@@ -13,6 +13,12 @@ data class User(
     @Column(name = "email", nullable = true)
     var email: String = "",
 
+    @Column(name = "login", nullable = true)
+    var login: String = "",
+
+    @Column(name = "image", nullable = true)
+    var image: String = "",
+
     @JsonIgnore
     @Column(name = "password", nullable = true)
     var password: String = "",

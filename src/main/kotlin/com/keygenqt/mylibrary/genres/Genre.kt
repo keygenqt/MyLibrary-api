@@ -1,5 +1,6 @@
 package com.keygenqt.mylibrary.genres
 
+import com.keygenqt.mylibrary.books.*
 import javax.persistence.*
 
 @Entity
@@ -10,5 +11,8 @@ data class Genre(
     var id: Long? = null,
 
     @Column(name = "title", nullable = true)
-    var title: String = ""
+    var title: String = "",
+
+    @Column(name = "description", nullable = true)
+    var description: String = ""
 )

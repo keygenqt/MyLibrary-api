@@ -10,7 +10,7 @@ create table books
     year            int                    not null,
     isbn            varchar(250)           not null,
     number_of_pages int                    not null,
-    cover_type      enum ('soft', 'solid') not null,
-    cover           varchar(250)           not null,
+    cover_type      enum ('soft', 'solid', 'unknown') not null,
+    image           varchar(250)           not null,
     primary key (id)
 );

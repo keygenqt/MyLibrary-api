@@ -4,19 +4,12 @@ import com.keygenqt.mylibrary.genres.*
 import com.keygenqt.mylibrary.users.*
 import javax.persistence.*
 
-// model
 @Entity
 @Table(name = "books")
 data class Book(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
-
-    @Column(name = "user_id", nullable = true)
-    var userId: Long = 0,
-
-    @Column(name = "genre_id", nullable = true)
-    var genreId: Long = 0,
 
     @Column(name = "title", nullable = true)
     var title: String = "",
@@ -42,14 +35,14 @@ data class Book(
     @Column(name = "cover_type", nullable = true)
     var coverType: String = "soft",
 
-    @Column(name = "cover", nullable = true)
-    var cover: String = "",
+    @Column(name = "image", nullable = true)
+    var image: String = "",
 
     @OneToOne(cascade = [CascadeType.ALL])
-    @JoinColumn(name = "id", referencedColumnName = "genre_id")
+    @JoinColumn(name = "genre_id", referencedColumnName = "id")
     var genre: Genre? = null,
 
     @OneToOne(cascade = [CascadeType.ALL])
-    @JoinColumn(name = "id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     var user: User? = null
 )
