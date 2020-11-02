@@ -1,4 +1,4 @@
-package com.keygenqt.mylibrary.book
+package com.keygenqt.mylibrary.books
 
 import org.springframework.http.HttpStatus.*
 import org.springframework.web.bind.annotation.*

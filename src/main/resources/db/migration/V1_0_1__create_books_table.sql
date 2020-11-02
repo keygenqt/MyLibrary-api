@@ -1,8 +1,11 @@
 create table books
 (
     id              int                    not null auto_increment,
-    name            varchar(250)           not null,
+    user_id         int                    not null,
+    genre_id        int                    not null,
+    title           varchar(250)           not null,
     author          varchar(250)           not null,
+    description     TEXT                   not null,
     publisher       varchar(250)           not null,
     year            int                    not null,
     isbn            varchar(250)           not null,

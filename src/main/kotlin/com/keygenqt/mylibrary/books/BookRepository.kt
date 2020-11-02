@@ -1,4 +1,4 @@
-package com.keygenqt.mylibrary.book
+package com.keygenqt.mylibrary.books
 
 import org.springframework.data.jpa.repository.*
 

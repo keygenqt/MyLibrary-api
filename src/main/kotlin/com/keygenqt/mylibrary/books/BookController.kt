@@ -1,4 +1,4 @@
-package com.keygenqt.mylibrary.book
+package com.keygenqt.mylibrary.books
 
 import org.springframework.hateoas.*
 import org.springframework.hateoas.server.mvc.*
@@ -28,7 +28,7 @@ internal class BookController(private val repository: BookRepository) {
     fun replaceBook(@RequestBody newBook: Book, @PathVariable id: Long): Book {
         return repository.findById(id)
             .map { book ->
-                book.name = newBook.name
+                book.title = newBook.title
                 repository.save(book)
             }
             .orElseGet {
