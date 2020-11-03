@@ -3,12 +3,17 @@ package com.keygenqt.mylibrary.common
 import com.keygenqt.mylibrary.users.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.context.annotation.*
+import org.springframework.http.*
 import org.springframework.security.config.annotation.authentication.builders.*
 import org.springframework.security.config.annotation.web.builders.*
 import org.springframework.security.config.annotation.web.configuration.*
+import org.springframework.security.core.*
 import org.springframework.security.crypto.bcrypt.*
 import org.springframework.security.crypto.password.*
+import org.springframework.security.web.authentication.logout.*
+import org.springframework.security.web.header.writers.*
 import javax.annotation.*
+import javax.servlet.http.*
 import javax.sql.*
 
 @Configuration
@@ -59,11 +64,29 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
         http
+            .csrf().disable()
             .httpBasic()
             .and()
-            .authorizeRequests().antMatchers("/**").hasAnyAuthority(ROLE_USER, ROLE_ADMIN)
+            .authorizeRequests()
+            .antMatchers("/").hasAnyAuthority(ROLE_ADMIN)
+            .antMatchers("/**").hasAnyAuthority(ROLE_USER, ROLE_ADMIN)
+
+            // not working logout, @todo oauth2
             .and()
-            .csrf().disable()
-            .formLogin().disable()
+            .formLogin()
+
+            .and()
+            .logout()
+            .logoutUrl("/logout")
+            .clearAuthentication(true)
+            .deleteCookies("JSESSIONID")
+            .invalidateHttpSession(true)
+            .addLogoutHandler(HeaderWriterLogoutHandler(ClearSiteDataHeaderWriter(
+                ClearSiteDataHeaderWriter.Directive.CACHE,
+                ClearSiteDataHeaderWriter.Directive.EXECUTION_CONTEXTS,
+                ClearSiteDataHeaderWriter.Directive.COOKIES,
+                ClearSiteDataHeaderWriter.Directive.STORAGE)))
+            .logoutSuccessUrl("/login")
     }
+
 }
