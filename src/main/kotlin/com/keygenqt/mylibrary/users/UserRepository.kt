@@ -1,5 +1,7 @@
 package com.keygenqt.mylibrary.users
 
-import org.springframework.data.jpa.repository.*
+import org.springframework.data.repository.*
+import org.springframework.data.rest.core.annotation.*
 
-internal interface UserRepository : JpaRepository<User, Long>
+@RepositoryRestResource(exported = false)
+interface UserRepository : CrudRepository<User, Long>

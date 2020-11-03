@@ -5,6 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "users")
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

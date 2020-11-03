@@ -2,7 +2,11 @@ package com.keygenqt.mylibrary.books
 
 import com.keygenqt.mylibrary.genres.*
 import com.keygenqt.mylibrary.users.*
+import org.hibernate.annotations.*
 import javax.persistence.*
+import javax.persistence.CascadeType
+import javax.persistence.Entity
+import javax.persistence.Table
 
 @Entity
 @Table(name = "books")
@@ -39,10 +43,12 @@ data class Book(
     var image: String = "",
 
     @OneToOne(cascade = [CascadeType.ALL])
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "genre_id", referencedColumnName = "id")
     var genre: Genre? = null,
 
     @OneToOne(cascade = [CascadeType.ALL])
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     var user: User? = null
 )

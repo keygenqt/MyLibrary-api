@@ -17,7 +17,7 @@ internal class BookController {
     private lateinit var bookRepository: BookRepository
 
     @Autowired
-    private lateinit var bookModelAssembler: BookModelAssembler
+    private lateinit var bookModelAssembler: BookAssembler
 
     @Autowired
     @Suppress("SpringJavaInjectionPointsAutowiringInspection")
@@ -26,7 +26,7 @@ internal class BookController {
     @GetMapping(path = ["/books"]) fun all(
         @PageableDefault(page = 0, size = 20)
         @SortDefaults(SortDefault(sort = ["title"], direction = Sort.Direction.DESC), SortDefault(sort = ["id"], direction = Sort.Direction.ASC))
-        pageable: Pageable
+        pageable: Pageable = Pageable.unpaged()
     ): ResponseEntity<PagedModel<EntityModel<Book>>> {
         val collModel = pagedResourcesAssembler
             .toModel<EntityModel<Book>>(bookRepository.findAll(pageable), bookModelAssembler)
@@ -65,7 +65,7 @@ internal class BookController {
             .body(entityModel)
     }
 
-    @DeleteMapping("/employees/{id}") fun deleteBook(@PathVariable id: Long): ResponseEntity<*> {
+    @DeleteMapping("/books/{id}") fun deleteBook(@PathVariable id: Long): ResponseEntity<*> {
         bookRepository.deleteById(id)
         return ResponseEntity.noContent().build<Any>()
     }

@@ -1,6 +1,5 @@
 package com.keygenqt.mylibrary.genres
 
-import com.keygenqt.mylibrary.books.*
 import javax.persistence.*
 
 @Entity
