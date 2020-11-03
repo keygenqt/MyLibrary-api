@@ -5,10 +5,10 @@ import org.springframework.data.domain.*
 import org.springframework.data.web.*
 import org.springframework.data.web.SortDefault.*
 import org.springframework.hateoas.*
-import org.springframework.hateoas.server.mvc.*
 import org.springframework.http.*
 import org.springframework.http.HttpStatus.*
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.*
 
 @RestController
 internal class BookController {
@@ -33,14 +33,24 @@ internal class BookController {
         return ResponseEntity(collModel, OK)
     }
 
-    @PostMapping("/books")
-    fun newBook(@RequestBody newBook: Book): Book {
-        return bookRepository.save(newBook)
+    @GetMapping("/books/{id}") fun one(@PathVariable id: Long): EntityModel<Book> {
+        return bookModelAssembler.toModel(
+            bookRepository.findById(id).orElseThrow {
+                throw ResponseStatusException(NOT_FOUND, "Could not find book $id")
+            }
+        )
+    }
+
+    @PostMapping("/books") fun newBook(@RequestBody newEmployee: Book): ResponseEntity<*> {
+        val entityModel: EntityModel<Book> = bookModelAssembler.toModel(bookRepository.save(newEmployee))
+        return ResponseEntity
+            .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+            .body(entityModel)
     }
 
     @PutMapping("/books/{id}")
-    fun replaceBook(@RequestBody newBook: Book, @PathVariable id: Long): Book {
-        return bookRepository.findById(id)
+    fun replaceBook(@RequestBody newBook: Book, @PathVariable id: Long): ResponseEntity<*> {
+        val updated = bookRepository.findById(id)
             .map { book ->
                 book.title = newBook.title
                 bookRepository.save(book)
@@ -49,16 +59,14 @@ internal class BookController {
                 newBook.id = id
                 bookRepository.save(newBook)
             }
+        val entityModel: EntityModel<Book> = bookModelAssembler.toModel(updated)
+        return ResponseEntity
+            .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+            .body(entityModel)
     }
 
-    @DeleteMapping("/books/{id}")
-    fun deleteBook(@PathVariable id: Long) {
+    @DeleteMapping("/employees/{id}") fun deleteBook(@PathVariable id: Long): ResponseEntity<*> {
         bookRepository.deleteById(id)
+        return ResponseEntity.noContent().build<Any>()
     }
-
-    @GetMapping("/books/{id}") fun one(@PathVariable id: Long): EntityModel<Book> {
-        val model = bookRepository.findById(id).orElseThrow<RuntimeException> { BookNotFoundException(id) }
-        return bookModelAssembler.toModel(model)
-    }
-
 }
