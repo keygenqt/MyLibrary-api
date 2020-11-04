@@ -7,4 +7,4 @@ Find a rare book among users MyLibrary.
 
 **It's API part - [Spring](https://spring.io/)**
 
-![picture](data/screenshot-8.png)
+![picture](data/screenshot-15.png)
