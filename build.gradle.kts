@@ -31,7 +31,7 @@ flyway {
     password = findProperty("password") as String
 }
 
-// mysql
+// rest
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
 }
