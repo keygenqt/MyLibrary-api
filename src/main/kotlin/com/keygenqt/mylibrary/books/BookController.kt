@@ -14,35 +14,35 @@ import org.springframework.web.server.*
 internal class BookController {
 
     @Autowired
-    private lateinit var bookRepository: BookRepository
+    private lateinit var repository: BookRepository
 
     @Autowired
-    private lateinit var bookModelAssembler: BookAssembler
+    private lateinit var assembler: BookAssembler
 
     @Autowired
     @Suppress("SpringJavaInjectionPointsAutowiringInspection")
-    private lateinit var pagedResourcesAssembler: PagedResourcesAssembler<Book>
+    private lateinit var pagedAssembler: PagedResourcesAssembler<Book>
 
     @GetMapping(path = ["/books"]) fun all(
         @PageableDefault(page = 0, size = 20)
         @SortDefaults(SortDefault(sort = ["title"], direction = Sort.Direction.DESC), SortDefault(sort = ["id"], direction = Sort.Direction.ASC))
         pageable: Pageable = Pageable.unpaged()
     ): ResponseEntity<PagedModel<EntityModel<Book>>> {
-        val collModel = pagedResourcesAssembler
-            .toModel<EntityModel<Book>>(bookRepository.findAll(pageable), bookModelAssembler)
+        val collModel = pagedAssembler
+            .toModel<EntityModel<Book>>(repository.findAll(pageable), assembler)
         return ResponseEntity(collModel, OK)
     }
 
     @GetMapping("/books/{id}") fun one(@PathVariable id: Long): EntityModel<Book> {
-        return bookModelAssembler.toModel(
-            bookRepository.findById(id).orElseThrow {
+        return assembler.toModel(
+            repository.findById(id).orElseThrow {
                 throw ResponseStatusException(NOT_FOUND, "Could not find book $id")
             }
         )
     }
 
     @PostMapping("/books") fun newBook(@RequestBody newEmployee: Book): ResponseEntity<*> {
-        val entityModel: EntityModel<Book> = bookModelAssembler.toModel(bookRepository.save(newEmployee))
+        val entityModel: EntityModel<Book> = assembler.toModel(repository.save(newEmployee))
         return ResponseEntity
             .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
             .body(entityModel)
@@ -50,23 +50,23 @@ internal class BookController {
 
     @PutMapping("/books/{id}")
     fun replaceBook(@RequestBody newBook: Book, @PathVariable id: Long): ResponseEntity<*> {
-        val updated = bookRepository.findById(id)
+        val updated = repository.findById(id)
             .map { book ->
                 book.title = newBook.title
-                bookRepository.save(book)
+                repository.save(book)
             }
             .orElseGet {
                 newBook.id = id
-                bookRepository.save(newBook)
+                repository.save(newBook)
             }
-        val entityModel: EntityModel<Book> = bookModelAssembler.toModel(updated)
+        val entityModel: EntityModel<Book> = assembler.toModel(updated)
         return ResponseEntity
             .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
             .body(entityModel)
     }
 
     @DeleteMapping("/books/{id}") fun deleteBook(@PathVariable id: Long): ResponseEntity<*> {
-        bookRepository.deleteById(id)
+        repository.deleteById(id)
         return ResponseEntity.noContent().build<Any>()
     }
 }

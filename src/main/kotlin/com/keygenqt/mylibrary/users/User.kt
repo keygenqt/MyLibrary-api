@@ -30,5 +30,8 @@ data class User(
 
     @JsonIgnore
     @Column(name = "role", nullable = true)
-    var role: String = "USER"
+    var role: String = "USER",
+
+    @Transient
+    var token: String = ""
 )
