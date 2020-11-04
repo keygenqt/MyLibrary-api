@@ -1,6 +1,7 @@
 package com.keygenqt.mylibrary.users
 
 import com.fasterxml.jackson.annotation.*
+import com.fasterxml.jackson.annotation.JsonInclude.*
 import javax.persistence.*
 
 @Entity
@@ -33,5 +34,6 @@ data class User(
     var role: String = "USER",
 
     @Transient
-    var token: String = ""
+    @JsonInclude(Include.NON_NULL)
+    var token: String? = null
 )
