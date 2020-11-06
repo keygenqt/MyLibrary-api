@@ -27,15 +27,20 @@ class UserController {
     @Suppress("SpringJavaInjectionPointsAutowiringInspection")
     private lateinit var pagedAssembler: PagedResourcesAssembler<User>
 
-    @PostMapping("/login")
+    @GetMapping(path = ["/test"])
+    fun test( ): ResponseEntity<PagedModel<EntityModel<User>>> {
+        throw ResponseStatusException(FORBIDDEN, "Authorization failed")
+    }
+
+    @PostMapping(path = ["/login"])
     fun login(
-        @RequestParam("email") email: String,
-        @RequestParam("password") password: String
-    ): User {
+        @RequestParam(required = true) email: String,
+        @RequestParam(required = true) password: String
+    ): EntityModel<User> {
         repository.findAllByEmail(email)?.let {
             if (BCryptPasswordEncoder().matches(password, it.password)) {
                 it.token = it.email.getJWTToken(it.role)
-                return it
+                return assembler.toModel(it)
             }
         }
         throw ResponseStatusException(FORBIDDEN, "Authorization failed")

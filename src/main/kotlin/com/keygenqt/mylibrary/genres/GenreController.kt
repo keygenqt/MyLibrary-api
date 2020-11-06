@@ -25,7 +25,7 @@ internal class GenreController {
 
     @GetMapping(path = ["/genres"]) fun all(
         @PageableDefault(page = 0, size = 20)
-        @SortDefaults(SortDefault(sort = ["title"], direction = Sort.Direction.DESC), SortDefault(sort = ["id"], direction = Sort.Direction.ASC))
+        @SortDefaults(SortDefault(sort = ["title", "description"], direction = Sort.Direction.DESC), SortDefault(sort = ["id"], direction = Sort.Direction.ASC))
         pageable: Pageable = Pageable.unpaged()
     ): ResponseEntity<PagedModel<EntityModel<Genre>>> {
         val collModel = pagedAssembler
