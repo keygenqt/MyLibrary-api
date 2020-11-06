@@ -36,7 +36,7 @@ internal class GenreController {
     @GetMapping("/genres/{id}") fun one(@PathVariable id: Long): EntityModel<Genre> {
         return assembler.toModel(
             repository.findById(id).orElseThrow {
-                throw ResponseStatusException(NOT_FOUND, "Could not find genre $id")
+                throw ResponseStatusException(NOT_FOUND, "Could not find model $id")
             }
         )
     }

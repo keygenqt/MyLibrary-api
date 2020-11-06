@@ -36,7 +36,7 @@ internal class BookController {
     @GetMapping("/books/{id}") fun one(@PathVariable id: Long): EntityModel<Book> {
         return assembler.toModel(
             repository.findById(id).orElseThrow {
-                throw ResponseStatusException(NOT_FOUND, "Could not find book $id")
+                throw ResponseStatusException(NOT_FOUND, "Could not find model $id")
             }
         )
     }

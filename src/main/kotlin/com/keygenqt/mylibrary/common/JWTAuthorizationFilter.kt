@@ -1,13 +1,11 @@
 package com.keygenqt.mylibrary.common
 
-import com.keygenqt.mylibrary.common.WebSecurityConfig.Companion.SECRET_KEY
+import com.keygenqt.mylibrary.config.WebSecurityConfig.Companion.SECRET_KEY
 import io.jsonwebtoken.*
-import org.springframework.http.HttpStatus.*
 import org.springframework.security.authentication.*
 import org.springframework.security.core.authority.*
 import org.springframework.security.core.context.*
 import org.springframework.web.filter.*
-import org.springframework.web.server.*
 import javax.servlet.*
 import javax.servlet.http.*
 
@@ -28,7 +26,8 @@ class JWTAuthorizationFilter : OncePerRequestFilter() {
                     return
                 }
             }
-        } catch (ex: Exception) {}
+        } catch (ex: Exception) {
+        }
         SecurityContextHolder.clearContext()
         chain.doFilter(request, response)
     }
@@ -42,9 +41,18 @@ class JWTAuthorizationFilter : OncePerRequestFilter() {
     }
 
     private fun setUpSpringAuthentication(claims: Claims) {
-        val authorities: List<String> = (claims["authorities"] as List<*>).map { it.toString() }
-        SecurityContextHolder.getContext().authentication =
-            UsernamePasswordAuthenticationToken(claims.subject, null, authorities.map { SimpleGrantedAuthority(it) })
+        claims["authorities"]?.let {
+            if (it is ArrayList<*>) {
+                it.first()?.let { item ->
+                    if (item is LinkedHashMap<*, *>) {
+                        item["authority"]?.let { authority ->
+                            SecurityContextHolder.getContext().authentication =
+                                UsernamePasswordAuthenticationToken(claims.subject, null, listOf(SimpleGrantedAuthority(authority.toString())))
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun checkJWTToken(request: HttpServletRequest): Boolean {
