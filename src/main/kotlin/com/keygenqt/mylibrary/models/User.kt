@@ -1,4 +1,4 @@
-package com.keygenqt.mylibrary.users
+package com.keygenqt.mylibrary.models
 
 import com.fasterxml.jackson.annotation.*
 import com.fasterxml.jackson.annotation.JsonInclude.*
@@ -33,7 +33,6 @@ data class User(
     @Column(name = "role", nullable = true)
     var role: String = "USER",
 
-    @Transient
     @JsonInclude(Include.NON_NULL)
     var token: String? = null
 )

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.keygenqt.mylibrary.common
+package com.keygenqt.mylibrary.api
 
 import org.springframework.boot.autoconfigure.web.servlet.error.*
 import org.springframework.boot.web.error.*

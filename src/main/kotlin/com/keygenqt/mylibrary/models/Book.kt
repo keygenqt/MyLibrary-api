@@ -1,7 +1,6 @@
-package com.keygenqt.mylibrary.books
+package com.keygenqt.mylibrary.models
 
 import com.keygenqt.mylibrary.models.*
-import com.keygenqt.mylibrary.users.*
 import org.hibernate.annotations.*
 import javax.persistence.*
 import javax.persistence.CascadeType

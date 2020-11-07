@@ -1,5 +1,6 @@
 package com.keygenqt.mylibrary.api
 
+import com.keygenqt.mylibrary.api.assemblers.*
 import com.keygenqt.mylibrary.api.resources.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.http.*

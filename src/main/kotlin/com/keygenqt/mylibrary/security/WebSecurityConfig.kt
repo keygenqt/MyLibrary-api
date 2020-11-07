@@ -1,11 +1,10 @@
-package com.keygenqt.mylibrary.config
+package com.keygenqt.mylibrary.security
 
-import com.keygenqt.mylibrary.common.*
-import com.keygenqt.mylibrary.users.*
+import com.keygenqt.mylibrary.models.*
+import com.keygenqt.mylibrary.models.repositories.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.context.annotation.*
 import org.springframework.http.HttpMethod.*
-import org.springframework.security.config.annotation.method.configuration.*
 import org.springframework.security.config.annotation.web.builders.*
 import org.springframework.security.config.annotation.web.configuration.*
 import org.springframework.security.crypto.bcrypt.*
@@ -53,7 +52,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
         http.csrf().disable()
-            .addFilterAfter(JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterAfter(JWTAuthorizationFilter(repository), UsernamePasswordAuthenticationFilter::class.java)
             .authorizeRequests()
             .antMatchers(POST, "/login").permitAll()
             .antMatchers("/users/**").hasAuthority(ROLE_ADMIN)

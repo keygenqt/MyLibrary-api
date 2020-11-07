@@ -1,19 +1,37 @@
-package com.keygenqt.mylibrary.common
+package com.keygenqt.mylibrary.security
 
-import com.keygenqt.mylibrary.config.WebSecurityConfig.Companion.SECRET_KEY
+import com.keygenqt.mylibrary.models.repositories.*
 import io.jsonwebtoken.*
+import org.springframework.beans.factory.annotation.*
+import org.springframework.http.HttpStatus.*
 import org.springframework.security.authentication.*
 import org.springframework.security.core.authority.*
 import org.springframework.security.core.context.*
 import org.springframework.web.filter.*
+import org.springframework.web.server.*
+import java.util.*
 import javax.servlet.*
 import javax.servlet.http.*
 
-class JWTAuthorizationFilter : OncePerRequestFilter() {
+class JWTAuthorizationFilter(private val repository: UserRepository) : OncePerRequestFilter() {
 
     companion object {
         private const val HEADER = "Authorization"
         private const val PREFIX = "Bearer "
+
+        fun getJWTToken(login: String, role: String): String {
+            return "Bearer ${
+                Jwts
+                    .builder()
+                    .setId("JWT")
+                    .setSubject(login)
+                    .claim("authorities", listOf(SimpleGrantedAuthority(role)))
+                    .setIssuedAt(Date(System.currentTimeMillis()))
+                    .setExpiration(Date(System.currentTimeMillis() + 2592000000 /* month */))
+                    .signWith(SignatureAlgorithm.HS512, WebSecurityConfig.SECRET_KEY.toByteArray())
+                    .compact()
+            }"
+        }
     }
 
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, chain: FilterChain) {
@@ -33,11 +51,15 @@ class JWTAuthorizationFilter : OncePerRequestFilter() {
     }
 
     private fun validateToken(request: HttpServletRequest): Claims {
-        val token = request.getHeader(HEADER).replace(PREFIX, "")
-        return Jwts.parser()
-            .setSigningKey(SECRET_KEY.toByteArray())
-            .parseClaimsJws(token)
-            .body
+        val token = request.getHeader(HEADER)
+        repository.findByToken(token)?.let {
+            return Jwts.parser()
+                .setSigningKey(WebSecurityConfig.SECRET_KEY.toByteArray())
+                .parseClaimsJws(token.replace(PREFIX, ""))
+                .body
+        } ?: run {
+            throw ResponseStatusException(FORBIDDEN, "Authorization failed")
+        }
     }
 
     private fun setUpSpringAuthentication(claims: Claims) {
