@@ -1,4 +1,4 @@
-package com.keygenqt.mylibrary.genres
+package com.keygenqt.mylibrary.models
 
 import javax.persistence.*
 

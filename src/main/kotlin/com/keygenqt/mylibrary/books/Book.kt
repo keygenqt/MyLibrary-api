@@ -1,6 +1,6 @@
 package com.keygenqt.mylibrary.books
 
-import com.keygenqt.mylibrary.genres.*
+import com.keygenqt.mylibrary.models.*
 import com.keygenqt.mylibrary.users.*
 import org.hibernate.annotations.*
 import javax.persistence.*

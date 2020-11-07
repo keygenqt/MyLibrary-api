@@ -2,6 +2,7 @@ package com.keygenqt.mylibrary.books
 
 import org.springframework.beans.factory.annotation.*
 import org.springframework.data.domain.*
+import org.springframework.data.repository.query.*
 import org.springframework.data.web.*
 import org.springframework.data.web.SortDefault.*
 import org.springframework.hateoas.*
