@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.keygenqt.mylibrary
+package com.keygenqt.mylibrary.models.repositories
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import com.keygenqt.mylibrary.models.*
+import org.springframework.data.repository.*
+import org.springframework.data.repository.query.*
+import org.springframework.data.rest.core.annotation.*
 
-@SpringBootApplication
-class Application
-
-fun main(args: Array<String>) {
-    runApplication<Application>(*args)
+@RepositoryRestResource(exported = false)
+interface UserTokenRepository : CrudRepository<UserToken, String> {
+    fun findByToken(@Param("token") token: String): UserToken?
 }

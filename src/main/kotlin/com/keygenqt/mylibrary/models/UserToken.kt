@@ -14,14 +14,27 @@
  * limitations under the License.
  */
 
-package com.keygenqt.mylibrary
+package com.keygenqt.mylibrary.models
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
+import com.fasterxml.jackson.annotation.*
+import javax.persistence.*
 
-@SpringBootApplication
-class Application
+@Entity
+@Table(name = "users_tokens")
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class UserToken(
+    @Id
+    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null,
 
-fun main(args: Array<String>) {
-    runApplication<Application>(*args)
-}
+    @JsonIgnore
+    @Column(name = "user_id", nullable = false)
+    var userId: Long = 0,
+
+    @Column(name = "token", nullable = false)
+    var token: String = "",
+
+    @Column(name = "uid", nullable = false)
+    var uid: String = ""
+)

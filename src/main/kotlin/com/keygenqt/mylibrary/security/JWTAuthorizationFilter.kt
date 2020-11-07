@@ -1,3 +1,19 @@
+/*
+ * Copyright 2020 Vitaliy Zarubin
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.keygenqt.mylibrary.security
 
 import com.keygenqt.mylibrary.models.repositories.*
@@ -12,7 +28,10 @@ import java.util.*
 import javax.servlet.*
 import javax.servlet.http.*
 
-class JWTAuthorizationFilter(private val repository: UserRepository) : OncePerRequestFilter() {
+class JWTAuthorizationFilter(
+    private val repositoryUser: UserRepository,
+    private val repositoryUserToken: UserTokenRepository
+) : OncePerRequestFilter() {
 
     companion object {
         private const val HEADER = "Authorization"
@@ -51,14 +70,19 @@ class JWTAuthorizationFilter(private val repository: UserRepository) : OncePerRe
 
     private fun validateToken(request: HttpServletRequest): Claims {
         val token = request.getHeader(HEADER)
-        repository.findByToken(token)?.let {
-            return Jwts.parser()
-                .setSigningKey(WebSecurityConfig.SECRET_KEY.toByteArray())
-                .parseClaimsJws(token.replace(PREFIX, ""))
-                .body
-        } ?: run {
-            throw ResponseStatusException(FORBIDDEN, "Authorization failed")
+        repositoryUserToken.findByToken(token)?.let {
+            repositoryUser.findByIdActive(it.userId)?.let { user ->
+                if (user.enabled) {
+                    return Jwts.parser()
+                        .setSigningKey(WebSecurityConfig.SECRET_KEY.toByteArray())
+                        .parseClaimsJws(token.replace(PREFIX, ""))
+                        .body
+                } else {
+                    throw ResponseStatusException(FORBIDDEN, "Authorization failed. User disabled.")
+                }
+            }
         }
+        throw ResponseStatusException(FORBIDDEN, "Authorization failed")
     }
 
     private fun setUpSpringAuthentication(claims: Claims) {
