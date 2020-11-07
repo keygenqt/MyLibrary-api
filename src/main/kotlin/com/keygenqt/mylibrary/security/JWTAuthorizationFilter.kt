@@ -2,7 +2,6 @@ package com.keygenqt.mylibrary.security
 
 import com.keygenqt.mylibrary.models.repositories.*
 import io.jsonwebtoken.*
-import org.springframework.beans.factory.annotation.*
 import org.springframework.http.HttpStatus.*
 import org.springframework.security.authentication.*
 import org.springframework.security.core.authority.*
