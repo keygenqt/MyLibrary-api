@@ -16,22 +16,29 @@
 
 package com.keygenqt.mylibrary.api
 
+import com.keygenqt.mylibrary.api.validators.*
 import com.keygenqt.mylibrary.models.*
 import com.keygenqt.mylibrary.models.assemblers.*
 import com.keygenqt.mylibrary.models.repositories.*
 import com.keygenqt.mylibrary.security.*
 import org.springframework.beans.factory.annotation.*
-import org.springframework.hateoas.*
+import org.springframework.http.*
 import org.springframework.http.HttpStatus.*
-import org.springframework.security.crypto.bcrypt.*
+import org.springframework.validation.*
+import org.springframework.validation.annotation.*
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.*
+import java.sql.*
 
 @RestController
+@Validated
 class AuthController {
 
     @Autowired
     private lateinit var repository: UserRepository
+
+    @Autowired
+    private lateinit var loginValidator: LoginValidator
 
     @Autowired
     private lateinit var repositoryToken: UserTokenRepository
@@ -39,28 +46,37 @@ class AuthController {
     @Autowired
     private lateinit var assembler: UserAssembler
 
-    @PostMapping(path = ["/login"])
-    fun login(
-        @RequestHeader("uid") uid: String,
-        @RequestParam(required = true) email: String,
-        @RequestParam(required = true) password: String
-    ): EntityModel<User> {
-        repository.findAllByEmail(email)?.let { model ->
-            if (BCryptPasswordEncoder().matches(password, model.password)) {
-                val tokenModel = model.tokens.firstOrNull { it.uid == uid }?.let {
-                    it.token = JWTAuthorizationFilter.getJWTToken(model.email, model.role)
+    @PostMapping(
+        path = ["/login"],
+        consumes = [MediaType.APPLICATION_FORM_URLENCODED_VALUE])
+    fun login(model: Login, bindingResult: BindingResult): ResponseEntity<Any> {
+
+        loginValidator.validate(model, bindingResult)
+
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity(hashMapOf<String, Any>("errors" to bindingResult.fieldErrors).apply {
+                put("status", UNPROCESSABLE_ENTITY.value())
+                put("error", "Validate")
+                put("message", "Validation failed")
+                put("path", "/login")
+                put("timestamp", Timestamp(System.currentTimeMillis()))
+            }, UNPROCESSABLE_ENTITY)
+        } else {
+            repository.findAllByEmail(model.email ?: "")?.let { user ->
+                val tokenModel = user.tokens.firstOrNull { it.uid == model.uid }?.let {
+                    it.token = JWTAuthorizationFilter.getJWTToken(user.email, user.role)
                     it
                 } ?: run {
                     UserToken(
-                        uid = uid,
-                        userId = model.id!!,
-                        token = JWTAuthorizationFilter.getJWTToken(model.email, model.role)
+                        uid = model.uid!!,
+                        userId = user.id!!,
+                        token = JWTAuthorizationFilter.getJWTToken(user.email, user.role)
                     )
                 }
-                tokenModel.token = JWTAuthorizationFilter.getJWTToken(model.email, model.role)
+                tokenModel.token = JWTAuthorizationFilter.getJWTToken(user.email, user.role)
                 repositoryToken.save(tokenModel)
-                model.token = tokenModel.token
-                return assembler.toModel(model)
+                user.token = tokenModel.token
+                return ResponseEntity(assembler.toModel(user), OK)
             }
         }
         throw ResponseStatusException(FORBIDDEN, "Authorization failed")

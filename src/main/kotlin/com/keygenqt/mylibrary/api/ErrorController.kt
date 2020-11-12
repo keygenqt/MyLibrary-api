@@ -23,6 +23,7 @@ import org.springframework.http.*
 import org.springframework.stereotype.*
 import org.springframework.ui.*
 import org.springframework.web.bind.annotation.*
+import java.sql.*
 import javax.servlet.*
 import javax.servlet.http.*
 
@@ -34,6 +35,7 @@ class ErrorController(errorAttributes: ErrorAttributes?) : AbstractErrorControll
     fun handleError(request: HttpServletRequest, model: Model): ResponseEntity<Map<String, Any>> {
         val body = getErrorAttributes(request, ErrorAttributeOptions.defaults())
         body["message"] = request.getAttribute(RequestDispatcher.ERROR_MESSAGE)
+        body["timestamp"] = Timestamp(System.currentTimeMillis())
         val status: HttpStatus = getStatus(request)
         return ResponseEntity(body, status)
     }
