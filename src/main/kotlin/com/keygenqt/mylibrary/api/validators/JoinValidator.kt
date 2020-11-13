@@ -5,13 +5,12 @@ import com.keygenqt.mylibrary.models.repositories.*
 import org.apache.commons.validator.routines.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.context.*
-import org.springframework.security.crypto.bcrypt.*
 import org.springframework.stereotype.*
 import org.springframework.validation.*
 import java.util.*
 
 @Component
-class LoginValidator : Validator {
+class JoinValidator : Validator {
 
     var validator: EmailValidator = EmailValidator.getInstance()
 
@@ -27,6 +26,9 @@ class LoginValidator : Validator {
 
     override fun validate(target: Any, errors: Errors) {
 
+        ValidationUtils.rejectIfEmpty(errors, "login", "field.required",
+            messageSource.getMessage("field.required", arrayOf("Logon"), Locale.ENGLISH))
+
         ValidationUtils.rejectIfEmpty(errors, "email", "field.required",
             messageSource.getMessage("field.required", arrayOf("Email"), Locale.ENGLISH))
 
@@ -36,7 +38,19 @@ class LoginValidator : Validator {
         ValidationUtils.rejectIfEmpty(errors, "uid", "field.required",
             messageSource.getMessage("field.required", arrayOf("UID"), Locale.ENGLISH))
 
-        if (target is Login) {
+        if (target is Join) {
+            target.login?.let {
+                if (it.trim().isNotEmpty()) {
+                    if (it.trim().length < 5) {
+                        errors.rejectValue("login", "field.min.length",
+                            messageSource.getMessage("field.min.length", arrayOf("Login", 5), Locale.ENGLISH))
+                    }
+                    if (it.trim().length > 30) {
+                        errors.rejectValue("login", "field.max.length",
+                            messageSource.getMessage("field.max.length", arrayOf("Login", 30), Locale.ENGLISH))
+                    }
+                }
+            }
             target.email?.let {
                 if (it.trim().isNotEmpty()) {
                     if (!validator.isValid(it)) {
@@ -47,26 +61,27 @@ class LoginValidator : Validator {
             }
             target.password?.let {
                 if (it.trim().isNotEmpty()) {
-                    if (it.trim().length < 5) {
-                        errors.rejectValue("password", "field.min.length",
-                            messageSource.getMessage("field.min.length", arrayOf("Password", 5), Locale.ENGLISH))
-                    }
-                    if (it.trim().length > 30) {
-                        errors.rejectValue("password", "field.max.length",
-                            messageSource.getMessage("field.max.length", arrayOf("Password", 30), Locale.ENGLISH))
+                    when {
+                        it.contains(' ') -> {
+                            errors.rejectValue("password", "field.incorrect.spaces",
+                                messageSource.getMessage("field.incorrect.spaces", arrayOf("Password", 5), Locale.ENGLISH))
+                        }
+                        it.trim().length < 5 -> {
+                            errors.rejectValue("password", "field.min.length",
+                                messageSource.getMessage("field.min.length", arrayOf("Password", 5), Locale.ENGLISH))
+                        }
+                        it.trim().length > 30 -> {
+                            errors.rejectValue("password", "field.max.length",
+                                messageSource.getMessage("field.max.length", arrayOf("Password", 30), Locale.ENGLISH))
+                        }
                     }
                 }
             }
 
             if (!errors.hasErrors()) {
                 repository.findAllByEmail(target.email ?: "")?.let {
-                    if (!BCryptPasswordEncoder().matches(target.password, it.password)) {
-                        errors.rejectValue("password", "field.incorrect",
-                            messageSource.getMessage("field.incorrect", arrayOf("password"), Locale.ENGLISH))
-                    }
-                } ?: run {
-                    errors.rejectValue("email", "field.found.empty",
-                        messageSource.getMessage("field.found.empty", arrayOf("Email"), Locale.ENGLISH))
+                    errors.rejectValue("email", "field.already.taken",
+                        messageSource.getMessage("field.already.taken", arrayOf("Email"), Locale.ENGLISH))
                 }
             }
         }

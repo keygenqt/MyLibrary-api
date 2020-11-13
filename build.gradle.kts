@@ -48,8 +48,13 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt:0.9.1")
 }
 
+// validate
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("commons-validator:commons-validator:1.7")
+}
+
+dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

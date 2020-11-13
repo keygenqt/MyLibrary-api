@@ -5,6 +5,5 @@ create table users_tokens
     uid     varchar(250) not null,
     user_id int          not null,
     primary key (id),
-    unique key (token),
-    unique key (uid)
+    unique key (token)
 );

@@ -17,18 +17,20 @@
 package com.keygenqt.mylibrary.api
 
 import com.keygenqt.mylibrary.api.validators.*
+import com.keygenqt.mylibrary.extensions.*
 import com.keygenqt.mylibrary.models.*
 import com.keygenqt.mylibrary.models.assemblers.*
 import com.keygenqt.mylibrary.models.repositories.*
 import com.keygenqt.mylibrary.security.*
+import com.keygenqt.mylibrary.security.WebSecurityConfig.Companion.ROLE_USER
 import org.springframework.beans.factory.annotation.*
 import org.springframework.http.*
 import org.springframework.http.HttpStatus.*
+import org.springframework.security.crypto.bcrypt.*
 import org.springframework.validation.*
 import org.springframework.validation.annotation.*
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.*
-import java.sql.*
 
 @RestController
 @Validated
@@ -39,6 +41,9 @@ class AuthController {
 
     @Autowired
     private lateinit var loginValidator: LoginValidator
+
+    @Autowired
+    private lateinit var regValidator: JoinValidator
 
     @Autowired
     private lateinit var repositoryToken: UserTokenRepository
@@ -54,13 +59,7 @@ class AuthController {
         loginValidator.validate(model, bindingResult)
 
         if (bindingResult.hasErrors()) {
-            return ResponseEntity(hashMapOf<String, Any>("errors" to bindingResult.fieldErrors).apply {
-                put("status", UNPROCESSABLE_ENTITY.value())
-                put("error", "Validate")
-                put("message", "Validation failed")
-                put("path", "/login")
-                put("timestamp", Timestamp(System.currentTimeMillis()))
-            }, UNPROCESSABLE_ENTITY)
+            return bindingResult.getErrorFormat()
         } else {
             repository.findAllByEmail(model.email ?: "")?.let { user ->
                 val tokenModel = user.tokens.firstOrNull { it.uid == model.uid }?.let {
@@ -80,5 +79,36 @@ class AuthController {
             }
         }
         throw ResponseStatusException(FORBIDDEN, "Authorization failed")
+    }
+
+    @PostMapping(
+        path = ["/join"],
+        consumes = [MediaType.APPLICATION_FORM_URLENCODED_VALUE])
+    fun join(model: Join, bindingResult: BindingResult): ResponseEntity<Any> {
+
+        regValidator.validate(model, bindingResult)
+
+        if (bindingResult.hasErrors()) {
+            return bindingResult.getErrorFormat()
+        } else {
+            repository.save(User(
+                login = model.login!!,
+                email = model.email!!,
+                password = BCryptPasswordEncoder().encode(model.password),
+                role = ROLE_USER
+            ))
+            repository.findAllByEmail(model.email ?: "")?.let { user ->
+                val tokenModel = UserToken(
+                    uid = model.uid!!,
+                    userId = user.id!!,
+                    token = JWTAuthorizationFilter.getJWTToken(user.email, user.role)
+                )
+                tokenModel.token = JWTAuthorizationFilter.getJWTToken(user.email, user.role)
+                repositoryToken.save(tokenModel)
+                user.token = tokenModel.token
+                return ResponseEntity(assembler.toModel(user), OK)
+            }
+        }
+        throw ResponseStatusException(FORBIDDEN, "Join failed")
     }
 }

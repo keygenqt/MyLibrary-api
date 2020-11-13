@@ -76,6 +76,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             .addFilterAfter(JWTAuthorizationFilter(repositoryUser, repositoryUserToken), UsernamePasswordAuthenticationFilter::class.java)
             .authorizeRequests()
             .antMatchers(POST, "/login").permitAll()
+            .antMatchers(POST, "/join").permitAll()
             .antMatchers(DELETE, "/**").hasAuthority(ROLE_ADMIN)
             .antMatchers("/users/**").hasAuthority(ROLE_ADMIN)
             .antMatchers("/profile/users/**").hasAuthority(ROLE_ADMIN)
