@@ -92,7 +92,7 @@ class AuthController {
             return bindingResult.getErrorFormat()
         } else {
             repository.save(User(
-                login = model.login!!,
+                nickname = model.nickname!!,
                 email = model.email!!,
                 password = BCryptPasswordEncoder().encode(model.password),
                 role = ROLE_USER

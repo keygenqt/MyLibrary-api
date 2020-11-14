@@ -56,14 +56,14 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                 User(
                     image = "https://www.amazon.com/avatar/default/amzn1.account.AF53E22MXLWU7FIMB27VQXVQQPHQ?square=true&max_width=460",
                     email = "admin@gmail.com",
-                    login = "admin",
+                    nickname = "admin",
                     password = passwordEncoder().encode("12345"),
                     role = ROLE_ADMIN
                 ),
                 User(
                     image = "https://www.amazon.com/avatar/default/amzn1.account.AGMEOBVVJKNYMOJRQUZVDMXXE5OA?square=true&max_width=460",
                     email = "user@gmail.com",
-                    login = "user",
+                    nickname = "user",
                     password = passwordEncoder().encode("12345"),
                     role = ROLE_USER
                 )

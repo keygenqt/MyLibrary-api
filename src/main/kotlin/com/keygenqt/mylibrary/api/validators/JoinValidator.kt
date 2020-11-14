@@ -26,8 +26,8 @@ class JoinValidator : Validator {
 
     override fun validate(target: Any, errors: Errors) {
 
-        ValidationUtils.rejectIfEmpty(errors, "login", "field.required",
-            messageSource.getMessage("field.required", arrayOf("Logon"), Locale.ENGLISH))
+        ValidationUtils.rejectIfEmpty(errors, "nickname", "field.required",
+            messageSource.getMessage("field.required", arrayOf("Nickname"), Locale.ENGLISH))
 
         ValidationUtils.rejectIfEmpty(errors, "email", "field.required",
             messageSource.getMessage("field.required", arrayOf("Email"), Locale.ENGLISH))
@@ -39,15 +39,15 @@ class JoinValidator : Validator {
             messageSource.getMessage("field.required", arrayOf("UID"), Locale.ENGLISH))
 
         if (target is Join) {
-            target.login?.let {
+            target.nickname?.let {
                 if (it.trim().isNotEmpty()) {
                     if (it.trim().length < 5) {
-                        errors.rejectValue("login", "field.min.length",
-                            messageSource.getMessage("field.min.length", arrayOf("Login", 5), Locale.ENGLISH))
+                        errors.rejectValue("nickname", "field.min.length",
+                            messageSource.getMessage("field.min.length", arrayOf("Nickname", 5), Locale.ENGLISH))
                     }
                     if (it.trim().length > 30) {
-                        errors.rejectValue("login", "field.max.length",
-                            messageSource.getMessage("field.max.length", arrayOf("Login", 30), Locale.ENGLISH))
+                        errors.rejectValue("nickname", "field.max.length",
+                            messageSource.getMessage("field.max.length", arrayOf("Nickname", 30), Locale.ENGLISH))
                     }
                 }
             }

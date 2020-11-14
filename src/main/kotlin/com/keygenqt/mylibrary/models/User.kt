@@ -35,8 +35,8 @@ data class User(
     @Column(name = "email", nullable = true)
     var email: String = "",
 
-    @Column(name = "login", nullable = true)
-    var login: String = "",
+    @Column(name = "nickname", nullable = true)
+    var nickname: String = "",
 
     @Column(name = "image", nullable = true)
     var image: String = "",
