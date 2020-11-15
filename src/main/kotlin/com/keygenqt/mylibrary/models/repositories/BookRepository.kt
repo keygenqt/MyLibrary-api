@@ -17,6 +17,9 @@
 package com.keygenqt.mylibrary.models.repositories
 
 import com.keygenqt.mylibrary.models.*
+import org.springframework.data.jpa.repository.*
 import org.springframework.data.repository.*
 
-internal interface BookRepository : PagingAndSortingRepository<Book, Long>
+internal interface BookRepository : PagingAndSortingRepository<Book, Long> {
+    fun findAllByUserId(userId: Int): List<Book>
+}

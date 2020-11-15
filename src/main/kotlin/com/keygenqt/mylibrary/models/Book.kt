@@ -29,6 +29,9 @@ data class Book(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
+    @Column(name = "user_id", nullable = false)
+    var userId: Int = 0,
+
     @Column(name = "title", nullable = true)
     var title: String = "",
 
@@ -63,6 +66,6 @@ data class Book(
 
     @OneToOne(cascade = [CascadeType.ALL])
     @NotFound(action = NotFoundAction.IGNORE)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", updatable = false, insertable = false)
     var user: User? = null
 )
