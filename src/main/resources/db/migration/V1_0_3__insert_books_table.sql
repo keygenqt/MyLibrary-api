@@ -1,4 +1,4 @@
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Thriller & Suspense
         'Saint X: A Novel',
@@ -9,9 +9,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/51Ys5yejqML.jpg');
+        'https://m.media-amazon.com/images/I/51Ys5yejqML.jpg',
+        0);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         11,
         'A Time for Mercy',
@@ -22,9 +23,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/51SRF4uN1-L.jpg');
+        'https://m.media-amazon.com/images/I/51SRF4uN1-L.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Thriller
         'The Sentinel',
@@ -35,9 +37,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/51BFBPsfUwL.jpg');
+        'https://m.media-amazon.com/images/I/51BFBPsfUwL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         12,
         'If You Tell: A True Story of Murder, Family Secrets, and the Unbreakable Bond of Sisterhood',
@@ -48,9 +51,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/410K-S--pmL.jpg');
+        'https://m.media-amazon.com/images/I/410K-S--pmL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Fantasy
         'Spellbreaker',
@@ -61,9 +65,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/51aJOTD2sPL.jpg');
+        'https://m.media-amazon.com/images/I/51aJOTD2sPL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Thriller
         'Open House: A Novel',
@@ -74,9 +79,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/41Q4HwXnvVL.jpg');
+        'https://m.media-amazon.com/images/I/41Q4HwXnvVL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Paranormal Ghost Romance
         'The Haunting of Brynn Wilder: A Novel',
@@ -87,9 +93,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/41Maa+WYpiL.jpg');
+        'https://m.media-amazon.com/images/I/41Maa+WYpiL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Historical Mystery, Thriller & Suspense Fiction
         'Under a Gilded Moon: A Novel',
@@ -100,9 +107,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/41TMZq66QjL.jpg');
+        'https://m.media-amazon.com/images/I/41TMZq66QjL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Romantic Comedy
         'My Big Fat Fake Honeymoon',
@@ -113,9 +121,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/51zpiF29gbL.jpg');
+        'https://m.media-amazon.com/images/I/51zpiF29gbL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         22,
         'Happily Letter After',
@@ -126,9 +135,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/516UJY6myOL.jpg');
+        'https://m.media-amazon.com/images/I/516UJY6myOL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Best History
         '21 Lessons for the 21st Century',
@@ -139,9 +149,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/41SxL78DpvL.jpg');
+        'https://m.media-amazon.com/images/I/41SxL78DpvL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Thriller
         'Girls of Brackenhill',
@@ -152,9 +163,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/517Uo39uqmL.jpg');
+        'https://m.media-amazon.com/images/I/517Uo39uqmL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Psychological Fiction
         'Every Last Secret',
@@ -165,9 +177,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/41eOBgaUG3L.jpg');
+        'https://m.media-amazon.com/images/I/41eOBgaUG3L.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         24,
         'Winter In Paradise: Book 1 in NYT-bestselling author Elin Hilderbrand''s wonderful Paradise series',
@@ -178,9 +191,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/41m5zvk-UoL.jpg');
+        'https://m.media-amazon.com/images/I/41m5zvk-UoL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Contemporary Literary Fiction
         'Where the Forest Meets the Stars',
@@ -191,9 +205,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/51sZRlFOe6L.jpg');
+        'https://m.media-amazon.com/images/I/51sZRlFOe6L.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # 20th Century Historical Romance
         'The Last Correspondent',
@@ -204,9 +219,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/41cPURng0WL.jpg');
+        'https://m.media-amazon.com/images/I/41cPURng0WL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         19,
         'Harry Potter and the Philosopher''s Stone',
@@ -217,9 +233,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/51UoqRAxwEL.jpg');
+        'https://m.media-amazon.com/images/I/51UoqRAxwEL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Adventure Travel
         'The Twenty-Ninth Day: Surviving a Grizzly Attack in the Canadian Tundra',
@@ -230,9 +247,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/51ebZxVbLKL.jpg');
+        'https://m.media-amazon.com/images/I/51ebZxVbLKL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Dystopian Science Fiction
         'Watchers',
@@ -243,9 +261,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/512EmOOswPL.jpg');
+        'https://m.media-amazon.com/images/I/512EmOOswPL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Contemporary Literature & Fiction
         'Perfectly Impossible',
@@ -256,9 +275,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/51yAD0bkGXL.jpg');
+        'https://m.media-amazon.com/images/I/51yAD0bkGXL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Thriller
         'title',
@@ -269,9 +289,10 @@ values (1,
         '',
         0,
         'unknown',
-        '');
+        '',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         6,
         'The Searcher',
@@ -282,9 +303,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/41L6pJljNUL.jpg');
+        'https://m.media-amazon.com/images/I/41L6pJljNUL.jpg',
+        1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Holiday Romance
         'The Christmas Pact',
@@ -295,9 +317,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/41-rVi5w5EL.jpg');
+        'https://m.media-amazon.com/images/I/41-rVi5w5EL.jpg',
+        0);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         21,
         'ake A Number: A Fake Dating Romantic Comedy',
@@ -308,9 +331,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/51imrZiGJ1L.jpg');
+        'https://m.media-amazon.com/images/I/51imrZiGJ1L.jpg',
+        0);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Romance Literary Fiction
         'White Ivy',
@@ -321,9 +345,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/41PACrotsYL.jpg');
+        'https://m.media-amazon.com/images/I/41PACrotsYL.jpg',
+        0);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         9,
         'I Know Your Secret: An absolutely gripping psychological thriller full of twists',
@@ -334,9 +359,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/518Hz0W+e9L.jpg');
+        'https://m.media-amazon.com/images/I/518Hz0W+e9L.jpg',
+        0);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         3,
         'Lying Next to Me',
@@ -347,9 +373,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/41rSaQpivNL.jpg');
+        'https://m.media-amazon.com/images/I/41rSaQpivNL.jpg',
+        0);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Friendship Fiction
         'Memories in the Drift',
@@ -360,9 +387,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/51lniK41wyL.jpg');
+        'https://m.media-amazon.com/images/I/51lniK41wyL.jpg',
+        0);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Travel Humor
         'The Best of Me',
@@ -373,9 +401,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/41PVbFCpDtL.jpg');
+        'https://m.media-amazon.com/images/I/41PVbFCpDtL.jpg',
+        0);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         15,
         'Anxious People',
@@ -386,9 +415,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/51sig3Nmy3L.jpg');
+        'https://m.media-amazon.com/images/I/51sig3Nmy3L.jpg',
+        0);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         1, # Technothrillers
         'Elsewhere',
@@ -399,9 +429,10 @@ values (1,
         '',
         0,
         'unknown',
-        '');
+        '',
+        0);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         8,
         'Sweet Cruelty: A Dark Mafia Romance',
@@ -412,9 +443,10 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/51--6mAry-L.jpg');
+        'https://m.media-amazon.com/images/I/51--6mAry-L.jpg',
+        0);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,
         14,
         'The Invisible Life of Addie LaRue',
@@ -425,4 +457,5 @@ values (1,
         '',
         0,
         'unknown',
-        'https://m.media-amazon.com/images/I/51FVPBt51ZL.jpg');
+        'https://m.media-amazon.com/images/I/51FVPBt51ZL.jpg',
+        0);

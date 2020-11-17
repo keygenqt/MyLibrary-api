@@ -12,5 +12,6 @@ create table books
     number_of_pages int                    not null,
     cover_type      enum ('soft', 'solid', 'unknown') not null,
     image           varchar(250)           not null,
+    sale            boolean                not null,
     primary key (id)
 );

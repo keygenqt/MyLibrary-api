@@ -59,6 +59,9 @@ data class Book(
     @Column(name = "image", nullable = true)
     var image: String = "",
 
+    @Column(name = "sale", nullable = true)
+    var sale: Boolean = false,
+
     @OneToOne(cascade = [CascadeType.ALL])
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "genre_id", referencedColumnName = "id")
