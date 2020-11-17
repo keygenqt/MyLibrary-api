@@ -15,7 +15,7 @@ class RestExceptionHandler : ResponseEntityExceptionHandler() {
     @Throws(IOException::class)
     fun springHandle(ex: Exception): ResponseEntity<ErrorResponse> {
         val error = ErrorResponse(
-            time = LocalDateTime.now(),
+            datetime = LocalDateTime.now(),
             status = BAD_REQUEST.value(),
             error = BAD_REQUEST,
             message = ex.message ?: "Bad Request"

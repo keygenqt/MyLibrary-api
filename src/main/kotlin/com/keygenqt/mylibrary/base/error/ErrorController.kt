@@ -40,7 +40,7 @@ class ErrorController(errorAttributes: ErrorAttributes?) : AbstractErrorControll
             }
         }
         val error = ErrorResponse(
-            time = LocalDateTime.now(),
+            datetime = LocalDateTime.now(),
             status = status.value(),
             error = status,
             message = ex.message ?: message
