@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-package com.keygenqt.mylibrary.api
+package com.keygenqt.mylibrary.base.error
 
 import org.springframework.boot.autoconfigure.web.servlet.error.*
-import org.springframework.boot.web.error.*
 import org.springframework.boot.web.servlet.error.*
 import org.springframework.http.*
 import org.springframework.stereotype.*
-import org.springframework.ui.*
 import org.springframework.web.bind.annotation.*
-import java.sql.*
+import java.time.*
 import javax.servlet.*
 import javax.servlet.http.*
 
@@ -32,12 +30,22 @@ import javax.servlet.http.*
 class ErrorController(errorAttributes: ErrorAttributes?) : AbstractErrorController(errorAttributes) {
 
     @RequestMapping
-    fun handleError(request: HttpServletRequest, model: Model): ResponseEntity<Map<String, Any>> {
-        val body = getErrorAttributes(request, ErrorAttributeOptions.defaults())
-        body["message"] = request.getAttribute(RequestDispatcher.ERROR_MESSAGE)
-        body["timestamp"] = Timestamp(System.currentTimeMillis())
+    fun handleError(ex: Exception, request: HttpServletRequest): ResponseEntity<ErrorResponse> {
         val status: HttpStatus = getStatus(request)
-        return ResponseEntity(body, status)
+        val message = request.getAttribute(RequestDispatcher.ERROR_MESSAGE).toString().let {
+            return@let if (it.isBlank()) {
+                "Bad request"
+            } else {
+                it
+            }
+        }
+        val error = ErrorResponse(
+            time = LocalDateTime.now(),
+            status = status.value(),
+            error = status,
+            message = ex.message ?: message
+        )
+        return ResponseEntity(error, error.error)
     }
 
     override fun getErrorPath(): String {
