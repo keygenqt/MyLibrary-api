@@ -17,7 +17,6 @@ package com.keygenqt.mylibrary.models
  */
 
 import com.fasterxml.jackson.annotation.*
-import com.fasterxml.jackson.annotation.JsonInclude.*
 import org.hibernate.annotations.*
 import javax.persistence.*
 import javax.persistence.CascadeType
@@ -41,6 +40,9 @@ data class User(
     @Column(name = "image", nullable = true)
     var image: String = "",
 
+    @Column(name = "avatar", nullable = true)
+    var avatar: String = "avatar_0",
+
     @JsonIgnore
     @Column(name = "password", nullable = true)
     var password: String = "",
@@ -61,4 +63,22 @@ data class User(
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     var tokens: List<UserToken> = listOf()
-)
+) {
+    companion object {
+        const val AVATAR_HAPPY = "avatar_0"
+        const val AVATAR_SURPRISED = "avatar_1"
+        const val AVATAR_TIRED = "avatar_2"
+        const val AVATAR_UPSET = "avatar_3"
+        const val AVATAR_OVERWHELMED = "avatar_4"
+        const val AVATAR_DEER = "avatar_5"
+        const val AVATAR_ENAMORED = "avatar_6"
+        const val AVATAR_BIRDIE = "avatar_7"
+        const val AVATAR_WHAT = "avatar_8"
+        const val AVATAR_SHOCKED = "avatar_9"
+        const val AVATAR_TOUCHED = "avatar_10"
+        const val AVATAR_ANGRY = "avatar_11"
+        const val AVATAR_ZOMBIE = "avatar_12"
+        const val AVATAR_PLAYFUL = "avatar_13"
+        const val AVATAR_SLEEPY = "avatar_14"
+    }
+}

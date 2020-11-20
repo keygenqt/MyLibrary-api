@@ -95,7 +95,8 @@ class AuthController {
                 nickname = model.nickname!!,
                 email = model.email!!,
                 password = BCryptPasswordEncoder().encode(model.password),
-                role = ROLE_USER
+                role = ROLE_USER,
+                avatar = model.avatar!!
             ))
             repository.findAllByEmail(model.email ?: "")?.let { user ->
                 val tokenModel = UserToken(

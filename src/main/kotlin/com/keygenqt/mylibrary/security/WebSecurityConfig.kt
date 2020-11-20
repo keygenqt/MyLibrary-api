@@ -17,6 +17,8 @@
 package com.keygenqt.mylibrary.security
 
 import com.keygenqt.mylibrary.models.*
+import com.keygenqt.mylibrary.models.User.Companion.AVATAR_HAPPY
+import com.keygenqt.mylibrary.models.User.Companion.AVATAR_TIRED
 import com.keygenqt.mylibrary.models.repositories.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.context.annotation.*
@@ -58,14 +60,16 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                     email = "admin@gmail.com",
                     nickname = "admin",
                     password = passwordEncoder().encode("12345"),
-                    role = ROLE_ADMIN
+                    role = ROLE_ADMIN,
+                    avatar = AVATAR_TIRED
                 ),
                 User(
                     image = "https://www.amazon.com/avatar/default/amzn1.account.AGMEOBVVJKNYMOJRQUZVDMXXE5OA?square=true&max_width=460",
                     email = "user@gmail.com",
                     nickname = "user",
                     password = passwordEncoder().encode("12345"),
-                    role = ROLE_USER
+                    role = ROLE_USER,
+                    avatar = AVATAR_HAPPY
                 )
             ))
         }

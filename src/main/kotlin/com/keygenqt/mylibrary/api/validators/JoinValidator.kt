@@ -38,6 +38,9 @@ class JoinValidator : Validator {
         ValidationUtils.rejectIfEmpty(errors, "uid", "field.required",
             messageSource.getMessage("field.required", arrayOf("UID"), Locale.ENGLISH))
 
+        ValidationUtils.rejectIfEmpty(errors, "avatar", "field.required",
+            messageSource.getMessage("field.required", arrayOf("Avatar"), Locale.ENGLISH))
+
         if (target is Join) {
             target.nickname?.let {
                 if (it.trim().isNotEmpty()) {
