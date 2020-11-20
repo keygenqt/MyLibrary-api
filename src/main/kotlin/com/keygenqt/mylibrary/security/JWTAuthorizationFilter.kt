@@ -34,8 +34,8 @@ class JWTAuthorizationFilter(
 ) : OncePerRequestFilter() {
 
     companion object {
-        private const val HEADER = "Authorization"
-        private const val PREFIX = "Bearer "
+        const val HEADER = "Authorization"
+        const val PREFIX = "Bearer "
 
         fun getJWTToken(login: String, role: String): String {
             return "Bearer ${

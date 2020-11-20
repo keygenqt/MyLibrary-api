@@ -44,7 +44,7 @@ class JoinValidator : Validator {
         if (target is Join) {
             target.nickname?.let {
                 if (it.trim().isNotEmpty()) {
-                    if (it.trim().length < 5) {
+                    if (it.trim().length < 2) {
                         errors.rejectValue("nickname", "field.min.length",
                             messageSource.getMessage("field.min.length", arrayOf("Nickname", 5), Locale.ENGLISH))
                     }

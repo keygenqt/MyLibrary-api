@@ -38,14 +38,9 @@ class IndexResourceAssembler {
     fun buildIndex(): IndexResource {
         val role = SecurityContextHolder.getContext().authentication.authorities.first().authority ?: WebSecurityConfig.ROLE_USER
         val links: List<Link> = listOfNotNull(
-            entityLinks.linkToCollectionResource(Book::class.java)
-                .withRel(relProvider.getCollectionResourceRelFor(Book::class.java)),
-            entityLinks.linkToCollectionResource(Genre::class.java)
-                .withRel(relProvider.getCollectionResourceRelFor(Genre::class.java)),
-            if (role == WebSecurityConfig.ROLE_ADMIN) {
-                entityLinks.linkToCollectionResource(User::class.java)
-                    .withRel(relProvider.getCollectionResourceRelFor(User::class.java))
-            } else null,
+            entityLinks.linkToCollectionResource(Book::class.java).withRel(relProvider.getCollectionResourceRelFor(Book::class.java)),
+            entityLinks.linkToCollectionResource(Genre::class.java).withRel(relProvider.getCollectionResourceRelFor(Genre::class.java)),
+            entityLinks.linkToCollectionResource(User::class.java).withRel(relProvider.getCollectionResourceRelFor(User::class.java)),
             if (role == WebSecurityConfig.ROLE_ADMIN) {
                 Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("profile").build().toUriString(), "profile")
             } else null

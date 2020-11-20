@@ -82,8 +82,6 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             .antMatchers(POST, "/login").permitAll()
             .antMatchers(POST, "/join").permitAll()
             .antMatchers(DELETE, "/**").hasAuthority(ROLE_ADMIN)
-            .antMatchers("/users/**").hasAuthority(ROLE_ADMIN)
-            .antMatchers("/profile/users/**").hasAuthority(ROLE_ADMIN)
             .anyRequest().authenticated()
     }
 }

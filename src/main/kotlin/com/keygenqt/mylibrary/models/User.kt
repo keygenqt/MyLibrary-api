@@ -22,6 +22,7 @@ import javax.persistence.*
 import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.Table
+import javax.validation.constraints.*
 
 @Entity
 @Table(name = "users")
@@ -37,8 +38,17 @@ data class User(
     @Column(name = "nickname", nullable = true)
     var nickname: String = "",
 
-    @Column(name = "image", nullable = true)
+    @Column(name = "image")
     var image: String = "",
+
+    @Column(name = "website")
+    var website: String = "",
+
+    @Column(name = "location")
+    var location: String = "",
+
+    @Column(name = "bio")
+    var bio: String = "",
 
     @Column(name = "avatar", nullable = true)
     var avatar: String = "avatar_0",

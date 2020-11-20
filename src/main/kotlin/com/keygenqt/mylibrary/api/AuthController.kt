@@ -22,6 +22,7 @@ import com.keygenqt.mylibrary.models.*
 import com.keygenqt.mylibrary.models.assemblers.*
 import com.keygenqt.mylibrary.models.repositories.*
 import com.keygenqt.mylibrary.security.*
+import com.keygenqt.mylibrary.security.JWTAuthorizationFilter.*
 import com.keygenqt.mylibrary.security.WebSecurityConfig.Companion.ROLE_USER
 import org.springframework.beans.factory.annotation.*
 import org.springframework.http.*
@@ -31,6 +32,7 @@ import org.springframework.validation.*
 import org.springframework.validation.annotation.*
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.*
+import javax.servlet.http.*
 
 @RestController
 @Validated
@@ -111,5 +113,16 @@ class AuthController {
             }
         }
         throw ResponseStatusException(FORBIDDEN, "Join failed")
+    }
+
+    @GetMapping(path = ["/users/me"])
+    fun me(request: HttpServletRequest): ResponseEntity<Any> {
+        repositoryToken.findByToken(request.getHeader(JWTAuthorizationFilter.HEADER))?.let { modelToken ->
+            repository.findById(modelToken.userId).get().let { user ->
+                user.token = modelToken.token
+                return ResponseEntity(assembler.toModel(user), OK)
+            }
+        }
+        throw ResponseStatusException(FORBIDDEN, "Authorization failed")
     }
 }
