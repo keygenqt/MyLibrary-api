@@ -39,16 +39,16 @@ data class User(
     var nickname: String = "",
 
     @Column(name = "image")
-    var image: String = "",
+    var image: String? = null,
 
     @Column(name = "website")
-    var website: String = "",
+    var website: String? = null,
 
     @Column(name = "location")
-    var location: String = "",
+    var location: String? = null,
 
     @Column(name = "bio")
-    var bio: String = "",
+    var bio: String? = null,
 
     @Column(name = "avatar", nullable = true)
     var avatar: String = "avatar_0",

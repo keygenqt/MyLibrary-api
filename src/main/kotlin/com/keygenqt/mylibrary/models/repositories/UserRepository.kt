@@ -21,6 +21,7 @@ import org.springframework.data.domain.*
 import org.springframework.data.jpa.repository.*
 import org.springframework.data.repository.*
 import org.springframework.data.repository.query.*
+import org.springframework.data.rest.core.annotation.*
 
 interface UserRepository : PagingAndSortingRepository<User, Long> {
     @Query(value = "select u from User u where u.enabled=true and u.email=:email")
@@ -31,4 +32,7 @@ interface UserRepository : PagingAndSortingRepository<User, Long> {
 
     @Query(value = "select u from User u where u.enabled=true and u.id=:id")
     fun findByIdActive(id: Long): User?
+
+    @RestResource(exported = false)
+    fun save(s: User): User
 }
