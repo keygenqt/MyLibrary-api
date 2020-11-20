@@ -17,6 +17,7 @@ package com.keygenqt.mylibrary.models
  */
 
 import com.fasterxml.jackson.annotation.*
+import com.fasterxml.jackson.annotation.JsonInclude.*
 import org.hibernate.annotations.*
 import javax.persistence.*
 import javax.persistence.CascadeType
@@ -66,7 +67,8 @@ data class User(
     var role: String = "USER",
 
     @Transient
-    var token: String = "",
+    @JsonInclude(Include.NON_NULL)
+    var token: String? = null,
 
     @JsonIgnore
     @OneToMany(cascade = [CascadeType.ALL])

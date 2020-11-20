@@ -114,15 +114,4 @@ class AuthController {
         }
         throw ResponseStatusException(FORBIDDEN, "Join failed")
     }
-
-    @GetMapping(path = ["/users/me"])
-    fun me(request: HttpServletRequest): ResponseEntity<Any> {
-        repositoryToken.findByToken(request.getHeader(JWTAuthorizationFilter.HEADER))?.let { modelToken ->
-            repository.findById(modelToken.userId).get().let { user ->
-                user.token = modelToken.token
-                return ResponseEntity(assembler.toModel(user), OK)
-            }
-        }
-        throw ResponseStatusException(FORBIDDEN, "Authorization failed")
-    }
 }

@@ -25,6 +25,7 @@ import com.keygenqt.mylibrary.security.*
 import com.keygenqt.mylibrary.security.JWTAuthorizationFilter.*
 import com.keygenqt.mylibrary.security.WebSecurityConfig.Companion.ROLE_USER
 import org.springframework.beans.factory.annotation.*
+import org.springframework.data.repository.*
 import org.springframework.http.*
 import org.springframework.http.HttpStatus.*
 import org.springframework.security.crypto.bcrypt.*
@@ -46,6 +47,15 @@ class UserController {
     @Autowired
     private lateinit var assembler: UserAssembler
 
+    @GetMapping(path = ["/users/{id}"])
+    fun userById(@PathVariable id: Long): ResponseEntity<Any> {
+        repository.findByIdOrNull(id)?.let { model ->
+            model.token = null
+            return ResponseEntity(assembler.toModel(model), OK)
+        }
+        throw ResponseStatusException(NOT_FOUND, "Page not found")
+    }
+
     @PutMapping(path = ["/users/{id}"])
     fun update(@PathVariable id: Long, @RequestBody model: UpdateUser, bindingResult: BindingResult): ResponseEntity<Any> {
 
@@ -54,19 +64,16 @@ class UserController {
         if (bindingResult.hasErrors()) {
             return bindingResult.getErrorFormat()
         } else {
-            try {
-                repository.findById(id).get().let { user ->
-                    user.avatar = model.avatar!!
-                    user.nickname = model.nickname!!
-                    user.website = model.website
-                    user.location = model.location
-                    user.bio = model.bio
-                    repository.save(user)
-                    return ResponseEntity(assembler.toModel(user), OK)
-                }
-            } catch (ex: Exception) {
-                throw ResponseStatusException(BAD_REQUEST, "Error update user")
+            repository.findByIdOrNull(id)?.let { user ->
+                user.avatar = model.avatar!!
+                user.nickname = model.nickname!!
+                user.website = model.website
+                user.location = model.location
+                user.bio = model.bio
+                repository.save(user)
+                return ResponseEntity(assembler.toModel(user), OK)
             }
         }
+        throw ResponseStatusException(BAD_REQUEST, "Error update user")
     }
 }
