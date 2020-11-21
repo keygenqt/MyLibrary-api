@@ -25,6 +25,7 @@ import com.keygenqt.mylibrary.security.*
 import com.keygenqt.mylibrary.security.JWTAuthorizationFilter.*
 import com.keygenqt.mylibrary.security.WebSecurityConfig.Companion.ROLE_USER
 import org.springframework.beans.factory.annotation.*
+import org.springframework.context.*
 import org.springframework.http.*
 import org.springframework.http.HttpStatus.*
 import org.springframework.security.crypto.bcrypt.*
