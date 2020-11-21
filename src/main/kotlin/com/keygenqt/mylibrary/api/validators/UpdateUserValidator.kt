@@ -43,7 +43,7 @@ class UpdateUserValidator : Validator {
                 }
             }
             target.website?.let {
-                if (!urlValidator.isValid(it)) {
+                if (it.isNotEmpty() && !urlValidator.isValid(it)) {
                     errors.rejectValue("website", "field.incorrect",
                         messageSource.getMessage("field.incorrect", arrayOf("website"), Locale.ENGLISH))
                 }
