@@ -18,19 +18,15 @@ package com.keygenqt.mylibrary.api
 
 import com.keygenqt.mylibrary.api.validators.*
 import com.keygenqt.mylibrary.extensions.*
-import com.keygenqt.mylibrary.models.*
 import com.keygenqt.mylibrary.models.assemblers.*
 import com.keygenqt.mylibrary.models.repositories.*
 import com.keygenqt.mylibrary.security.*
-import com.keygenqt.mylibrary.security.JWTAuthorizationFilter.*
-import com.keygenqt.mylibrary.security.WebSecurityConfig.Companion.ROLE_USER
 import org.springframework.beans.factory.annotation.*
 import org.springframework.data.repository.*
 import org.springframework.http.*
 import org.springframework.http.HttpStatus.*
 import org.springframework.security.crypto.bcrypt.*
 import org.springframework.validation.*
-import org.springframework.validation.annotation.*
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.*
 import javax.servlet.http.*
@@ -45,7 +41,32 @@ class UserController {
     private lateinit var updateUserValidator: UpdateUserValidator
 
     @Autowired
+    private lateinit var passwordValidator: PasswordValidator
+
+    @Autowired
     private lateinit var assembler: UserAssembler
+
+    @Autowired
+    private lateinit var repositoryToken: UserTokenRepository
+
+    @PostMapping(path = ["/password"])
+    fun password(@RequestBody model: Password, request: HttpServletRequest, bindingResult: BindingResult): ResponseEntity<Any> {
+        repositoryToken.findByToken(request.getHeader(JWTAuthorizationFilter.HEADER))?.let { modelToken ->
+            repository.findById(modelToken.userId).get().let { user ->
+
+                passwordValidator.validate(model, bindingResult)
+
+                return if (bindingResult.hasErrors()) {
+                    bindingResult.getErrorFormat()
+                } else {
+                    user.password = BCryptPasswordEncoder().encode(model.password)
+                    repository.save(user)
+                    ResponseEntity(assembler.toModel(user), OK)
+                }
+            }
+        }
+        throw ResponseStatusException(BAD_REQUEST, "Error update password")
+    }
 
     @GetMapping(path = ["/users/{id}"])
     fun userById(@PathVariable id: Long): ResponseEntity<Any> {

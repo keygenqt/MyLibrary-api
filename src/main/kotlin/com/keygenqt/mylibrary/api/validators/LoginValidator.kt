@@ -47,7 +47,7 @@ class LoginValidator : Validator {
             }
             target.password?.let {
                 if (it.trim().isNotEmpty()) {
-                    if (it.trim().length < 2) {
+                    if (it.trim().length < 5) {
                         errors.rejectValue("password", "field.min.length",
                             messageSource.getMessage("field.min.length", arrayOf("Password", 5), Locale.ENGLISH))
                     }

@@ -10,7 +10,6 @@ fun BindingResult.getErrorFormat(): ResponseEntity<Any> {
         put("status", UNPROCESSABLE_ENTITY.value())
         put("error", "Validate")
         put("message", "Validation failed")
-        put("path", "/login")
         put("timestamp", Timestamp(System.currentTimeMillis()))
     }, UNPROCESSABLE_ENTITY)
 }

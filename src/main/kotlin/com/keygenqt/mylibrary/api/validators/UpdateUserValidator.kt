@@ -18,7 +18,7 @@ class UpdateUserValidator : Validator {
     private lateinit var messageSource: MessageSource
 
     override fun supports(clazz: Class<*>): Boolean {
-        return User::class.java == clazz
+        return UpdateUser::class.java == clazz
     }
 
     override fun validate(target: Any, errors: Errors) {
