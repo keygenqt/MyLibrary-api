@@ -36,21 +36,28 @@ class IndexResourceAssembler {
     private lateinit var entityLinks: EntityLinks
 
     fun buildIndex(): IndexResource {
-        val role = SecurityContextHolder.getContext().authentication.authorities.first().authority ?: WebSecurityConfig.ROLE_USER
-        val links: List<Link> = listOfNotNull(
-            entityLinks.linkToCollectionResource(Book::class.java).withRel(relProvider.getCollectionResourceRelFor(Book::class.java)),
-            entityLinks.linkToCollectionResource(Genre::class.java).withRel(relProvider.getCollectionResourceRelFor(Genre::class.java)),
-            entityLinks.linkToCollectionResource(User::class.java).withRel(relProvider.getCollectionResourceRelFor(User::class.java)),
+        val role = SecurityContextHolder.getContext().authentication.authorities.first().authority ?: WebSecurityConfig.ROLE_ANONYMOUS
 
+        val links: MutableList<Link> = mutableListOf(
             Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("login").build().toUriString(), "login"),
             Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("join").build().toUriString(), "join"),
-            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("password").build().toUriString(), "password"),
-
-            if (role == WebSecurityConfig.ROLE_ADMIN) {
-                Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("profile").build().toUriString(), "profile")
-            } else null
+            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("password").build().toUriString(), "password")
         )
-        val resource = IndexResource("1.0.0", "HATEOAS API for app My Library")
+
+        if (role == WebSecurityConfig.ROLE_USER || role == WebSecurityConfig.ROLE_ADMIN) {
+            links.apply {
+                add(entityLinks.linkToCollectionResource(Book::class.java).withRel(relProvider.getCollectionResourceRelFor(Book::class.java)))
+                add(entityLinks.linkToCollectionResource(Genre::class.java).withRel(relProvider.getCollectionResourceRelFor(Genre::class.java)))
+                add(entityLinks.linkToCollectionResource(User::class.java).withRel(relProvider.getCollectionResourceRelFor(User::class.java)))
+            }
+        }
+        if (role == WebSecurityConfig.ROLE_ADMIN) {
+            links.apply {
+                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("profile").build().toUriString(), "profile"))
+            }
+        }
+
+        val resource = IndexResource("1.0.0", "HATEOAS API for app MyLibrary", role.replace("ROLE_", ""))
         resource.add(links)
         return resource
     }

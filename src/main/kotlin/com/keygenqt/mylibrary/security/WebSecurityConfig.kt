@@ -39,6 +39,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
         const val ROLE_USER = "USER"
         const val ROLE_ADMIN = "ADMIN"
+        const val ROLE_ANONYMOUS = "ANONYMOUS"
     }
 
     @Autowired
@@ -79,6 +80,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
         http.csrf().disable()
             .addFilterAfter(JWTAuthorizationFilter(repositoryUser, repositoryUserToken), UsernamePasswordAuthenticationFilter::class.java)
             .authorizeRequests()
+            .antMatchers(GET, "/").permitAll()
             .antMatchers(POST, "/login").permitAll()
             .antMatchers(POST, "/join").permitAll()
             .antMatchers(DELETE, "/**").hasAuthority(ROLE_ADMIN)
