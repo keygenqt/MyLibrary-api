@@ -76,4 +76,10 @@ data class Book(
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "user_id", referencedColumnName = "id", updatable = false, insertable = false)
     var user: User? = null
-)
+) {
+    companion object {
+        const val COVER_SOFT = "soft"
+        const val COVER_SOLID = "solid"
+        const val COVER_UNKNOWN = "unknown"
+    }
+}

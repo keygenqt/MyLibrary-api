@@ -16,15 +16,20 @@
 
 package com.keygenqt.mylibrary.api
 
+import com.keygenqt.mylibrary.api.validators.*
+import com.keygenqt.mylibrary.extensions.*
 import com.keygenqt.mylibrary.models.assemblers.*
 import com.keygenqt.mylibrary.models.repositories.*
 import org.springframework.beans.factory.annotation.*
+import org.springframework.data.repository.*
+import org.springframework.data.rest.webmvc.*
 import org.springframework.http.*
 import org.springframework.http.HttpStatus.*
+import org.springframework.validation.*
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.*
 
-@RestController
+@RepositoryRestController
 class BookController {
 
     @Autowired
@@ -33,11 +38,23 @@ class BookController {
     @Autowired
     private lateinit var assembler: BookAssembler
 
-//    @GetMapping(path = ["/books/{id}"])
-//    fun bookById(@PathVariable id: Long): ResponseEntity<Any> {
-//        repository.findById(id).orElse(null)?.let { model ->
-//            return ResponseEntity(assembler.toModel(model), OK)
-//        }
-//        throw ResponseStatusException(NOT_FOUND, "Page not found")
-//    }
+    @Autowired
+    private lateinit var updateBookValidator: BookValidator
+
+    @PutMapping("/books/{id}")
+    fun update(@PathVariable id: Long, @RequestBody model: Book, bindingResult: BindingResult): ResponseEntity<Any> {
+
+        updateBookValidator.validate(model, bindingResult)
+
+        if (bindingResult.hasErrors()) {
+            return bindingResult.getErrorFormat()
+        } else {
+            repository.findByIdOrNull(id)?.let { book ->
+                book.title = model.title!!
+                repository.save(book)
+                return ResponseEntity(assembler.toModel(book), OK)
+            }
+        }
+        throw ResponseStatusException(BAD_REQUEST, "Error update book")
+    }
 }
