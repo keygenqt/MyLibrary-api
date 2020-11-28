@@ -16,6 +16,7 @@
 
 package com.keygenqt.mylibrary.models
 
+import com.fasterxml.jackson.annotation.*
 import org.hibernate.annotations.*
 import javax.persistence.*
 import javax.persistence.CascadeType
@@ -62,6 +63,7 @@ data class Book(
     @Column(name = "sale", nullable = true)
     var sale: Boolean = false,
 
+    @JsonIgnore
     @Column(name = "enabled", nullable = true)
     var enabled: Boolean = true,
 
