@@ -54,10 +54,8 @@ class AuthController {
     @Autowired
     private lateinit var assembler: UserAssembler
 
-    @PostMapping(
-        path = ["/login"],
-        consumes = [MediaType.APPLICATION_FORM_URLENCODED_VALUE])
-    fun login(model: Login, bindingResult: BindingResult): ResponseEntity<Any> {
+    @PostMapping(path = ["/login"])
+    fun login(@RequestBody model: Login, bindingResult: BindingResult): ResponseEntity<Any> {
 
         loginValidator.validate(model, bindingResult)
 
@@ -84,10 +82,8 @@ class AuthController {
         throw ResponseStatusException(FORBIDDEN, "Authorization failed")
     }
 
-    @PostMapping(
-        path = ["/join"],
-        consumes = [MediaType.APPLICATION_FORM_URLENCODED_VALUE])
-    fun join(model: Join, bindingResult: BindingResult): ResponseEntity<Any> {
+    @PostMapping(path = ["/join"])
+    fun join(@RequestBody model: Join, bindingResult: BindingResult): ResponseEntity<Any> {
 
         regValidator.validate(model, bindingResult)
 
