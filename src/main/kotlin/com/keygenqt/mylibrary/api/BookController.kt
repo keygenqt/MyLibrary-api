@@ -41,7 +41,7 @@ class BookController {
     @Autowired
     private lateinit var updateBookValidator: BookValidator
 
-    @PutMapping("/books/{id}")
+    @PutMapping(path = ["/books/{id}"])
     fun update(@PathVariable id: Long, @RequestBody model: Book, bindingResult: BindingResult): ResponseEntity<Any> {
 
         updateBookValidator.validate(model, bindingResult)
@@ -49,6 +49,10 @@ class BookController {
         if (bindingResult.hasErrors()) {
             return bindingResult.getErrorFormat()
         } else {
+
+            println(id)
+            println(model.ISBN)
+
             repository.findByIdOrNull(id)?.let { book ->
                 book.title = model.title!!
                 repository.save(book)

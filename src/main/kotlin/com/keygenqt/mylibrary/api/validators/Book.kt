@@ -5,11 +5,11 @@ class Book(
     var author: String?,
     var description: String?,
     var publisher: String?,
-    var year: Int?,
+    var year: String?,
     var ISBN: String?,
-    var numberOfPages: Int?,
+    var numberOfPages: String?,
     var coverType: String?,
     var image: String?,
-    var sale: Boolean?,
-    var genreId: Long?
+    var sale: String?,
+    var genreId: String?
 )

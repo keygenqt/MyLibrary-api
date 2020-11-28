@@ -21,16 +21,16 @@ class BookValidator : Validator {
 
         errors.validateText(target, "title", 2, 250)
         errors.validateText(target, "author", 2, 250)
-        errors.validateText(target, "description", 2, 1000)
+        errors.validateText(target, "description", 2, 5000)
         errors.validateText(target, "publisher", 2, 250)
         errors.validateYear(target, "year")
         errors.validateText(target, "ISBN", 17)
-        errors.validateRequired(target, "numberOfPages")
+        errors.validateIsInt(target, "numberOfPages")
         errors.validateCoverType(target)
         errors.validateRequired(target, "genreId")
 
         if (!errors.hasErrors() && target is Book) {
-            if (repository.findByIdOrNull(target.genreId ?: 0) == null) {
+            if (repository.findByIdOrNull(target.genreId?.toLongOrNull() ?: 0) == null) {
                 "field.found.empty".let { errors.rejectValue("genreId", it, BaseMessageUtils.getMessage(it)) }
             }
         }

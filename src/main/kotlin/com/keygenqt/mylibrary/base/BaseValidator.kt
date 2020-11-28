@@ -133,16 +133,36 @@ fun Errors.validateYear(model: Any, field: String, required: Boolean = true) {
     }
 }
 
-fun Errors.validateText(model: Any, field: String, max: Int, min: Int = max, required: Boolean = true) {
+fun Errors.validateIsInt(model: Any, field: String, required: Boolean = true) {
     findValue(field, model)?.let { value ->
         when {
-            max == max && value.trim().length != min -> {
+            value.toIntOrNull() == null -> {
+                "field.incorrect".let { rejectValue(field, it, getMessage(it)) }
+            }
+            value.toInt() > 99999999 -> {
+                "field.too.mach".let { rejectValue(field, it, getMessage(it)) }
+            }
+            value.toInt() == 0 -> {
+                "field.too.few".let { rejectValue(field, it, getMessage(it)) }
+            }
+        }
+    } ?: run {
+        if (required) {
+            "field.required".let { rejectValue(field, it, getMessage(it)) }
+        }
+    }
+}
+
+fun Errors.validateText(model: Any, field: String, min: Int, max: Int = 0, required: Boolean = true) {
+    findValue(field, model)?.let { value ->
+        when {
+            max == 0 && value.trim().length != min -> {
                 "field.length".let { rejectValue(field, it, getMessage(it, min)) }
             }
-            value.trim().length < min -> {
+            max != 0 && value.trim().length < min -> {
                 "field.min.length".let { rejectValue(field, it, getMessage(it, min)) }
             }
-            value.trim().length > max -> {
+            max != 0 && value.trim().length > max -> {
                 "field.max.length".let { rejectValue(field, it, getMessage(it, max)) }
             }
         }
