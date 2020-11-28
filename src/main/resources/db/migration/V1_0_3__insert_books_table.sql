@@ -45,16 +45,24 @@ values (1,
         12,
         'If You Tell: A True Story of Murder, Family Secrets, and the Unbreakable Bond of Sisterhood',
         'Gregg Olsen',
-        'For years, behind the closed doors of their farmhouse in Raymond, Washington, their sadistic mother, Shelly, subjected her girls to unimaginable abuse, degradation, torture, and psychic terrors. Through it all, Nikki, Sami, and Tori developed a defiant bond that made them far less vulnerable than Shelly imagined. Even as others were drawn into their mother’s dark and perverse web, the sisters found the strength and courage to escape an escalating nightmare that culminated in multiple murders.',
-        '',
-        0,
-        '',
-        0,
-        'unknown',
+        'A #1 Wall Street Journal, Amazon Charts, USA Today, and Washington Post bestseller.
+
+#1 New York Times bestselling author Gregg Olsen’s shocking and empowering true-crime story of three sisters determined to survive their mother’s house of horrors.
+
+After more than a decade, when sisters Nikki, Sami, and Tori Knotek hear the word mom, it claws like an eagle’s talons, triggering memories that have been their secret since childhood. Until now.
+
+For years, behind the closed doors of their farmhouse in Raymond, Washington, their sadistic mother, Shelly, subjected her girls to unimaginable abuse, degradation, torture, and psychic terrors. Through it all, Nikki, Sami, and Tori developed a defiant bond that made them far less vulnerable than Shelly imagined. Even as others were drawn into their mother’s dark and perverse web, the sisters found the strength and courage to escape an escalating nightmare that culminated in multiple murders.
+
+Harrowing and heartrending, If You Tell is a survivor’s story of absolute evil—and the freedom and justice that Nikki, Sami, and Tori risked their lives to fight for. Sisters forever, victims no more, they found a light in the darkness that made them the resilient women they are today—loving, loved, and moving on.',
+        'Kindle Edition',
+        2020,
+        '978-5-00131-235-2',
+        156,
+        'solid',
         'https://m.media-amazon.com/images/I/410K-S--pmL.jpg',
         1);
 
-insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
+insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale, enabled)
 values (1,
         1, # Fantasy
         'Spellbreaker',
@@ -66,7 +74,8 @@ values (1,
         0,
         'unknown',
         'https://m.media-amazon.com/images/I/51aJOTD2sPL.jpg',
-        1);
+        1,
+        0);
 
 insert into books (user_id, genre_id, title, author, description, publisher, year, isbn, number_of_pages, cover_type, image, sale)
 values (1,

@@ -18,9 +18,21 @@ package com.keygenqt.mylibrary.models.repositories
 
 import com.keygenqt.mylibrary.models.*
 import org.springframework.data.domain.*
+import org.springframework.data.jpa.repository.*
 import org.springframework.data.repository.*
+import java.util.*
 
 internal interface BookRepository : PagingAndSortingRepository<Book, Long> {
-    fun findAllByUserId(userId: Int, pageable: Pageable): Page<Book>
+
+    @Query(value = "select m from Book m where m.enabled=true and m.id=:id")
+    fun findById(id: Long?): Optional<Book?>?
+
+    @Query(value = "select m from Book m where m.enabled=true")
+    override fun findAll(pageable: Pageable): Page<Book>
+
+    @Query(value = "select m from Book m where m.enabled=true and m.id=:id")
+    fun findAllByUserId(id: Int, pageable: Pageable): Page<Book>
+
+    @Query(value = "select m from Book m where m.enabled=true and m.sale=:sale")
     fun findAllBySale(sale: Boolean, pageable: Pageable): Page<Book>
 }

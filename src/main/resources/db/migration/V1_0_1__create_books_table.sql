@@ -13,5 +13,6 @@ create table books
     cover_type      enum ('soft', 'solid', 'unknown') not null,
     image           varchar(250)           not null,
     sale            boolean                not null,
+    enabled         boolean                not null default 1,
     primary key (id)
 );

@@ -10,7 +10,8 @@ import java.time.*
 @ControllerAdvice
 class RestExceptionHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(value = [
-        Exception::class
+        ArithmeticException::class,
+        IllegalArgumentException::class
     ])
     @Throws(IOException::class)
     fun springHandle(ex: Exception): ResponseEntity<ErrorResponse> {

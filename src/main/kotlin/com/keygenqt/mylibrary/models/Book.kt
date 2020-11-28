@@ -62,6 +62,9 @@ data class Book(
     @Column(name = "sale", nullable = true)
     var sale: Boolean = false,
 
+    @Column(name = "enabled", nullable = true)
+    var enabled: Boolean = true,
+
     @OneToOne(cascade = [CascadeType.ALL])
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "genre_id", referencedColumnName = "id")
