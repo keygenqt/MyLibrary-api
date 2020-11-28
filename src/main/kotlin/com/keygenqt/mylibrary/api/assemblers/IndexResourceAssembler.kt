@@ -41,6 +41,11 @@ class IndexResourceAssembler {
             entityLinks.linkToCollectionResource(Book::class.java).withRel(relProvider.getCollectionResourceRelFor(Book::class.java)),
             entityLinks.linkToCollectionResource(Genre::class.java).withRel(relProvider.getCollectionResourceRelFor(Genre::class.java)),
             entityLinks.linkToCollectionResource(User::class.java).withRel(relProvider.getCollectionResourceRelFor(User::class.java)),
+
+            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("login").build().toUriString(), "login"),
+            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("join").build().toUriString(), "join"),
+            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("password").build().toUriString(), "password"),
+
             if (role == WebSecurityConfig.ROLE_ADMIN) {
                 Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("profile").build().toUriString(), "profile")
             } else null
