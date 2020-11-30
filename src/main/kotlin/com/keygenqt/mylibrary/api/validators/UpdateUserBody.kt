@@ -1,6 +1,6 @@
 package com.keygenqt.mylibrary.api.validators
 
-class UpdateUser(
+class UpdateUserBody(
     var avatar: String?,
     var nickname: String?,
     var website: String?,

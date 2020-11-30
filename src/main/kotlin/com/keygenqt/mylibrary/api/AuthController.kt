@@ -22,10 +22,8 @@ import com.keygenqt.mylibrary.models.*
 import com.keygenqt.mylibrary.models.assemblers.*
 import com.keygenqt.mylibrary.models.repositories.*
 import com.keygenqt.mylibrary.security.*
-import com.keygenqt.mylibrary.security.JWTAuthorizationFilter.*
 import com.keygenqt.mylibrary.security.WebSecurityConfig.Companion.ROLE_USER
 import org.springframework.beans.factory.annotation.*
-import org.springframework.context.*
 import org.springframework.http.*
 import org.springframework.http.HttpStatus.*
 import org.springframework.security.crypto.bcrypt.*
@@ -33,7 +31,6 @@ import org.springframework.validation.*
 import org.springframework.validation.annotation.*
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.*
-import javax.servlet.http.*
 
 @RestController
 @Validated
@@ -55,7 +52,7 @@ class AuthController {
     private lateinit var assembler: UserAssembler
 
     @PostMapping(path = ["/login"])
-    fun login(@RequestBody model: Login, bindingResult: BindingResult): ResponseEntity<Any> {
+    fun login(@RequestBody model: LoginBody, bindingResult: BindingResult): ResponseEntity<Any> {
 
         loginValidator.validate(model, bindingResult)
 
@@ -83,7 +80,7 @@ class AuthController {
     }
 
     @PostMapping(path = ["/join"])
-    fun join(@RequestBody model: Join, bindingResult: BindingResult): ResponseEntity<Any> {
+    fun join(@RequestBody model: JoinBody, bindingResult: BindingResult): ResponseEntity<Any> {
 
         regValidator.validate(model, bindingResult)
 

@@ -19,6 +19,7 @@ package com.keygenqt.mylibrary.api
 import com.keygenqt.mylibrary.api.validators.*
 import com.keygenqt.mylibrary.base.*
 import com.keygenqt.mylibrary.extensions.*
+import com.keygenqt.mylibrary.models.*
 import com.keygenqt.mylibrary.models.assemblers.*
 import com.keygenqt.mylibrary.models.repositories.*
 import com.keygenqt.mylibrary.security.*
@@ -48,7 +49,7 @@ class BookController {
     private lateinit var repositoryToken: UserTokenRepository
 
     @PutMapping(path = ["/books/{id}"])
-    fun update(@PathVariable id: Long, @RequestBody model: Book, bindingResult: BindingResult): ResponseEntity<Any> {
+    fun update(@PathVariable id: Long, @RequestBody model: BookBody, bindingResult: BindingResult): ResponseEntity<Any> {
 
         updateBookValidator.validate(model, bindingResult)
 
@@ -68,6 +69,35 @@ class BookController {
                 book.genreId = model.genreId?.toLong()!!
                 repository.save(book)
                 return ResponseEntity(assembler.toModel(book), OK)
+            }
+        }
+        throw ResponseStatusException(BAD_REQUEST, "Error update book")
+    }
+
+    @PostMapping(path = ["/books"])
+    fun add(@RequestBody model: BookBody, bindingResult: BindingResult, request: HttpServletRequest): ResponseEntity<Any> {
+
+        updateBookValidator.validate(model, bindingResult)
+
+        if (bindingResult.hasErrors()) {
+            return bindingResult.getErrorFormat()
+        } else {
+            repositoryToken.findByToken(request.getHeader(JWTAuthorizationFilter.HEADER))?.let { modelToken ->
+                val modelBook = Book().apply {
+                    title = model.title!!
+                    description = model.description!!
+                    publisher = model.publisher!!
+                    year = model.year?.toInt()!!
+                    ISBN = model.ISBN!!
+                    numberOfPages = model.numberOfPages?.toInt()!!
+                    coverType = model.coverType!!
+                    image = model.image!!
+                    sale = model.sale?.toBoolean()!!
+                    genreId = model.genreId?.toLong()!!
+                    userId = modelToken.userId
+                }
+                repository.save(modelBook)
+                return ResponseEntity(assembler.toModel(modelBook), OK)
             }
         }
         throw ResponseStatusException(BAD_REQUEST, "Error update book")

@@ -14,7 +14,7 @@ class BookValidator : Validator {
     private lateinit var repository: GenreRepository
 
     override fun supports(clazz: Class<*>): Boolean {
-        return Book::class.java == clazz
+        return BookBody::class.java == clazz
     }
 
     override fun validate(target: Any, errors: Errors) {
@@ -29,7 +29,7 @@ class BookValidator : Validator {
         errors.validateCoverType(target)
         errors.validateRequired(target, "genreId")
 
-        if (!errors.hasErrors() && target is Book) {
+        if (!errors.hasErrors() && target is BookBody) {
             if (repository.findByIdOrNull(target.genreId?.toLongOrNull() ?: 0) == null) {
                 "field.found.empty".let { errors.rejectValue("genreId", it, BaseMessageUtils.getMessage(it)) }
             }

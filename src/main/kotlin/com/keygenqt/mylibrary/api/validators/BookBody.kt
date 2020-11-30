@@ -1,6 +1,6 @@
 package com.keygenqt.mylibrary.api.validators
 
-class Book(
+class BookBody(
     var title: String?,
     var author: String?,
     var description: String?,

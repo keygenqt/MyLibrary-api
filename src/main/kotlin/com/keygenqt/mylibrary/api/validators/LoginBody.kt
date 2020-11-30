@@ -1,6 +1,6 @@
 package com.keygenqt.mylibrary.api.validators
 
-class Login(
+class LoginBody(
     var uid: String?,
     var email: String?,
     var password: String?

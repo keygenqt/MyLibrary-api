@@ -14,7 +14,7 @@ class LoginValidator : Validator {
     private lateinit var repository: UserRepository
 
     override fun supports(clazz: Class<*>): Boolean {
-        return Login::class.java == clazz
+        return LoginBody::class.java == clazz
     }
 
     override fun validate(target: Any, errors: Errors) {
@@ -23,7 +23,7 @@ class LoginValidator : Validator {
         errors.validatePassword(target)
         errors.validateRequired(target, "uid")
 
-        if (!errors.hasErrors() && target is Login) {
+        if (!errors.hasErrors() && target is LoginBody) {
             repository.findAllByEmail(target.email ?: "")?.let { model ->
                 if (!BCryptPasswordEncoder().matches(target.password, model.password)) {
                     "field.incorrect".let { errors.rejectValue("password", it, BaseMessageUtils.getMessage(it)) }

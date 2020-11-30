@@ -13,7 +13,7 @@ class JoinValidator : Validator {
     private lateinit var repository: UserRepository
 
     override fun supports(clazz: Class<*>): Boolean {
-        return Join::class.java == clazz
+        return JoinBody::class.java == clazz
     }
 
     override fun validate(target: Any, errors: Errors) {
@@ -24,7 +24,7 @@ class JoinValidator : Validator {
         errors.validateRequired(target, "uid")
         errors.validateAvatar(target)
 
-        if (!errors.hasErrors() && target is Join) {
+        if (!errors.hasErrors() && target is JoinBody) {
             repository.findAllByEmail(target.email ?: "")?.let {
                 "field.already.taken".let { errors.rejectValue("email", it, BaseMessageUtils.getMessage(it)) }
             }

@@ -1,6 +1,6 @@
 package com.keygenqt.mylibrary.api.validators
 
-class Join(
+class JoinBody(
     var uid: String?,
     var nickname: String?,
     var email: String?,

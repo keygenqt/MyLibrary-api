@@ -8,7 +8,7 @@ import org.springframework.validation.*
 class UpdateUserValidator : Validator {
 
     override fun supports(clazz: Class<*>): Boolean {
-        return UpdateUser::class.java == clazz
+        return UpdateUserBody::class.java == clazz
     }
 
     override fun validate(target: Any, errors: Errors) {

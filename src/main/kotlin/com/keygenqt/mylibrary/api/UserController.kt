@@ -50,7 +50,7 @@ class UserController {
     private lateinit var repositoryToken: UserTokenRepository
 
     @PostMapping(path = ["/password"])
-    fun password(@RequestBody model: Password, request: HttpServletRequest, bindingResult: BindingResult): ResponseEntity<Any> {
+    fun password(@RequestBody model: PasswordBody, request: HttpServletRequest, bindingResult: BindingResult): ResponseEntity<Any> {
         repositoryToken.findByToken(request.getHeader(JWTAuthorizationFilter.HEADER))?.let { modelToken ->
             repository.findById(modelToken.userId).get().let { user ->
 
@@ -78,7 +78,7 @@ class UserController {
     }
 
     @PutMapping(path = ["/users/{id}"])
-    fun update(@PathVariable id: Long, @RequestBody model: UpdateUser, bindingResult: BindingResult): ResponseEntity<Any> {
+    fun update(@PathVariable id: Long, @RequestBody model: UpdateUserBody, bindingResult: BindingResult): ResponseEntity<Any> {
 
         updateUserValidator.validate(model, bindingResult)
 
