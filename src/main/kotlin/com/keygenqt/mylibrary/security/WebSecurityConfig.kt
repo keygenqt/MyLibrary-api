@@ -83,6 +83,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             .antMatchers(GET, "/").permitAll()
             .antMatchers(POST, "/login").permitAll()
             .antMatchers(POST, "/join").permitAll()
+            .antMatchers(DELETE, "/books/**").permitAll()
             .antMatchers(DELETE, "/**").hasAuthority(ROLE_ADMIN)
             .anyRequest().authenticated()
     }

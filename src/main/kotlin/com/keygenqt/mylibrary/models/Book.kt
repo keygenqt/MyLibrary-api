@@ -30,8 +30,11 @@ data class Book(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
+    @Column(name = "genre_id", nullable = false)
+    var genreId: Long = 0,
+
     @Column(name = "user_id", nullable = false)
-    var userId: Int = 0,
+    var userId: Long = 0,
 
     @Column(name = "title", nullable = true)
     var title: String = "",
@@ -63,13 +66,12 @@ data class Book(
     @Column(name = "sale", nullable = true)
     var sale: Boolean = false,
 
-    @JsonIgnore
     @Column(name = "enabled", nullable = true)
     var enabled: Boolean = true,
 
     @OneToOne(cascade = [CascadeType.ALL])
     @NotFound(action = NotFoundAction.IGNORE)
-    @JoinColumn(name = "genre_id", referencedColumnName = "id")
+    @JoinColumn(name = "genre_id", referencedColumnName = "id", updatable = false, insertable = false)
     var genre: Genre? = null,
 
     @OneToOne(cascade = [CascadeType.ALL])

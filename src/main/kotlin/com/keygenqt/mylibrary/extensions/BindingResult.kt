@@ -13,3 +13,11 @@ fun BindingResult.getErrorFormat(): ResponseEntity<Any> {
         put("timestamp", Timestamp(System.currentTimeMillis()))
     }, UNPROCESSABLE_ENTITY)
 }
+
+fun getSuccessFormat(message: String): ResponseEntity<Any> {
+    return ResponseEntity(hashMapOf<String, Any>().apply {
+        put("status", OK.value())
+        put("message", message)
+        put("timestamp", Timestamp(System.currentTimeMillis()))
+    }, OK)
+}
