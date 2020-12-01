@@ -8,7 +8,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/51Ys5yejqML.jpg',
         0);
 
@@ -22,7 +22,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/51SRF4uN1-L.jpg',
         1);
 
@@ -36,7 +36,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/51BFBPsfUwL.jpg',
         1);
 
@@ -72,7 +72,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/51aJOTD2sPL.jpg',
         1,
         0);
@@ -87,7 +87,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/41Q4HwXnvVL.jpg',
         1);
 
@@ -101,7 +101,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/41Maa+WYpiL.jpg',
         1);
 
@@ -115,7 +115,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/41TMZq66QjL.jpg',
         1);
 
@@ -129,7 +129,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/51zpiF29gbL.jpg',
         1);
 
@@ -143,7 +143,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/516UJY6myOL.jpg',
         1);
 
@@ -157,7 +157,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/41SxL78DpvL.jpg',
         1);
 
@@ -171,7 +171,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/517Uo39uqmL.jpg',
         1);
 
@@ -185,7 +185,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/41eOBgaUG3L.jpg',
         1);
 
@@ -199,7 +199,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/41m5zvk-UoL.jpg',
         1);
 
@@ -213,7 +213,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/51sZRlFOe6L.jpg',
         1);
 
@@ -227,7 +227,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/41cPURng0WL.jpg',
         1);
 
@@ -241,7 +241,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/51UoqRAxwEL.jpg',
         1);
 
@@ -255,7 +255,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/51ebZxVbLKL.jpg',
         1);
 
@@ -269,7 +269,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/512EmOOswPL.jpg',
         1);
 
@@ -283,7 +283,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/51yAD0bkGXL.jpg',
         1);
 
@@ -297,7 +297,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         '',
         1);
 
@@ -311,7 +311,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/41L6pJljNUL.jpg',
         1);
 
@@ -325,7 +325,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/41-rVi5w5EL.jpg',
         0);
 
@@ -339,7 +339,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/51imrZiGJ1L.jpg',
         0);
 
@@ -353,7 +353,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/41PACrotsYL.jpg',
         0);
 
@@ -367,7 +367,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/518Hz0W+e9L.jpg',
         0);
 
@@ -381,7 +381,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/41rSaQpivNL.jpg',
         0);
 
@@ -395,7 +395,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/51lniK41wyL.jpg',
         0);
 
@@ -409,7 +409,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/41PVbFCpDtL.jpg',
         0);
 
@@ -423,7 +423,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/51sig3Nmy3L.jpg',
         0);
 
@@ -437,7 +437,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         '',
         0);
 
@@ -451,7 +451,7 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/51--6mAry-L.jpg',
         0);
 
@@ -465,6 +465,6 @@ values (1,
         0,
         '',
         0,
-        'unknown',
+        'Other',
         'https://m.media-amazon.com/images/I/51FVPBt51ZL.jpg',
         0);

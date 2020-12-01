@@ -3,7 +3,7 @@ package com.keygenqt.mylibrary.base
 import com.keygenqt.mylibrary.base.BaseMessageUtils.Companion.getMessage
 import com.keygenqt.mylibrary.models.Book.Companion.COVER_SOFT
 import com.keygenqt.mylibrary.models.Book.Companion.COVER_SOLID
-import com.keygenqt.mylibrary.models.Book.Companion.COVER_UNKNOWN
+import com.keygenqt.mylibrary.models.Book.Companion.COVER_OTHER
 import com.keygenqt.mylibrary.models.User.Companion.AVATAR_ANGRY
 import com.keygenqt.mylibrary.models.User.Companion.AVATAR_BIRDIE
 import com.keygenqt.mylibrary.models.User.Companion.AVATAR_DEER
@@ -68,7 +68,7 @@ fun Errors.validateCoverType(model: Any, field: String = "coverType") {
     findValue(field, model)?.let { value ->
         if (!listOf(COVER_SOFT,
                 COVER_SOLID,
-                COVER_UNKNOWN).contains(value)
+                COVER_OTHER).contains(value)
         ) {
             "field.incorrect".let { rejectValue(field, it, getMessage(it)) }
         }

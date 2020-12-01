@@ -19,15 +19,14 @@ class BookValidator : Validator {
 
     override fun validate(target: Any, errors: Errors) {
 
-        errors.validateText(target, "title", 2, 250)
-        errors.validateText(target, "author", 2, 250)
-        errors.validateText(target, "description", 2, 5000)
-        errors.validateText(target, "publisher", 2, 250)
-        errors.validateYear(target, "year")
-        errors.validateText(target, "ISBN", 17)
-        errors.validateIsInt(target, "numberOfPages")
         errors.validateCoverType(target)
         errors.validateRequired(target, "genreId")
+        errors.validateText(target, "title", 2, 250)
+        errors.validateText(target, "description", 2, 5000, false)
+        errors.validateText(target, "author", 2, 250, false)
+        errors.validateText(target, "publisher", 2, 250, false)
+        errors.validateYear(target, "year", false)
+        errors.validateIsInt(target, "numberOfPages", false)
 
         if (!errors.hasErrors() && target is BookBody) {
             if (repository.findByIdOrNull(target.genreId?.toLongOrNull() ?: 0) == null) {

@@ -16,7 +16,6 @@
 
 package com.keygenqt.mylibrary.models
 
-import com.fasterxml.jackson.annotation.*
 import org.hibernate.annotations.*
 import javax.persistence.*
 import javax.persistence.CascadeType
@@ -36,37 +35,37 @@ data class Book(
     @Column(name = "user_id", nullable = false)
     var userId: Long = 0,
 
+    @Column(name = "image", nullable = true)
+    var image: String? = null,
+
     @Column(name = "title", nullable = true)
-    var title: String = "",
+    var title: String? = null,
 
     @Column(name = "author", nullable = true)
-    var author: String = "",
-
-    @Column(name = "description", nullable = true)
-    var description: String = "",
+    var author: String? = null,
 
     @Column(name = "publisher", nullable = true)
-    var publisher: String = "",
-
-    @Column(name = "year", nullable = true)
-    var year: Int = 0,
+    var publisher: String? = null,
 
     @Column(name = "isbn", nullable = true)
-    var ISBN: String = "",
+    var ISBN: String? = null,
+
+    @Column(name = "year", nullable = true)
+    var year: Int? = null,
 
     @Column(name = "number_of_pages", nullable = true)
-    var numberOfPages: Int = 0,
+    var numberOfPages: Int? = null,
 
-    @Column(name = "cover_type", nullable = true)
+    @Column(name = "description", nullable = true)
+    var description: String? = null,
+
+    @Column(name = "cover_type", nullable = false)
     var coverType: String = "soft",
 
-    @Column(name = "image", nullable = true)
-    var image: String = "",
-
-    @Column(name = "sale", nullable = true)
+    @Column(name = "sale", nullable = false)
     var sale: Boolean = false,
 
-    @Column(name = "enabled", nullable = true)
+    @Column(name = "enabled", nullable = false)
     var enabled: Boolean = true,
 
     @OneToOne(cascade = [CascadeType.ALL])
@@ -80,8 +79,8 @@ data class Book(
     var user: User? = null
 ) {
     companion object {
-        const val COVER_SOFT = "soft"
-        const val COVER_SOLID = "solid"
-        const val COVER_UNKNOWN = "unknown"
+        const val COVER_SOFT = "Soft"
+        const val COVER_SOLID = "Solid"
+        const val COVER_OTHER = "Other"
     }
 }

@@ -57,16 +57,32 @@ class BookController {
             return bindingResult.getErrorFormat()
         } else {
             repository.findByIdOrNull(id)?.let { book ->
-                book.title = model.title!!
-                book.description = model.description!!
-                book.publisher = model.publisher!!
-                book.year = model.year?.toInt()!!
-                book.ISBN = model.ISBN!!
-                book.numberOfPages = model.numberOfPages?.toInt()!!
-                book.coverType = model.coverType!!
-                book.image = model.image!!
-                book.sale = model.sale?.toBoolean()!!
-                book.genreId = model.genreId?.toLong()!!
+                book.apply {
+                    title = model.title!!
+                    genreId = model.genreId?.toLong()!!
+                    coverType = model.coverType ?: Book.COVER_OTHER
+                    sale = model.sale?.toBoolean() ?: false
+
+                    model.image?.let {
+                        image = it
+                    }
+                    model.publisher?.let {
+                        publisher = it
+                    }
+                    model.year?.let {
+                        year = it.toIntOrNull()
+                    }
+                    model.ISBN?.let {
+                        ISBN = it
+                    }
+                    model.numberOfPages?.let {
+                        numberOfPages = it.toIntOrNull()
+                    }
+                    model.description?.let {
+                        description = it
+                    }
+                }
+
                 repository.save(book)
                 return ResponseEntity(assembler.toModel(book), OK)
             }
@@ -82,25 +98,41 @@ class BookController {
         if (bindingResult.hasErrors()) {
             return bindingResult.getErrorFormat()
         } else {
+
+
+
             repositoryToken.findByToken(request.getHeader(JWTAuthorizationFilter.HEADER))?.let { modelToken ->
-                val modelBook = Book().apply {
+                val book = Book().apply {
                     title = model.title!!
-                    description = model.description!!
-                    publisher = model.publisher!!
-                    year = model.year?.toInt()!!
-                    ISBN = model.ISBN!!
-                    numberOfPages = model.numberOfPages?.toInt()!!
-                    coverType = model.coverType!!
-                    image = model.image!!
-                    sale = model.sale?.toBoolean()!!
                     genreId = model.genreId?.toLong()!!
                     userId = modelToken.userId
+                    coverType = model.coverType ?: Book.COVER_OTHER
+                    sale = model.sale?.toBoolean() ?: false
+
+                    model.image?.let {
+                        image = it
+                    }
+                    model.publisher?.let {
+                        publisher = it
+                    }
+                    model.year?.let {
+                        year = it.toIntOrNull()
+                    }
+                    model.ISBN?.let {
+                        ISBN = it
+                    }
+                    model.numberOfPages?.let {
+                        numberOfPages = it.toIntOrNull()
+                    }
+                    model.description?.let {
+                        description = it
+                    }
                 }
-                repository.save(modelBook)
-                return ResponseEntity(assembler.toModel(modelBook), OK)
+                repository.save(book)
+                return ResponseEntity(assembler.toModel(book), OK)
             }
         }
-        throw ResponseStatusException(BAD_REQUEST, "Error update book")
+        throw ResponseStatusException(BAD_REQUEST, "Error add book")
     }
 
     @DeleteMapping(path = ["/books/{id}"])
