@@ -30,8 +30,8 @@ internal interface BookRepository : PagingAndSortingRepository<Book, Long> {
     @Query(value = "select m from Book m where m.enabled=true order by m.id desc")
     override fun findAll(pageable: Pageable): Page<Book>
 
-    @Query(value = "select m from Book m where m.enabled=true and m.id=:id order by m.id desc")
-    fun findAllByUserId(id: Int, pageable: Pageable): Page<Book>
+    @Query(value = "select m from Book m where m.enabled=true and m.userId=:userId order by m.id desc")
+    fun findAllByUserId(userId: Long, pageable: Pageable): Page<Book>
 
     @Query(value = "select m from Book m where m.enabled=true and m.sale=:sale order by m.id desc")
     fun findAllBySale(sale: Boolean, pageable: Pageable): Page<Book>

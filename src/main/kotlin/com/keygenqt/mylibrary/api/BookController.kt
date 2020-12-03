@@ -98,9 +98,6 @@ class BookController {
         if (bindingResult.hasErrors()) {
             return bindingResult.getErrorFormat()
         } else {
-
-
-
             repositoryToken.findByToken(request.getHeader(JWTAuthorizationFilter.HEADER))?.let { modelToken ->
                 val book = Book().apply {
                     title = model.title!!

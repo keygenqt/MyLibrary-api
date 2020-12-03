@@ -32,9 +32,6 @@ class IndexResourceAssembler {
     @Autowired
     private lateinit var relProvider: LinkRelationProvider
 
-    @Autowired
-    private lateinit var entityLinks: EntityLinks
-
     fun buildIndex(): IndexResource {
         val role = SecurityContextHolder.getContext().authentication.authorities.first().authority ?: WebSecurityConfig.ROLE_ANONYMOUS
 
@@ -46,9 +43,12 @@ class IndexResourceAssembler {
 
         if (role == WebSecurityConfig.ROLE_USER || role == WebSecurityConfig.ROLE_ADMIN) {
             links.apply {
-                add(entityLinks.linkToCollectionResource(Book::class.java).withRel(relProvider.getCollectionResourceRelFor(Book::class.java)))
-                add(entityLinks.linkToCollectionResource(Genre::class.java).withRel(relProvider.getCollectionResourceRelFor(Genre::class.java)))
-                add(entityLinks.linkToCollectionResource(User::class.java).withRel(relProvider.getCollectionResourceRelFor(User::class.java)))
+                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("/books/search/findAll").build().toUriString())
+                    .withRel(relProvider.getCollectionResourceRelFor(Book::class.java)))
+                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("/genres").build().toUriString())
+                    .withRel(relProvider.getCollectionResourceRelFor(Genre::class.java)))
+                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("/users").build().toUriString())
+                    .withRel(relProvider.getCollectionResourceRelFor(User::class.java)))
             }
         }
         if (role == WebSecurityConfig.ROLE_ADMIN) {
