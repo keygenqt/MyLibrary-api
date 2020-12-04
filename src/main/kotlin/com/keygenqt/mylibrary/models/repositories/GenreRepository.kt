@@ -17,10 +17,18 @@
 package com.keygenqt.mylibrary.models.repositories
 
 import com.keygenqt.mylibrary.models.*
+import org.springframework.data.domain.*
+import org.springframework.data.jpa.repository.*
 import org.springframework.data.repository.*
 
 internal interface GenreRepository : PagingAndSortingRepository<Genre, Long> {
+
+    @Query(value = "select m from Genre m order by m.id desc")
+    override fun findAll(pageable: Pageable): Page<Genre>
+
     fun findAllByTitle(title: String): List<Genre>
+
     fun findAllByDescription(description: String): List<Genre>
+
     fun findAllByTitleAndDescription(title: String, description: String): List<Genre>
 }

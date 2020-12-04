@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.*
 import org.springframework.hateoas.*
 import org.springframework.hateoas.server.*
 import org.springframework.stereotype.*
+import javax.persistence.*
 
 @Component
 internal class BookAssembler : RepresentationModelAssembler<Book, EntityModel<Book>> {
@@ -32,10 +33,18 @@ internal class BookAssembler : RepresentationModelAssembler<Book, EntityModel<Bo
     private lateinit var entityLinks: EntityLinks
 
     override fun toModel(model: Book): EntityModel<Book> {
-        return EntityModel.of<Book>(model,
-            entityLinks.linkToItemResource(Book::class.java, model.id!!).withSelfRel(),
-            entityLinks.linkToItemResource(Book::class.java, model.id!!)
-                .withRel(relProvider.getItemResourceRelFor(Book::class.java))
-        )
+        val links = mutableListOf<Link>()
+        model.id?.let { id ->
+            links.apply {
+                add(entityLinks.linkToItemResource(Book::class.java, id).withSelfRel())
+                add(entityLinks.linkToItemResource(Book::class.java, id).withRel(relProvider.getItemResourceRelFor(Book::class.java)))
+            }
+            Book::class.java.declaredFields.forEach { field ->
+                field.getAnnotation(OneToOne::class.java)?.let {
+                    links.add(entityLinks.linkToItemResource(Book::class.java, "$id/${field.name}").withRel(field.name))
+                }
+            }
+        }
+        return EntityModel.of<Book>(model, links)
     }
 }
