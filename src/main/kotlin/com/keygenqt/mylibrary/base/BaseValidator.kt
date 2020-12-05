@@ -174,7 +174,8 @@ fun Errors.validateText(model: Any, field: String, min: Int, max: Int = 0, requi
 }
 
 fun Errors.validateRequired(model: Any, field: String) {
-    if (findValue(field, model) == null) {
+    val value = findValue(field, model)
+    if (findValue(field, model) == null || value == "0") {
         "field.required".let { rejectValue(field, it, getMessage(it)) }
     }
 }
