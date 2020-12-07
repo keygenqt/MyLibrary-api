@@ -16,7 +16,12 @@
 
 package com.keygenqt.mylibrary.models
 
+import com.fasterxml.jackson.annotation.*
+import org.hibernate.annotations.*
+import java.util.*
 import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.Table
 
 @Entity
 @Table(name = "genres")
@@ -29,5 +34,17 @@ data class Genre(
     var title: String = "",
 
     @Column(name = "description", nullable = true)
-    var description: String = ""
+    var description: String = "",
+
+    @JsonIgnore
+    @CreationTimestamp
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    var createdAt: Date = Date(),
+
+    @JsonIgnore
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    var updatedAt: Date = Date()
 )

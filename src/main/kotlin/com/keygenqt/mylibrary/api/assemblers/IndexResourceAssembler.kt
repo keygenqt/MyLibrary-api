@@ -29,6 +29,13 @@ import org.springframework.web.servlet.support.*
 @Service
 class IndexResourceAssembler {
 
+    companion object {
+        const val API_KEY_MESSAGE_TOKEN = "message-token"
+        const val API_KEY_LOGIN = "login"
+        const val API_KEY_JOIN = "join"
+        const val API_KEY_PASSWORD = "password"
+    }
+
     @Autowired
     private lateinit var relProvider: LinkRelationProvider
 
@@ -39,9 +46,9 @@ class IndexResourceAssembler {
         val role = SecurityContextHolder.getContext().authentication.authorities.first().authority ?: WebSecurityConfig.ROLE_ANONYMOUS
 
         val links: MutableList<Link> = mutableListOf(
-            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("login").build().toUriString(), "login"),
-            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("join").build().toUriString(), "join"),
-            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("password").build().toUriString(), "password")
+            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("login").build().toUriString(), API_KEY_LOGIN),
+            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("join").build().toUriString(), API_KEY_JOIN),
+            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("password").build().toUriString(), API_KEY_PASSWORD)
         )
 
         if (role == WebSecurityConfig.ROLE_USER || role == WebSecurityConfig.ROLE_ADMIN) {
@@ -49,6 +56,7 @@ class IndexResourceAssembler {
                 add(entityLinks.linkToCollectionResource(Book::class.java).withRel(relProvider.getCollectionResourceRelFor(Book::class.java)))
                 add(entityLinks.linkToCollectionResource(Genre::class.java).withRel(relProvider.getCollectionResourceRelFor(Genre::class.java)))
                 add(entityLinks.linkToCollectionResource(User::class.java).withRel(relProvider.getCollectionResourceRelFor(User::class.java)))
+                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("message-token").build().toUriString(), API_KEY_MESSAGE_TOKEN))
             }
         }
         if (role == WebSecurityConfig.ROLE_ADMIN) {

@@ -25,7 +25,9 @@ create table users
                     'avatar_11',
                     'avatar_12',
                     'avatar_13',
-                    'avatar_14') not null default 'avatar_0',
+                    'avatar_14')    not null default 'avatar_0',
+    created_at      TIMESTAMP       not null default now(),
+    updated_at      TIMESTAMP       not null default now(),
     primary key (id),
     unique key (email)
 );

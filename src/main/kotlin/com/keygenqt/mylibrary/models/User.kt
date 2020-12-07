@@ -19,11 +19,11 @@ package com.keygenqt.mylibrary.models
 import com.fasterxml.jackson.annotation.*
 import com.fasterxml.jackson.annotation.JsonInclude.*
 import org.hibernate.annotations.*
+import java.util.*
 import javax.persistence.*
 import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.Table
-import javax.validation.constraints.*
 
 @Entity
 @Table(name = "users")
@@ -61,6 +61,18 @@ data class User(
     @JsonIgnore
     @Column(name = "enabled", nullable = true)
     var enabled: Boolean = true,
+
+    @JsonIgnore
+    @CreationTimestamp
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    var createdAt: Date = Date(),
+
+    @JsonIgnore
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    var updatedAt: Date = Date(),
 
     @JsonIgnore
     @Column(name = "role", nullable = true)

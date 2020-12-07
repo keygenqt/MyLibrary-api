@@ -17,7 +17,11 @@
 package com.keygenqt.mylibrary.models
 
 import com.fasterxml.jackson.annotation.*
+import org.hibernate.annotations.*
+import java.util.*
 import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.Table
 
 @Entity
 @Table(name = "users_tokens")
@@ -35,6 +39,22 @@ data class UserToken(
     @Column(name = "token", nullable = false)
     var token: String = "",
 
+    @JsonIgnore
+    @Column(name = "message_token", nullable = true)
+    var messageToken: String = "",
+
     @Column(name = "uid", nullable = false)
-    var uid: String = ""
+    var uid: String = "",
+
+    @JsonIgnore
+    @CreationTimestamp
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    var createdAt: Date = Date(),
+
+    @JsonIgnore
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    var updatedAt: Date = Date()
 )

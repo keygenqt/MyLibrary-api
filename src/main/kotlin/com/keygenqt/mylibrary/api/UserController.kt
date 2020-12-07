@@ -17,6 +17,7 @@
 package com.keygenqt.mylibrary.api
 
 import com.keygenqt.mylibrary.api.validators.*
+import com.keygenqt.mylibrary.base.*
 import com.keygenqt.mylibrary.extensions.*
 import com.keygenqt.mylibrary.models.assemblers.*
 import com.keygenqt.mylibrary.models.repositories.*
@@ -39,6 +40,9 @@ class UserController {
 
     @Autowired
     private lateinit var updateUserValidator: UpdateUserValidator
+
+    @Autowired
+    private lateinit var updateUserMessageTokenValidator: UpdateUserMessageTokenValidator
 
     @Autowired
     private lateinit var passwordValidator: PasswordValidator
@@ -96,5 +100,23 @@ class UserController {
             }
         }
         throw ResponseStatusException(BAD_REQUEST, "Error update user")
+    }
+
+    @PutMapping(path = ["/message-token"])
+    fun messageToken(@RequestBody model: UpdateUserMessageToken, request: HttpServletRequest, bindingResult: BindingResult): ResponseEntity<Any> {
+
+        updateUserMessageTokenValidator.validate(model, bindingResult)
+
+        if (bindingResult.hasErrors()) {
+            return bindingResult.getErrorFormat()
+        } else {
+            repositoryToken.findByToken(request.getHeader(JWTAuthorizationFilter.HEADER))?.let { modelToken ->
+                modelToken.messageToken = model.token!!
+                repositoryToken.save(modelToken)
+                return getSuccessFormat("Updated message token successfully")
+            }
+        }
+
+        throw ResponseStatusException(BAD_REQUEST, "Error update message token")
     }
 }

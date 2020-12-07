@@ -14,5 +14,7 @@ create table books
     cover_type      enum ('Soft', 'Solid', 'Other') not null,
     sale            boolean                not null default 0,
     enabled         boolean                not null default 1,
+    created_at      TIMESTAMP              not null default now(),
+    updated_at      TIMESTAMP              not null default now(),
     primary key (id)
 );
