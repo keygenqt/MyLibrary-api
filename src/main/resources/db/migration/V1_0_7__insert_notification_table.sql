@@ -5,7 +5,7 @@ values (2,
         'open');
 
 insert into notifications (user_id, notification, type, status)
-values (null,
+values (1,
         'Notification text for users common',
         'common',
         'open');
@@ -17,7 +17,7 @@ values (2,
         'open');
 
 insert into notifications (user_id, notification, type, status)
-values (null,
+values (1,
         'Notification text for user 4',
         'direct',
         'open');
