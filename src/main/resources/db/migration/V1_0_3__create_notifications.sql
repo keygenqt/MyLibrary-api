@@ -1,7 +1,7 @@
 create table notifications
 (
     id              int                                         not null auto_increment,
-    user_id         int,
+    user_id         int                                         not null,
     notification    TEXT                                        not null,
     status          enum ('open', 'done', 'pending', 'error')   not null,
     created_at      TIMESTAMP                                   not null default now(),
