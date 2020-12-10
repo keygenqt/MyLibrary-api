@@ -1,29 +1,24 @@
-insert into notifications (user_id, notification, type, status)
+insert into notifications (user_id, body, status)
 values (2,
         'Notification text for user 1',
-        'direct',
         'open');
 
-insert into notifications (user_id, notification, type, status)
+insert into notifications (user_id, body, status)
 values (1,
         'Notification text for users common',
-        'common',
         'open');
 
-insert into notifications (user_id, notification, type, status)
+insert into notifications (user_id, body, status)
 values (2,
         'Notification text for user 3',
-        'direct',
         'open');
 
-insert into notifications (user_id, notification, type, status)
+insert into notifications (user_id, body, status)
 values (1,
         'Notification text for user 4',
-        'direct',
         'open');
 
-insert into notifications (user_id, notification, type, status)
+insert into notifications (user_id, body, status)
 values (2,
         'Notification text for user 5',
-        'direct',
         'open');
