@@ -70,9 +70,14 @@ class JWTAuthorizationFilter(
 
     private fun validateToken(request: HttpServletRequest): Claims {
         val token = request.getHeader(HEADER)
-        repositoryUserToken.findByToken(token)?.let {
-            repositoryUser.findByIdActive(it.userId)?.let { user ->
+        repositoryUserToken.findByToken(token)?.let { userToken ->
+            repositoryUser.findByIdActive(userToken.userId)?.let { user ->
                 if (user.enabled) {
+
+                    // up updated_at
+                    userToken.updatedAt = Date()
+                    repositoryUserToken.save(userToken)
+
                     return Jwts.parser()
                         .setSigningKey(WebSecurityConfig.SECRET_KEY.toByteArray())
                         .parseClaimsJws(token.replace(PREFIX, ""))
