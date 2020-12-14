@@ -78,11 +78,11 @@ class JWTAuthorizationFilter(
                         .parseClaimsJws(token.replace(PREFIX, ""))
                         .body
                 } else {
-                    throw ResponseStatusException(FORBIDDEN, "Authorization failed. User disabled.")
+                    throw ResponseStatusException(UNAUTHORIZED, "Authorization failed. User disabled.")
                 }
             }
         }
-        throw ResponseStatusException(FORBIDDEN, "Authorization failed")
+        throw ResponseStatusException(UNAUTHORIZED, "Authorization failed")
     }
 
     private fun setUpSpringAuthentication(claims: Claims) {

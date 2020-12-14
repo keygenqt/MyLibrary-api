@@ -22,6 +22,7 @@ import com.keygenqt.mylibrary.models.User.Companion.AVATAR_TIRED
 import com.keygenqt.mylibrary.models.repositories.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.context.annotation.*
+import org.springframework.http.*
 import org.springframework.http.HttpMethod.*
 import org.springframework.security.config.annotation.web.builders.*
 import org.springframework.security.config.annotation.web.configuration.*
@@ -55,29 +56,33 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
     @PostConstruct
     fun addFirstUser() {
         if (!repositoryUser.existsById(1)) {
-            repositoryUser.saveAll(listOf(
-                User(
-                    image = "https://www.amazon.com/avatar/default/amzn1.account.AF53E22MXLWU7FIMB27VQXVQQPHQ?square=true&max_width=460",
-                    email = "admin@gmail.com",
-                    nickname = "admin",
-                    password = passwordEncoder().encode("12345"),
-                    role = ROLE_ADMIN,
-                    avatar = AVATAR_TIRED
-                ),
-                User(
-                    image = "https://www.amazon.com/avatar/default/amzn1.account.AGMEOBVVJKNYMOJRQUZVDMXXE5OA?square=true&max_width=460",
-                    email = "user@gmail.com",
-                    nickname = "user",
-                    password = passwordEncoder().encode("12345"),
-                    role = ROLE_USER,
-                    avatar = AVATAR_HAPPY
+            repositoryUser.saveAll(
+                listOf(
+                    User(
+                        image = "https://www.amazon.com/avatar/default/amzn1.account.AF53E22MXLWU7FIMB27VQXVQQPHQ?square=true&max_width=460",
+                        email = "admin@gmail.com",
+                        nickname = "admin",
+                        password = passwordEncoder().encode("12345"),
+                        role = ROLE_ADMIN,
+                        avatar = AVATAR_TIRED
+                    ),
+                    User(
+                        image = "https://www.amazon.com/avatar/default/amzn1.account.AGMEOBVVJKNYMOJRQUZVDMXXE5OA?square=true&max_width=460",
+                        email = "user@gmail.com",
+                        nickname = "user",
+                        password = passwordEncoder().encode("12345"),
+                        role = ROLE_USER,
+                        avatar = AVATAR_HAPPY
+                    )
                 )
-            ))
+            )
         }
     }
 
     override fun configure(http: HttpSecurity) {
-        http.csrf().disable()
+        http
+            .csrf()
+            .disable()
             .addFilterAfter(JWTAuthorizationFilter(repositoryUser, repositoryUserToken), UsernamePasswordAuthenticationFilter::class.java)
             .authorizeRequests()
             .antMatchers(GET, "/").permitAll()
@@ -85,6 +90,10 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             .antMatchers(POST, "/join").permitAll()
             .antMatchers(DELETE, "/books/**").permitAll()
             .antMatchers(DELETE, "/**").hasAuthority(ROLE_ADMIN)
-            .anyRequest().authenticated()
+            .anyRequest()
+            .authenticated()
+            .and()
+            .exceptionHandling()
+            .authenticationEntryPoint(HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
     }
 }

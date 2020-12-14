@@ -76,7 +76,7 @@ class AuthController {
                 return ResponseEntity(assembler.toModel(user), OK)
             }
         }
-        throw ResponseStatusException(FORBIDDEN, "Authorization failed")
+        throw ResponseStatusException(UNAUTHORIZED, "Authorization failed")
     }
 
     @PostMapping(path = ["/join"])
@@ -106,6 +106,6 @@ class AuthController {
                 return ResponseEntity(assembler.toModel(user), OK)
             }
         }
-        throw ResponseStatusException(FORBIDDEN, "Join failed")
+        throw ResponseStatusException(UNAUTHORIZED, "Join failed")
     }
 }
