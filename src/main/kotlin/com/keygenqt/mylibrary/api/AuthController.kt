@@ -31,6 +31,7 @@ import org.springframework.validation.*
 import org.springframework.validation.annotation.*
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.*
+import javax.servlet.http.*
 
 @RestController
 @Validated
@@ -52,7 +53,7 @@ class AuthController {
     private lateinit var assembler: UserAssembler
 
     @PostMapping(path = ["/login"])
-    fun login(@RequestBody model: LoginBody, bindingResult: BindingResult): ResponseEntity<Any> {
+    fun login(@RequestBody model: LoginBody, bindingResult: BindingResult, request: HttpServletRequest): ResponseEntity<Any> {
 
         loginValidator.validate(model, bindingResult)
 
@@ -67,7 +68,8 @@ class AuthController {
                     UserToken(
                         uid = model.uid!!,
                         userId = user.id!!,
-                        token = JWTAuthorizationFilter.getJWTToken(user.email, user.role)
+                        token = JWTAuthorizationFilter.getJWTToken(user.email, user.role),
+                        language = request.getHeader(JWTAuthorizationFilter.ACCEPT_LANGUAGE)
                     )
                 }
                 tokenModel.token = JWTAuthorizationFilter.getJWTToken(user.email, user.role)
@@ -80,25 +82,28 @@ class AuthController {
     }
 
     @PostMapping(path = ["/join"])
-    fun join(@RequestBody model: JoinBody, bindingResult: BindingResult): ResponseEntity<Any> {
+    fun join(@RequestBody model: JoinBody, bindingResult: BindingResult, request: HttpServletRequest): ResponseEntity<Any> {
 
         regValidator.validate(model, bindingResult)
 
         if (bindingResult.hasErrors()) {
             return bindingResult.getErrorFormat()
         } else {
-            repository.save(User(
-                nickname = model.nickname!!,
-                email = model.email!!,
-                password = BCryptPasswordEncoder().encode(model.password),
-                role = ROLE_USER,
-                avatar = model.avatar!!
-            ))
+            repository.save(
+                User(
+                    nickname = model.nickname!!,
+                    email = model.email!!,
+                    password = BCryptPasswordEncoder().encode(model.password),
+                    role = ROLE_USER,
+                    avatar = model.avatar!!
+                )
+            )
             repository.findAllByEmail(model.email ?: "")?.let { user ->
                 val tokenModel = UserToken(
                     uid = model.uid!!,
                     userId = user.id!!,
-                    token = JWTAuthorizationFilter.getJWTToken(user.email, user.role)
+                    token = JWTAuthorizationFilter.getJWTToken(user.email, user.role),
+                    language = request.getHeader(JWTAuthorizationFilter.ACCEPT_LANGUAGE)
                 )
                 tokenModel.token = JWTAuthorizationFilter.getJWTToken(user.email, user.role)
                 repositoryToken.save(tokenModel)
