@@ -16,6 +16,7 @@
 
 package com.keygenqt.mylibrary.security
 
+import com.keygenqt.mylibrary.models.*
 import com.keygenqt.mylibrary.models.repositories.*
 import io.jsonwebtoken.*
 import org.springframework.http.HttpStatus.*
@@ -34,6 +35,7 @@ class JWTAuthorizationFilter(
 ) : OncePerRequestFilter() {
 
     companion object {
+        const val ACCEPT_LANGUAGE = "Accept-Language"
         const val HEADER = "Authorization"
         const val PREFIX = "Bearer "
 
@@ -70,14 +72,11 @@ class JWTAuthorizationFilter(
 
     private fun validateToken(request: HttpServletRequest): Claims {
         val token = request.getHeader(HEADER)
+        val language = request.getHeader(ACCEPT_LANGUAGE)
         repositoryUserToken.findByToken(token)?.let { userToken ->
             repositoryUser.findByIdActive(userToken.userId)?.let { user ->
                 if (user.enabled) {
-
-                    // up updated_at
-                    userToken.updatedAt = Date()
-                    repositoryUserToken.save(userToken)
-
+                    update(userToken, language)
                     return Jwts.parser()
                         .setSigningKey(WebSecurityConfig.SECRET_KEY.toByteArray())
                         .parseClaimsJws(token.replace(PREFIX, ""))
@@ -110,5 +109,20 @@ class JWTAuthorizationFilter(
             return it.startsWith(PREFIX)
         }
         return false
+    }
+
+    private fun update(userToken: UserToken, language: String) {
+        var isUpdate = false
+        if (language != userToken.language) {
+            userToken.language = language
+            isUpdate = true
+        }
+        if (userToken.updatedAt.time < (Date().time - 86400000)) {
+            userToken.updatedAt = Date()
+            isUpdate = true
+        }
+        if (isUpdate) {
+            repositoryUserToken.save(userToken)
+        }
     }
 }

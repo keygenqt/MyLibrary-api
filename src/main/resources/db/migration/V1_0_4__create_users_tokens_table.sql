@@ -4,6 +4,7 @@ create table users_tokens
     token           varchar(500)           not null,
     message_token   varchar(500)           not null,
     uid             varchar(250)           not null,
+    language        varchar(10)            not null,
     user_id         int                    not null,
     created_at      TIMESTAMP              not null default now(),
     updated_at      TIMESTAMP              not null default now(),

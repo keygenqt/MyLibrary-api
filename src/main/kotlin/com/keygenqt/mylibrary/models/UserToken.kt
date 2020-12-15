@@ -46,6 +46,9 @@ data class UserToken(
     @Column(name = "uid", nullable = false)
     var uid: String = "",
 
+    @Column(name = "language", nullable = false)
+    var language: String = "",
+
     @JsonIgnore
     @CreationTimestamp
     @Column(name = "created_at")
