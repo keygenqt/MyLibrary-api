@@ -31,6 +31,7 @@ class IndexResourceAssembler {
 
     companion object {
         const val API_KEY_MESSAGE_TOKEN = "message-token"
+        const val API_KEY_UPLOAD_IMAGE = "upload-image"
         const val API_KEY_LOGIN = "login"
         const val API_KEY_JOIN = "join"
         const val API_KEY_PASSWORD = "password"
@@ -53,10 +54,11 @@ class IndexResourceAssembler {
 
         if (role == WebSecurityConfig.ROLE_USER || role == WebSecurityConfig.ROLE_ADMIN) {
             links.apply {
+                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("message-token").build().toUriString(), API_KEY_MESSAGE_TOKEN))
+                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("upload-image").build().toUriString(), API_KEY_UPLOAD_IMAGE))
                 add(entityLinks.linkToCollectionResource(Book::class.java).withRel(relProvider.getCollectionResourceRelFor(Book::class.java)))
                 add(entityLinks.linkToCollectionResource(Genre::class.java).withRel(relProvider.getCollectionResourceRelFor(Genre::class.java)))
                 add(entityLinks.linkToCollectionResource(User::class.java).withRel(relProvider.getCollectionResourceRelFor(User::class.java)))
-                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("message-token").build().toUriString(), API_KEY_MESSAGE_TOKEN))
             }
         }
         if (role == WebSecurityConfig.ROLE_ADMIN) {

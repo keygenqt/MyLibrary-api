@@ -31,6 +31,11 @@ flyway {
     password = findProperty("password") as String
 }
 
+// commons-io
+dependencies {
+    implementation("org.apache.commons:commons-io:1.3.2")
+}
+
 // rest
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-hateoas")

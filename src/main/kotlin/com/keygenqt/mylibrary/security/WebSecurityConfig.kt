@@ -85,6 +85,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             .disable()
             .addFilterAfter(JWTAuthorizationFilter(repositoryUser, repositoryUserToken), UsernamePasswordAuthenticationFilter::class.java)
             .authorizeRequests()
+            .antMatchers(GET, "/images/**").permitAll()
             .antMatchers(GET, "/").permitAll()
             .antMatchers(POST, "/login").permitAll()
             .antMatchers(POST, "/join").permitAll()
