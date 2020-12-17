@@ -23,8 +23,8 @@ import org.springframework.data.repository.*
 
 internal interface GenreRepository : PagingAndSortingRepository<Genre, Long> {
 
-    @Query(value = "select m from Genre m order by m.id desc")
-    override fun findAll(pageable: Pageable): Page<Genre>
+    @Query("select m from Genre m where m.enabled=true and m.language=:language order by m.id desc")
+    fun findAll(language: String, pageable: Pageable): Page<Genre>
 
     fun findAllByTitle(title: String): List<Genre>
 

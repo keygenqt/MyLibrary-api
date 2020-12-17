@@ -56,8 +56,9 @@ class IndexResourceAssembler {
             links.apply {
                 add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("message-token").build().toUriString(), API_KEY_MESSAGE_TOKEN))
                 add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("upload-image").build().toUriString(), API_KEY_UPLOAD_IMAGE))
+                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("genres/search/findAll{?language,page,size,sort}").build().toUriString())
+                    .withRel(relProvider.getCollectionResourceRelFor(Genre::class.java)))
                 add(entityLinks.linkToCollectionResource(Book::class.java).withRel(relProvider.getCollectionResourceRelFor(Book::class.java)))
-                add(entityLinks.linkToCollectionResource(Genre::class.java).withRel(relProvider.getCollectionResourceRelFor(Genre::class.java)))
                 add(entityLinks.linkToCollectionResource(User::class.java).withRel(relProvider.getCollectionResourceRelFor(User::class.java)))
             }
         }

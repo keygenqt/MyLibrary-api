@@ -30,11 +30,17 @@ data class Genre(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
-    @Column(name = "title", nullable = true)
+    @Column(name = "title", nullable = false)
     var title: String = "",
 
-    @Column(name = "description", nullable = true)
+    @Column(name = "description", nullable = false)
     var description: String = "",
+
+    @Column(name = "language", nullable = false)
+    var language: String = "",
+
+    @Column(name = "enabled", nullable = false)
+    var enabled: Boolean = true,
 
     @JsonIgnore
     @CreationTimestamp

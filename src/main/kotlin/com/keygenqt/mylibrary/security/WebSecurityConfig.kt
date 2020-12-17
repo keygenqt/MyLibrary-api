@@ -59,7 +59,6 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             repositoryUser.saveAll(
                 listOf(
                     User(
-                        image = "https://www.amazon.com/avatar/default/amzn1.account.AF53E22MXLWU7FIMB27VQXVQQPHQ?square=true&max_width=460",
                         email = "admin@gmail.com",
                         nickname = "admin",
                         password = passwordEncoder().encode("12345"),
@@ -67,9 +66,8 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
                         avatar = AVATAR_TIRED
                     ),
                     User(
-                        image = "https://www.amazon.com/avatar/default/amzn1.account.AGMEOBVVJKNYMOJRQUZVDMXXE5OA?square=true&max_width=460",
-                        email = "user@gmail.com",
-                        nickname = "user",
+                        email = "dev@keygenqt.com",
+                        nickname = "Vitaliy Zarubin",
                         password = passwordEncoder().encode("12345"),
                         role = ROLE_USER,
                         avatar = AVATAR_HAPPY
