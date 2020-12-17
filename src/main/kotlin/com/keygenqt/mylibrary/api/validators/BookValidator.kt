@@ -21,6 +21,7 @@ class BookValidator : Validator {
 
         errors.validateCoverType(target)
         errors.validateRequired(target, "genreId")
+        errors.validateRequired(target, "image")
         errors.validateText(target, "title", 2, 250)
         errors.validateText(target, "description", 2, 5000, false)
         errors.validateText(target, "author", 2, 250, false)
