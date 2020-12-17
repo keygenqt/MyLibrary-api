@@ -1,16 +1,4 @@
 insert into genres (title, description)
-values ('Programming',
-        'Literature on programming and IT world.');
-
-insert into genres (title, description)
-values ('Scientific',
-        'Literature based on scientific evidence.');
-
-insert into genres (title, description)
-values ('Classic',
-        'Fiction that has become part of an accepted literary canon, widely taught in schools.');
-
-insert into genres (title, description)
 values ('Crime/Detective',
         'Fiction about a crime, how the criminal gets caught and serves time, and the repercussions of the crime.');
 
@@ -109,3 +97,15 @@ values ('Travel',
 insert into genres (title, description)
 values ('Western',
         'Fiction set in the American Old West frontier and typically in the late nineteenth to early twentieth century.');
+
+insert into genres (title, description)
+values ('Programming',
+        'Literature on programming and IT world.');
+
+insert into genres (title, description)
+values ('Scientific',
+        'Literature based on scientific evidence.');
+
+insert into genres (title, description)
+values ('Classic',
+        'Fiction that has become part of an accepted literary canon, widely taught in schools.');
