@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package com.keygenqt.mylibrary
+package com.keygenqt.mylibrary.api
 
 import com.keygenqt.mylibrary.extensions.*
 import org.apache.commons.io.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.http.*
+import org.springframework.http.HttpStatus.*
 import org.springframework.stereotype.*
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.*
 import java.io.*
 import java.util.*
 import javax.servlet.http.*
@@ -43,6 +45,10 @@ class UploadController {
     @GetMapping(path = ["/images/{name}"], produces = [MediaType.IMAGE_PNG_VALUE])
     @ResponseBody
     fun getImage(@PathVariable name: String): ByteArray {
-        return FileUtils.readFileToByteArray(File("$path/$name"))
+        val file = File("$path/$name")
+        if (file.exists()) {
+            return FileUtils.readFileToByteArray(File("$path/$name"))
+        }
+        throw ResponseStatusException(NOT_FOUND, "Image not found")
     }
 }
