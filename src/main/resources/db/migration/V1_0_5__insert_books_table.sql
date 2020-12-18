@@ -17,7 +17,7 @@ values (
            # genre_id
            '57',
            # image
-           'https://mylibraryapp.com/images/9bd61984-8819-4093-9014-8b494dc24886.png',
+           'https://api.mylibraryapp.com/images/9bd61984-8819-4093-9014-8b494dc24886.png',
            # title
            'Иммануил Кант',
            # author
@@ -59,7 +59,7 @@ values (
            # genre_id
            '56',
            # image
-           'https://mylibraryapp.com/images/9be37ffe-b199-4a14-b8bf-ca80c95bf85e.png',
+           'https://api.mylibraryapp.com/images/9be37ffe-b199-4a14-b8bf-ca80c95bf85e.png',
            # title
            'Реактивное программирование с использованием RxJava',
            # author
@@ -101,7 +101,7 @@ values (
            # genre_id
            '57',
            # image
-           'https://mylibraryapp.com/images/68ad122f-5b75-4d4e-9cc9-261226770fb6.png',
+           'https://api.mylibraryapp.com/images/68ad122f-5b75-4d4e-9cc9-261226770fb6.png',
            # title
            'Структура и смысл: Теория литературы для всех',
            # author
@@ -119,7 +119,7 @@ values (
            # cover_type
            'Solid',
            # sale
-           '0',
+           '1',
            # enabled
            '1'
        );
@@ -143,7 +143,7 @@ values (
            # genre_id
            '57',
            # image
-           'https://mylibraryapp.com/images/73f83507-f345-4ac8-8cf0-67175e42a1fb.png',
+           'https://api.mylibraryapp.com/images/73f83507-f345-4ac8-8cf0-67175e42a1fb.png',
            # title
            'Краткая история США',
            # author
@@ -185,7 +185,7 @@ values (
            # genre_id
            '56',
            # image
-           'https://mylibraryapp.com/images/567e5a6e-b11c-41d1-8bee-250ff3f72c99.png',
+           'https://api.mylibraryapp.com/images/567e5a6e-b11c-41d1-8bee-250ff3f72c99.png',
            # title
            'Волшебство Kotlin',
            # author
@@ -227,7 +227,7 @@ values (
            # genre_id
            '57',
            # image
-           'https://mylibraryapp.com/images/8510b9fb-1606-4bba-9740-9890614d88c5.png',
+           'https://api.mylibraryapp.com/images/8510b9fb-1606-4bba-9740-9890614d88c5.png',
            # title
            'Платон',
            # author
@@ -269,7 +269,7 @@ values (
            # genre_id
            '26',
            # image
-           'https://mylibraryapp.com/images/a1d5583b-55a6-4952-a32d-5fcb18e39da5.png',
+           'https://api.mylibraryapp.com/images/a1d5583b-55a6-4952-a32d-5fcb18e39da5.png',
            # title
            'Producing Open Source Software',
            # author
@@ -311,7 +311,7 @@ values (
            # genre_id
            '57',
            # image
-           'https://mylibraryapp.com/images/af0e0874-4b77-4422-aad3-9a17bd0938fb.png',
+           'https://api.mylibraryapp.com/images/af0e0874-4b77-4422-aad3-9a17bd0938fb.png',
            # title
            'Краткая история Франции',
            # author
@@ -353,7 +353,7 @@ values (
            # genre_id
            '57',
            # image
-           'https://mylibraryapp.com/images/bc5f66e5-9c17-4ffd-b0e5-63fbfb8e4089.png',
+           'https://api.mylibraryapp.com/images/bc5f66e5-9c17-4ffd-b0e5-63fbfb8e4089.png',
            # title
            'Гегель',
            # author
@@ -395,7 +395,7 @@ values (
            # genre_id
            '57',
            # image
-           'https://mylibraryapp.com/images/c7175f25-232b-4479-8668-43a14e8d3a29.png',
+           'https://api.mylibraryapp.com/images/c7175f25-232b-4479-8668-43a14e8d3a29.png',
            # title
            'Фрейд Зигмунд',
            # author
@@ -437,7 +437,7 @@ values (
            # genre_id
            '57',
            # image
-           'https://mylibraryapp.com/images/db60c98c-61dc-40f9-b5c8-df39cf42e1a9.png',
+           'https://api.mylibraryapp.com/images/db60c98c-61dc-40f9-b5c8-df39cf42e1a9.png',
            # title
            'Краткая история Англии',
            # author
@@ -479,7 +479,7 @@ values (
            # genre_id
            '57',
            # image
-           'https://mylibraryapp.com/images/e8c10239-0f0b-486a-b5c1-472b61c84bbb.png',
+           'https://api.mylibraryapp.com/images/e8c10239-0f0b-486a-b5c1-472b61c84bbb.png',
            # title
            'Декарт',
            # author
@@ -521,7 +521,7 @@ values (
            # genre_id
            '57',
            # image
-           'https://mylibraryapp.com/images/fb53ecef-2318-434a-99f0-e6723c112f2d.png',
+           'https://api.mylibraryapp.com/images/fb53ecef-2318-434a-99f0-e6723c112f2d.png',
            # title
            'Аристотель',
            # author
