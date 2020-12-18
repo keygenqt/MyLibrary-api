@@ -19,6 +19,7 @@ package com.keygenqt.mylibrary.security
 import com.keygenqt.mylibrary.models.*
 import com.keygenqt.mylibrary.models.User.Companion.AVATAR_HAPPY
 import com.keygenqt.mylibrary.models.User.Companion.AVATAR_TIRED
+import com.keygenqt.mylibrary.models.User.Companion.AVATAR_TOUCHED
 import com.keygenqt.mylibrary.models.repositories.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.context.annotation.*
@@ -59,18 +60,14 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
             repositoryUser.saveAll(
                 listOf(
                     User(
-                        email = "admin@gmail.com",
-                        nickname = "admin",
-                        password = passwordEncoder().encode("12345"),
-                        role = ROLE_ADMIN,
-                        avatar = AVATAR_TIRED
-                    ),
-                    User(
                         email = "dev@keygenqt.com",
                         nickname = "Vitaliy Zarubin",
-                        password = passwordEncoder().encode("12345"),
+                        password = "\$2a\$10\$Y8BcZWFswVyu2rBt9pD2JOXfIFMYPK/uzt5sriyeOjPWmRMuf8K42",
                         role = ROLE_USER,
-                        avatar = AVATAR_HAPPY
+                        avatar = AVATAR_TOUCHED,
+                        website = "https://keygenqt.com",
+                        location = "Volgodonsk, Russia",
+                        bio = "Most of all I want to become the kind of person who could make the world a little better."
                     )
                 )
             )

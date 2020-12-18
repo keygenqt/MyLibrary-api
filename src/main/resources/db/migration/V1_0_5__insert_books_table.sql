@@ -13,7 +13,7 @@ insert into books (user_id,
                    enabled)
 values (
            # user_id
-           '2',
+           '1',
            # genre_id
            '57',
            # image
@@ -55,7 +55,7 @@ insert into books (user_id,
                    enabled)
 values (
            # user_id
-           '2',
+           '1',
            # genre_id
            '56',
            # image
@@ -97,7 +97,7 @@ insert into books (user_id,
                    enabled)
 values (
            # user_id
-           '2',
+           '1',
            # genre_id
            '57',
            # image
@@ -139,7 +139,7 @@ insert into books (user_id,
                    enabled)
 values (
            # user_id
-           '2',
+           '1',
            # genre_id
            '57',
            # image
@@ -181,7 +181,7 @@ insert into books (user_id,
                    enabled)
 values (
            # user_id
-           '2',
+           '1',
            # genre_id
            '56',
            # image
@@ -223,7 +223,7 @@ insert into books (user_id,
                    enabled)
 values (
            # user_id
-           '2',
+           '1',
            # genre_id
            '57',
            # image
@@ -265,7 +265,7 @@ insert into books (user_id,
                    enabled)
 values (
            # user_id
-           '2',
+           '1',
            # genre_id
            '26',
            # image
@@ -307,7 +307,7 @@ insert into books (user_id,
                    enabled)
 values (
            # user_id
-           '2',
+           '1',
            # genre_id
            '57',
            # image
@@ -349,7 +349,7 @@ insert into books (user_id,
                    enabled)
 values (
            # user_id
-           '2',
+           '1',
            # genre_id
            '57',
            # image
@@ -391,7 +391,7 @@ insert into books (user_id,
                    enabled)
 values (
            # user_id
-           '2',
+           '1',
            # genre_id
            '57',
            # image
@@ -433,7 +433,7 @@ insert into books (user_id,
                    enabled)
 values (
            # user_id
-           '2',
+           '1',
            # genre_id
            '57',
            # image
@@ -475,7 +475,7 @@ insert into books (user_id,
                    enabled)
 values (
            # user_id
-           '2',
+           '1',
            # genre_id
            '57',
            # image
@@ -517,7 +517,7 @@ insert into books (user_id,
                    enabled)
 values (
            # user_id
-           '2',
+           '1',
            # genre_id
            '57',
            # image
