@@ -26,28 +26,29 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.*
 import java.io.*
 import java.util.*
-import javax.servlet.http.*
 
 @Controller
 class UploadController {
 
-    @Value("\${images.path}")
-    private val path: String = ""
+    @Value("\${images.dir}")
+    private val dir: String = ""
+
+    @Value("\${images.url}")
+    private val url: String = ""
 
     @PostMapping(path = ["/upload-image"])
-    fun uploadImage(@RequestBody bytes: ByteArray, request: HttpServletRequest): ResponseEntity<Any> {
-        val basePath = "${request.scheme}://${request.serverName}:${request.serverPort}"
+    fun uploadImage(@RequestBody bytes: ByteArray): ResponseEntity<Any> {
         val name = "${UUID.randomUUID()}.png"
-        FileUtils.writeByteArrayToFile(File("$path/$name"), bytes)
-        return getSuccessFormat("$basePath/images/$name")
+        FileUtils.writeByteArrayToFile(File("$dir/$name"), bytes)
+        return getSuccessFormat("$url/$name")
     }
 
     @GetMapping(path = ["/images/{name}"], produces = [MediaType.IMAGE_PNG_VALUE])
     @ResponseBody
     fun getImage(@PathVariable name: String): ByteArray {
-        val file = File("$path/$name")
+        val file = File("$dir/$name")
         if (file.exists()) {
-            return FileUtils.readFileToByteArray(File("$path/$name"))
+            return FileUtils.readFileToByteArray(File("$dir/$name"))
         }
         throw ResponseStatusException(NOT_FOUND, "Image not found")
     }
