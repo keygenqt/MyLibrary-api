@@ -44,7 +44,7 @@ dependencies {
 // mysql
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    providedRuntime("mysql:mysql-connector-java")
+    implementation("mysql:mysql-connector-java:8.0.18")
 }
 
 // security
