@@ -47,16 +47,16 @@ class IndexResourceAssembler {
         val role = SecurityContextHolder.getContext().authentication.authorities.first().authority ?: WebSecurityConfig.ROLE_ANONYMOUS
 
         val links: MutableList<Link> = mutableListOf(
-            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("login").build().toUriString(), API_KEY_LOGIN),
-            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("join").build().toUriString(), API_KEY_JOIN),
-            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("password").build().toUriString(), API_KEY_PASSWORD)
+            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("/login").build().toUriString(), API_KEY_LOGIN),
+            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("/join").build().toUriString(), API_KEY_JOIN),
+            Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("/password").build().toUriString(), API_KEY_PASSWORD)
         )
 
         if (role == WebSecurityConfig.ROLE_USER || role == WebSecurityConfig.ROLE_ADMIN) {
             links.apply {
-                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("message-token").build().toUriString(), API_KEY_MESSAGE_TOKEN))
-                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("upload-image").build().toUriString(), API_KEY_UPLOAD_IMAGE))
-                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("genres/search/findAll{?language,page,size,sort}").build().toUriString())
+                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("/message-token").build().toUriString(), API_KEY_MESSAGE_TOKEN))
+                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("/upload-image").build().toUriString(), API_KEY_UPLOAD_IMAGE))
+                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("/genres/search/findAll{?language,page,size,sort}").build().toUriString())
                     .withRel(relProvider.getCollectionResourceRelFor(Genre::class.java)))
                 add(entityLinks.linkToCollectionResource(Book::class.java).withRel(relProvider.getCollectionResourceRelFor(Book::class.java)))
                 add(entityLinks.linkToCollectionResource(User::class.java).withRel(relProvider.getCollectionResourceRelFor(User::class.java)))
@@ -64,7 +64,7 @@ class IndexResourceAssembler {
         }
         if (role == WebSecurityConfig.ROLE_ADMIN) {
             links.apply {
-                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("profile").build().toUriString(), "profile"))
+                add(Link.of(ServletUriComponentsBuilder.fromCurrentContextPath().path("/profile").build().toUriString(), "profile"))
             }
         }
 
