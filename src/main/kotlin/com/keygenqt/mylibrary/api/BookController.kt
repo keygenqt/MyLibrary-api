@@ -22,7 +22,7 @@ import com.keygenqt.mylibrary.extensions.*
 import com.keygenqt.mylibrary.models.*
 import com.keygenqt.mylibrary.models.assemblers.*
 import com.keygenqt.mylibrary.models.repositories.*
-import com.keygenqt.mylibrary.security.*
+import com.keygenqt.mylibrary.config.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.data.repository.*
 import org.springframework.data.rest.webmvc.*
@@ -73,7 +73,7 @@ class BookController {
                         year = it.toIntOrNull()
                     }
                     model.ISBN?.let {
-                        ISBN = it
+                        isbn = it
                     }
                     model.numberOfPages?.let {
                         numberOfPages = it.toIntOrNull()
@@ -116,7 +116,7 @@ class BookController {
                         year = it.toIntOrNull()
                     }
                     model.ISBN?.let {
-                        ISBN = it
+                        isbn = it
                     }
                     model.numberOfPages?.let {
                         numberOfPages = it.toIntOrNull()

@@ -1,28 +1,13 @@
 package com.keygenqt.mylibrary.base
 
 import com.keygenqt.mylibrary.base.BaseMessageUtils.Companion.getMessage
-import com.keygenqt.mylibrary.models.Book.Companion.COVER_SOFT
-import com.keygenqt.mylibrary.models.Book.Companion.COVER_SOLID
-import com.keygenqt.mylibrary.models.Book.Companion.COVER_OTHER
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_ANGRY
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_BIRDIE
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_DEER
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_ENAMORED
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_HAPPY
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_OVERWHELMED
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_PLAYFUL
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_SHOCKED
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_SLEEPY
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_SURPRISED
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_TIRED
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_TOUCHED
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_UPSET
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_WHAT
-import com.keygenqt.mylibrary.models.User.Companion.AVATAR_ZOMBIE
-import org.apache.commons.validator.routines.*
-import org.springframework.validation.*
+import com.keygenqt.mylibrary.models.Book
+import com.keygenqt.mylibrary.models.User
+import org.apache.commons.validator.routines.EmailValidator
+import org.apache.commons.validator.routines.UrlValidator
+import org.springframework.validation.Errors
 import java.util.*
-import kotlin.reflect.full.*
+import kotlin.reflect.full.memberProperties
 
 fun Errors.validateNickname(model: Any, field: String = "nickname") {
     findValue(field, model)?.let { value ->
@@ -41,21 +26,21 @@ fun Errors.validateNickname(model: Any, field: String = "nickname") {
 
 fun Errors.validateAvatar(model: Any, field: String = "avatar") {
     findValue(field, model)?.let { value ->
-        if (!listOf(AVATAR_HAPPY,
-                AVATAR_SURPRISED,
-                AVATAR_TIRED,
-                AVATAR_UPSET,
-                AVATAR_OVERWHELMED,
-                AVATAR_DEER,
-                AVATAR_ENAMORED,
-                AVATAR_BIRDIE,
-                AVATAR_WHAT,
-                AVATAR_SHOCKED,
-                AVATAR_TOUCHED,
-                AVATAR_ANGRY,
-                AVATAR_ZOMBIE,
-                AVATAR_PLAYFUL,
-                AVATAR_SLEEPY).contains(value)
+        if (!listOf(User.AVATAR_HAPPY,
+                        User.AVATAR_SURPRISED,
+                        User.AVATAR_TIRED,
+                        User.AVATAR_UPSET,
+                        User.AVATAR_OVERWHELMED,
+                        User.AVATAR_DEER,
+                        User.AVATAR_ENAMORED,
+                        User.AVATAR_BIRDIE,
+                        User.AVATAR_WHAT,
+                        User.AVATAR_SHOCKED,
+                        User.AVATAR_TOUCHED,
+                        User.AVATAR_ANGRY,
+                        User.AVATAR_ZOMBIE,
+                        User.AVATAR_PLAYFUL,
+                        User.AVATAR_SLEEPY).contains(value)
         ) {
             "field.incorrect".let { rejectValue(field, it, getMessage(it)) }
         }
@@ -66,9 +51,9 @@ fun Errors.validateAvatar(model: Any, field: String = "avatar") {
 
 fun Errors.validateCoverType(model: Any, field: String = "coverType") {
     findValue(field, model)?.let { value ->
-        if (!listOf(COVER_SOFT,
-                COVER_SOLID,
-                COVER_OTHER).contains(value)
+        if (!listOf(Book.COVER_SOFT,
+                        Book.COVER_SOLID,
+                        Book.COVER_OTHER).contains(value)
         ) {
             "field.incorrect".let { rejectValue(field, it, getMessage(it)) }
         }

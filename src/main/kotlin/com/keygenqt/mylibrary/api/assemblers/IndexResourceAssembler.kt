@@ -18,7 +18,7 @@ package com.keygenqt.mylibrary.api.assemblers
 
 import com.keygenqt.mylibrary.api.resources.*
 import com.keygenqt.mylibrary.models.*
-import com.keygenqt.mylibrary.security.*
+import com.keygenqt.mylibrary.config.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.hateoas.*
 import org.springframework.hateoas.server.*

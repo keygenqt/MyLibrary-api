@@ -29,6 +29,7 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
     @Query(value = "select u from User u where u.enabled=true and u.email=:email")
     User findAllByEmail(@Param("email") String email);
 
+    @NotNull
     @Override
     @Query(value = "select u from User u where u.enabled=true")
     Page<User> findAll(@NotNull Pageable pageable);

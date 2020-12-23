@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.keygenqt.mylibrary.security
+package com.keygenqt.mylibrary.config
 
 import com.keygenqt.mylibrary.models.*
 import com.keygenqt.mylibrary.models.repositories.*

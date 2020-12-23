@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
-package com.keygenqt.mylibrary.security
+package com.keygenqt.mylibrary.config;
 
-import com.keygenqt.mylibrary.base.*
-import org.springframework.context.annotation.*
-import org.springframework.web.servlet.*
+import com.keygenqt.mylibrary.base.BaseLocaleResolver;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.LocaleResolver;
 
 @Configuration
 class WebConfig {
-    @Bean fun localeResolver(): LocaleResolver {
-        return BaseLocaleResolver()
+    @Bean
+    LocaleResolver localeResolver() {
+        return new BaseLocaleResolver();
     }
 }

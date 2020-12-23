@@ -16,22 +16,30 @@
 
 package com.keygenqt.mylibrary.api
 
-import com.keygenqt.mylibrary.api.validators.*
-import com.keygenqt.mylibrary.extensions.*
-import com.keygenqt.mylibrary.models.*
-import com.keygenqt.mylibrary.models.assemblers.*
-import com.keygenqt.mylibrary.models.repositories.*
-import com.keygenqt.mylibrary.security.*
-import com.keygenqt.mylibrary.security.WebSecurityConfig.Companion.ROLE_USER
-import org.springframework.beans.factory.annotation.*
-import org.springframework.http.*
-import org.springframework.http.HttpStatus.*
-import org.springframework.security.crypto.bcrypt.*
-import org.springframework.validation.*
-import org.springframework.validation.annotation.*
-import org.springframework.web.bind.annotation.*
-import org.springframework.web.server.*
-import javax.servlet.http.*
+import com.keygenqt.mylibrary.api.validators.JoinBody
+import com.keygenqt.mylibrary.api.validators.JoinValidator
+import com.keygenqt.mylibrary.api.validators.LoginBody
+import com.keygenqt.mylibrary.api.validators.LoginValidator
+import com.keygenqt.mylibrary.extensions.getErrorFormat
+import com.keygenqt.mylibrary.models.User
+import com.keygenqt.mylibrary.models.UserToken
+import com.keygenqt.mylibrary.models.assemblers.UserAssembler
+import com.keygenqt.mylibrary.models.repositories.UserRepository
+import com.keygenqt.mylibrary.models.repositories.UserTokenRepository
+import com.keygenqt.mylibrary.config.JWTAuthorizationFilter
+import com.keygenqt.mylibrary.config.WebSecurityConfig
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus.OK
+import org.springframework.http.HttpStatus.UNAUTHORIZED
+import org.springframework.http.ResponseEntity
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.validation.BindingResult
+import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.server.ResponseStatusException
+import javax.servlet.http.HttpServletRequest
 
 @RestController
 @Validated
@@ -66,10 +74,10 @@ class AuthController {
                     it
                 } ?: run {
                     UserToken(
-                        uid = model.uid!!,
-                        userId = user.id!!,
-                        token = JWTAuthorizationFilter.getJWTToken(user.email, user.role),
-                        language = request.getHeader(JWTAuthorizationFilter.ACCEPT_LANGUAGE)
+                            model.uid,
+                            user.id,
+                            JWTAuthorizationFilter.getJWTToken(user.email, user.role),
+                            request.getHeader(JWTAuthorizationFilter.ACCEPT_LANGUAGE)
                     )
                 }
                 tokenModel.token = JWTAuthorizationFilter.getJWTToken(user.email, user.role)
@@ -90,20 +98,20 @@ class AuthController {
             return bindingResult.getErrorFormat()
         } else {
             repository.save(
-                User(
-                    nickname = model.nickname!!,
-                    email = model.email!!,
-                    password = BCryptPasswordEncoder().encode(model.password),
-                    role = ROLE_USER,
-                    avatar = model.avatar!!
-                )
+                    User(
+                            model.email,
+                            model.nickname,
+                            BCryptPasswordEncoder().encode(model.password),
+                            WebSecurityConfig.ROLE_USER,
+                            model.avatar
+                    )
             )
             repository.findAllByEmail(model.email ?: "")?.let { user ->
                 val tokenModel = UserToken(
-                    uid = model.uid!!,
-                    userId = user.id!!,
-                    token = JWTAuthorizationFilter.getJWTToken(user.email, user.role),
-                    language = request.getHeader(JWTAuthorizationFilter.ACCEPT_LANGUAGE)
+                        model.uid,
+                        user.id,
+                        JWTAuthorizationFilter.getJWTToken(user.email, user.role),
+                        request.getHeader(JWTAuthorizationFilter.ACCEPT_LANGUAGE)
                 )
                 tokenModel.token = JWTAuthorizationFilter.getJWTToken(user.email, user.role)
                 repositoryToken.save(tokenModel)

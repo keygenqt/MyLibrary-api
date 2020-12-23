@@ -17,11 +17,10 @@
 package com.keygenqt.mylibrary.api
 
 import com.keygenqt.mylibrary.api.validators.*
-import com.keygenqt.mylibrary.base.*
 import com.keygenqt.mylibrary.extensions.*
 import com.keygenqt.mylibrary.models.assemblers.*
 import com.keygenqt.mylibrary.models.repositories.*
-import com.keygenqt.mylibrary.security.*
+import com.keygenqt.mylibrary.config.*
 import org.springframework.beans.factory.annotation.*
 import org.springframework.data.repository.*
 import org.springframework.http.*
