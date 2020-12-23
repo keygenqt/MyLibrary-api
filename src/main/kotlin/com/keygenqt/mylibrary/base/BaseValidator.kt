@@ -1,6 +1,6 @@
 package com.keygenqt.mylibrary.base
 
-import com.keygenqt.mylibrary.base.BaseMessageUtils.Companion.getMessage
+import com.keygenqt.mylibrary.base.BaseMessageUtils.getMessage
 import com.keygenqt.mylibrary.models.Book
 import com.keygenqt.mylibrary.models.User
 import org.apache.commons.validator.routines.EmailValidator
