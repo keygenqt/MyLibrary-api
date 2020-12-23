@@ -14,14 +14,15 @@
 // * limitations under the License.
 // */
 //
-//package com.keygenqt.mylibrary.models.repositories
+//package com.keygenqt.mylibrary
 //
-//import com.keygenqt.mylibrary.models.*
-//import org.springframework.data.repository.*
-//import org.springframework.data.repository.query.*
-//import org.springframework.data.rest.core.annotation.*
+//import org.springframework.boot.autoconfigure.SpringBootApplication
+//import org.springframework.boot.runApplication
+//import org.springframework.boot.web.servlet.support.*
 //
-//@RepositoryRestResource(exported = false)
-//interface UserTokenRepository : CrudRepository<UserToken, String> {
-//    fun findByToken(@Param("token") token: String): UserToken?
+//@SpringBootApplication
+//class Application: SpringBootServletInitializer()
+//
+//fun main(args: Array<String>) {
+//    runApplication<Application>(*args)
 //}

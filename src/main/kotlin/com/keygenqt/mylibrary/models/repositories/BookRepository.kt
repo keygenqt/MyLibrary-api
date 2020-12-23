@@ -20,15 +20,19 @@
 //import org.springframework.data.domain.*
 //import org.springframework.data.jpa.repository.*
 //import org.springframework.data.repository.*
+//import java.util.*
 //
-//internal interface GenreRepository : PagingAndSortingRepository<Genre, Long> {
+//internal interface BookRepository : PagingAndSortingRepository<Book, Long> {
 //
-//    @Query("select m from Genre m where m.enabled=true and m.language=:language order by m.id desc")
-//    fun findAll(language: String, pageable: Pageable): Page<Genre>
+//    @Query("select m from Book m where m.enabled=true and m.id=:id")
+//    fun findById(id: Long?): Optional<Book?>?
 //
-//    fun findAllByTitle(title: String): List<Genre>
+//    @Query("select m from Book m where m.enabled=true and (:search IS NULL or m.title like %:search%) order by m.id desc")
+//    fun findAll(search: String?, pageable: Pageable): Page<Book>
 //
-//    fun findAllByDescription(description: String): List<Genre>
+//    @Query("select m from Book m where m.enabled=true and m.userId=:userId and (:search IS NULL or m.title like %:search%) order by m.id desc")
+//    fun findAllByUserId(search: String?, userId: Long, pageable: Pageable): Page<Book>
 //
-//    fun findAllByTitleAndDescription(title: String, description: String): List<Genre>
+//    @Query("select m from Book m where m.enabled=true and m.sale=:sale and (:search IS NULL or m.title like %:search%) order by m.id desc")
+//    fun findAllBySale(search: String?, sale: Boolean, pageable: Pageable): Page<Book>
 //}
