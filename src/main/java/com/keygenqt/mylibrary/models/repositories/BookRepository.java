@@ -14,25 +14,30 @@
  * limitations under the License.
  */
 
-package com.keygenqt.mylibrary.models.repositories
+package com.keygenqt.mylibrary.models.repositories;
 
-import com.keygenqt.mylibrary.models.*
-import org.springframework.data.domain.*
-import org.springframework.data.jpa.repository.*
-import org.springframework.data.repository.*
-import java.util.*
+import com.keygenqt.mylibrary.models.Book;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-internal interface BookRepository : PagingAndSortingRepository<Book, Long> {
+import java.util.Optional;
 
+public interface BookRepository extends PagingAndSortingRepository<Book, Long> {
+
+    @NotNull
+    @Override
     @Query("select m from Book m where m.enabled=true and m.id=:id")
-    fun findById(id: Long?): Optional<Book?>?
+    Optional<Book> findById(@NotNull Long id);
 
     @Query("select m from Book m where m.enabled=true and (:search IS NULL or m.title like %:search%) order by m.id desc")
-    fun findAll(search: String?, pageable: Pageable): Page<Book>
+    Page<Book> findAll(String search, Pageable pageable);
 
     @Query("select m from Book m where m.enabled=true and m.userId=:userId and (:search IS NULL or m.title like %:search%) order by m.id desc")
-    fun findAllByUserId(search: String?, userId: Long, pageable: Pageable): Page<Book>
+    Page<Book> findAllByUserId(String search, Long userId, Pageable pageable);
 
     @Query("select m from Book m where m.enabled=true and m.sale=:sale and (:search IS NULL or m.title like %:search%) order by m.id desc")
-    fun findAllBySale(search: String?, sale: Boolean, pageable: Pageable): Page<Book>
+    Page<Book> findAllBySale(String search, Boolean sale, Pageable pageable);
 }

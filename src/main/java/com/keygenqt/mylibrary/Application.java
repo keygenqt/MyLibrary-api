@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.keygenqt.mylibrary
+package com.keygenqt.mylibrary;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
-import org.springframework.boot.web.servlet.support.*
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-class Application: SpringBootServletInitializer()
-
-fun main(args: Array<String>) {
-    runApplication<Application>(*args)
+public class Application extends SpringBootServletInitializer {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 }
