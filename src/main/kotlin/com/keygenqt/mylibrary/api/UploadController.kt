@@ -16,15 +16,16 @@
 
 package com.keygenqt.mylibrary.api
 
-import com.keygenqt.mylibrary.extensions.*
-import org.apache.commons.io.*
-import org.springframework.beans.factory.annotation.*
-import org.springframework.http.*
-import org.springframework.http.HttpStatus.*
-import org.springframework.stereotype.*
+import com.keygenqt.mylibrary.base.BaseFormatResponse
+import org.apache.commons.io.FileUtils
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.http.HttpStatus.NOT_FOUND
+import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
+import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.server.*
-import java.io.*
+import org.springframework.web.server.ResponseStatusException
+import java.io.File
 import java.util.*
 
 @Controller
@@ -40,7 +41,8 @@ class UploadController {
     fun uploadImage(@RequestBody bytes: ByteArray): ResponseEntity<Any> {
         val name = "${UUID.randomUUID()}.png"
         FileUtils.writeByteArrayToFile(File("$dir/$name"), bytes)
-        return getSuccessFormat("$url/$name")
+        return BaseFormatResponse.getSuccessFormat("$url/$name")
+
     }
 
     @GetMapping(path = ["/images/{name}"], produces = [MediaType.IMAGE_PNG_VALUE])

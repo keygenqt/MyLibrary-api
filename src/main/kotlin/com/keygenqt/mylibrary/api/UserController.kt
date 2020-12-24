@@ -17,19 +17,20 @@
 package com.keygenqt.mylibrary.api
 
 import com.keygenqt.mylibrary.api.validators.*
-import com.keygenqt.mylibrary.extensions.*
-import com.keygenqt.mylibrary.models.assemblers.*
-import com.keygenqt.mylibrary.models.repositories.*
-import com.keygenqt.mylibrary.config.*
-import org.springframework.beans.factory.annotation.*
-import org.springframework.data.repository.*
-import org.springframework.http.*
+import com.keygenqt.mylibrary.base.BaseFormatResponse
+import com.keygenqt.mylibrary.config.JWTAuthorizationFilter
+import com.keygenqt.mylibrary.models.assemblers.UserAssembler
+import com.keygenqt.mylibrary.models.repositories.UserRepository
+import com.keygenqt.mylibrary.models.repositories.UserTokenRepository
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.http.HttpStatus.*
-import org.springframework.security.crypto.bcrypt.*
-import org.springframework.validation.*
+import org.springframework.http.ResponseEntity
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.server.*
-import javax.servlet.http.*
+import org.springframework.web.server.ResponseStatusException
+import javax.servlet.http.HttpServletRequest
 
 @RestController
 class UserController {
@@ -60,7 +61,7 @@ class UserController {
                 passwordValidator.validate(model, bindingResult)
 
                 return if (bindingResult.hasErrors()) {
-                    bindingResult.getErrorFormat()
+                    return BaseFormatResponse.getErrorFormat(bindingResult)
                 } else {
                     user.password = BCryptPasswordEncoder().encode(model.password)
                     repository.save(user)
@@ -86,7 +87,7 @@ class UserController {
         updateUserValidator.validate(model, bindingResult)
 
         if (bindingResult.hasErrors()) {
-            return bindingResult.getErrorFormat()
+            return BaseFormatResponse.getErrorFormat(bindingResult)
         } else {
             repository.findByIdOrNull(id)?.let { user ->
                 user.avatar = model.avatar!!
@@ -107,12 +108,12 @@ class UserController {
         updateUserMessageTokenValidator.validate(model, bindingResult)
 
         if (bindingResult.hasErrors()) {
-            return bindingResult.getErrorFormat()
+            return BaseFormatResponse.getErrorFormat(bindingResult)
         } else {
             repositoryToken.findByToken(request.getHeader(JWTAuthorizationFilter.HEADER))?.let { modelToken ->
                 modelToken.messageToken = model.token!!
                 repositoryToken.save(modelToken)
-                return getSuccessFormat("Updated message token successfully")
+                return BaseFormatResponse.getSuccessFormat("Updated message token successfully")
             }
         }
 

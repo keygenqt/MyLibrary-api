@@ -20,7 +20,7 @@ import com.keygenqt.mylibrary.api.validators.JoinBody
 import com.keygenqt.mylibrary.api.validators.JoinValidator
 import com.keygenqt.mylibrary.api.validators.LoginBody
 import com.keygenqt.mylibrary.api.validators.LoginValidator
-import com.keygenqt.mylibrary.extensions.getErrorFormat
+import com.keygenqt.mylibrary.base.BaseFormatResponse
 import com.keygenqt.mylibrary.models.User
 import com.keygenqt.mylibrary.models.UserToken
 import com.keygenqt.mylibrary.models.assemblers.UserAssembler
@@ -66,7 +66,7 @@ class AuthController {
         loginValidator.validate(model, bindingResult)
 
         if (bindingResult.hasErrors()) {
-            return bindingResult.getErrorFormat()
+            return BaseFormatResponse.getErrorFormat(bindingResult)
         } else {
             repository.findAllByEmail(model.email ?: "")?.let { user ->
                 val tokenModel = user.tokens.firstOrNull { it.uid == model.uid }?.let {
@@ -95,7 +95,7 @@ class AuthController {
         regValidator.validate(model, bindingResult)
 
         if (bindingResult.hasErrors()) {
-            return bindingResult.getErrorFormat()
+            return BaseFormatResponse.getErrorFormat(bindingResult)
         } else {
             repository.save(
                     User(

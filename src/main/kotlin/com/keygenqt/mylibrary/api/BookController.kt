@@ -16,22 +16,25 @@
 
 package com.keygenqt.mylibrary.api
 
-import com.keygenqt.mylibrary.api.validators.*
-import com.keygenqt.mylibrary.base.*
-import com.keygenqt.mylibrary.extensions.*
-import com.keygenqt.mylibrary.models.*
-import com.keygenqt.mylibrary.models.assemblers.*
-import com.keygenqt.mylibrary.models.repositories.*
-import com.keygenqt.mylibrary.config.*
-import org.springframework.beans.factory.annotation.*
-import org.springframework.data.repository.*
-import org.springframework.data.rest.webmvc.*
-import org.springframework.http.*
-import org.springframework.http.HttpStatus.*
-import org.springframework.validation.*
+import com.keygenqt.mylibrary.api.validators.BookBody
+import com.keygenqt.mylibrary.api.validators.BookValidator
+import com.keygenqt.mylibrary.base.BaseFormatResponse
+import com.keygenqt.mylibrary.base.BaseMessageUtils
+import com.keygenqt.mylibrary.config.JWTAuthorizationFilter
+import com.keygenqt.mylibrary.models.Book
+import com.keygenqt.mylibrary.models.assemblers.BookAssembler
+import com.keygenqt.mylibrary.models.repositories.BookRepository
+import com.keygenqt.mylibrary.models.repositories.UserTokenRepository
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.repository.findByIdOrNull
+import org.springframework.data.rest.webmvc.RepositoryRestController
+import org.springframework.http.HttpStatus.BAD_REQUEST
+import org.springframework.http.HttpStatus.OK
+import org.springframework.http.ResponseEntity
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.server.*
-import javax.servlet.http.*
+import org.springframework.web.server.ResponseStatusException
+import javax.servlet.http.HttpServletRequest
 
 @RepositoryRestController
 class BookController {
@@ -54,7 +57,7 @@ class BookController {
         updateBookValidator.validate(model, bindingResult)
 
         if (bindingResult.hasErrors()) {
-            return bindingResult.getErrorFormat()
+            return BaseFormatResponse.getErrorFormat(bindingResult)
         } else {
             repository.findByIdOrNull(id)?.let { book ->
                 book.apply {
@@ -96,7 +99,7 @@ class BookController {
         updateBookValidator.validate(model, bindingResult)
 
         if (bindingResult.hasErrors()) {
-            return bindingResult.getErrorFormat()
+            return BaseFormatResponse.getErrorFormat(bindingResult)
         } else {
             repositoryToken.findByToken(request.getHeader(JWTAuthorizationFilter.HEADER))?.let { modelToken ->
                 val book = Book().apply {
@@ -139,7 +142,7 @@ class BookController {
                 if (book.userId == modelToken.userId) {
                     book.enabled = false
                     repository.save(book)
-                    return getSuccessFormat(BaseMessageUtils.getMessage("message.delete", "Object"))
+                    return BaseFormatResponse.getSuccessFormat(BaseMessageUtils.getMessage("message.delete", "Object"))
                 } else {
                     throw ResponseStatusException(BAD_REQUEST, "Error delete book")
                 }
