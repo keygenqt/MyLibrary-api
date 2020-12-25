@@ -30,7 +30,7 @@ import java.io.IOException;
 public class BaseRestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {
-            ArithmeticException.class,
+            Exception.class,
             IllegalArgumentException.class,
             ResponseStatusException.class
     })

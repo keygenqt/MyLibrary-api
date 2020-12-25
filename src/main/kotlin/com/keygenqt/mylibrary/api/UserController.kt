@@ -18,7 +18,7 @@ package com.keygenqt.mylibrary.api
 
 import com.keygenqt.mylibrary.api.validators.*
 import com.keygenqt.mylibrary.base.BaseFormatResponse
-import com.keygenqt.mylibrary.config.JWTAuthorizationFilter
+import com.keygenqt.mylibrary.base.JWTAuthorizationFilter
 import com.keygenqt.mylibrary.models.assemblers.UserAssembler
 import com.keygenqt.mylibrary.models.repositories.UserRepository
 import com.keygenqt.mylibrary.models.repositories.UserTokenRepository

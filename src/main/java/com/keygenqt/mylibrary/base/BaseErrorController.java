@@ -22,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -35,14 +36,22 @@ class BaseErrorController extends AbstractErrorController {
     }
 
     @RequestMapping
-    ResponseEntity<ErrorResponse> handleError(Exception ex, HttpServletRequest request) {
+    ResponseEntity<ErrorResponse> handleError(HttpServletRequest request) {
+
         var status = getStatus(request);
-        String message = request.getAttribute(RequestDispatcher.ERROR_MESSAGE).toString();
+        var message = request.getAttribute(RequestDispatcher.ERROR_MESSAGE).toString();
+
+        if (request.getHeader(JWTAuthorizationFilter.HEADER) == null || request.getHeader(JWTAuthorizationFilter.ACCEPT_LANGUAGE) == null) {
+            status = HttpStatus.UNAUTHORIZED;
+            message = "Authorization failed";
+        }
+
         var error = new ErrorResponse(
                 status.value(),
                 status,
                 message.equals("") ? HttpStatus.BAD_REQUEST.name() : message
         );
+
         return new ResponseEntity<>(error, error.error);
     }
 

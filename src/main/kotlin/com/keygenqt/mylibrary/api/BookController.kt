@@ -20,7 +20,7 @@ import com.keygenqt.mylibrary.api.validators.BookBody
 import com.keygenqt.mylibrary.api.validators.BookValidator
 import com.keygenqt.mylibrary.base.BaseFormatResponse
 import com.keygenqt.mylibrary.base.BaseMessageUtils
-import com.keygenqt.mylibrary.config.JWTAuthorizationFilter
+import com.keygenqt.mylibrary.base.JWTAuthorizationFilter
 import com.keygenqt.mylibrary.models.Book
 import com.keygenqt.mylibrary.models.assemblers.BookAssembler
 import com.keygenqt.mylibrary.models.repositories.BookRepository

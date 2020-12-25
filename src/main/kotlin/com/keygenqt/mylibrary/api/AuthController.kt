@@ -21,12 +21,12 @@ import com.keygenqt.mylibrary.api.validators.JoinValidator
 import com.keygenqt.mylibrary.api.validators.LoginBody
 import com.keygenqt.mylibrary.api.validators.LoginValidator
 import com.keygenqt.mylibrary.base.BaseFormatResponse
+import com.keygenqt.mylibrary.base.JWTAuthorizationFilter
 import com.keygenqt.mylibrary.models.User
 import com.keygenqt.mylibrary.models.UserToken
 import com.keygenqt.mylibrary.models.assemblers.UserAssembler
 import com.keygenqt.mylibrary.models.repositories.UserRepository
 import com.keygenqt.mylibrary.models.repositories.UserTokenRepository
-import com.keygenqt.mylibrary.config.JWTAuthorizationFilter
 import com.keygenqt.mylibrary.config.WebSecurityConfig
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus.OK

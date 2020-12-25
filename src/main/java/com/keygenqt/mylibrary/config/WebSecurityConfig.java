@@ -16,6 +16,7 @@
 
 package com.keygenqt.mylibrary.config;
 
+import com.keygenqt.mylibrary.base.JWTAuthorizationFilter;
 import com.keygenqt.mylibrary.models.User;
 import com.keygenqt.mylibrary.models.repositories.UserRepository;
 import com.keygenqt.mylibrary.models.repositories.UserTokenRepository;
@@ -41,7 +42,7 @@ import java.util.ArrayList;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    final static String SECRET_KEY = "8e5ONnewmseOnHvxEFuNxeUxeM9jvYWUKlkhdBdjkcDdDfu1azypNiN409y1QaDCFV";
+    public final static String SECRET_KEY = "8e5ONnewmseOnHvxEFuNxeUxeM9jvYWUKlkhdBdjkcDdDfu1azypNiN409y1QaDCFV";
 
     public final static String ROLE_USER = "USER";
     public final static String ROLE_ADMIN = "ADMIN";
