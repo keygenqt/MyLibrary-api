@@ -70,7 +70,7 @@ public class UserToken {
 
     @JsonIgnore
     @Column(name = "message_token")
-    String messageToken;
+    String messageToken = "";
 
     public Long getId() {
         return id;

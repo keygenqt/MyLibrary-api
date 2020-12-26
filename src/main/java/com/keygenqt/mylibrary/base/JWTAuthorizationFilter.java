@@ -20,6 +20,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
@@ -58,16 +59,8 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         String authorization = request.getHeader(HEADER);
         String language = request.getHeader(ACCEPT_LANGUAGE);
 
-        if (authorization == null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Authorization failed.");
-        }
-
-        if (language == null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Authorization failed.");
-        }
-
         try {
-            if (authorization.startsWith(PREFIX)) {
+            if (authorization != null && language != null && authorization.startsWith(PREFIX)) {
                 Claims claims = validateToken(authorization, language);
                 if (claims != null && claims.get("authorities") != null) {
                     setUpSpringAuthentication(claims);

@@ -16,7 +16,7 @@
 
 package com.keygenqt.mylibrary.api
 
-import com.keygenqt.mylibrary.api.validators.BookBody
+import com.keygenqt.mylibrary.api.bodies.BookBody
 import com.keygenqt.mylibrary.api.validators.BookValidator
 import com.keygenqt.mylibrary.base.BaseFormatResponse
 import com.keygenqt.mylibrary.base.BaseMessageUtils
@@ -69,13 +69,16 @@ class BookController {
                     model.image?.let {
                         image = it
                     }
+                    model.author?.let {
+                        author = it
+                    }
                     model.publisher?.let {
                         publisher = it
                     }
                     model.year?.let {
                         year = it.toIntOrNull()
                     }
-                    model.ISBN?.let {
+                    model.isbn?.let {
                         isbn = it
                     }
                     model.numberOfPages?.let {
@@ -112,13 +115,16 @@ class BookController {
                     model.image?.let {
                         image = it
                     }
+                    model.author?.let {
+                        author = it
+                    }
                     model.publisher?.let {
                         publisher = it
                     }
                     model.year?.let {
                         year = it.toIntOrNull()
                     }
-                    model.ISBN?.let {
+                    model.isbn?.let {
                         isbn = it
                     }
                     model.numberOfPages?.let {

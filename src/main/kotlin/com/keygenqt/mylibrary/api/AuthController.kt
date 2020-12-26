@@ -16,9 +16,9 @@
 
 package com.keygenqt.mylibrary.api
 
-import com.keygenqt.mylibrary.api.validators.JoinBody
+import com.keygenqt.mylibrary.api.bodies.JoinBody
 import com.keygenqt.mylibrary.api.validators.JoinValidator
-import com.keygenqt.mylibrary.api.validators.LoginBody
+import com.keygenqt.mylibrary.api.bodies.LoginBody
 import com.keygenqt.mylibrary.api.validators.LoginValidator
 import com.keygenqt.mylibrary.base.BaseFormatResponse
 import com.keygenqt.mylibrary.base.JWTAuthorizationFilter

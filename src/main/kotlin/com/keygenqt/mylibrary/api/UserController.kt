@@ -16,6 +16,9 @@
 
 package com.keygenqt.mylibrary.api
 
+import com.keygenqt.mylibrary.api.bodies.PasswordBody
+import com.keygenqt.mylibrary.api.bodies.UpdateUserBody
+import com.keygenqt.mylibrary.api.bodies.UpdateUserMessageToken
 import com.keygenqt.mylibrary.api.validators.*
 import com.keygenqt.mylibrary.base.BaseFormatResponse
 import com.keygenqt.mylibrary.base.JWTAuthorizationFilter

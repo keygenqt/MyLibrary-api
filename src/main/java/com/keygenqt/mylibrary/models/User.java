@@ -101,7 +101,7 @@ public class User {
 
     @JsonIgnore
     @Column(name = "enabled", nullable = false)
-    private Boolean enabled;
+    private Boolean enabled = true;
 
     @JsonIgnore
     @CreationTimestamp
