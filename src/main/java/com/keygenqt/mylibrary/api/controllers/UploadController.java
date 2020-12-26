@@ -40,7 +40,7 @@ class UploadController {
     private String url;
 
     @PostMapping(path = "/upload-image")
-    public ResponseEntity<Object> uploadImage(@RequestBody byte[] bytes) {
+    ResponseEntity<Object> uploadImage(@RequestBody byte[] bytes) {
         var name = UUID.randomUUID() + ".png";
         try {
             FileUtils.writeByteArrayToFile(new File(dir + "/" + name), bytes);
@@ -53,7 +53,7 @@ class UploadController {
 
     @GetMapping(path = "/images/{name}", produces = MediaType.IMAGE_PNG_VALUE)
     @ResponseBody
-    public byte[] getImage(@PathVariable String name) {
+    byte[] getImage(@PathVariable String name) {
         var file = new File(dir + "/" + name);
         if (file.exists()) {
             try {

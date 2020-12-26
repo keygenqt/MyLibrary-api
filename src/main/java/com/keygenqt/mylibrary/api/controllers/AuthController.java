@@ -68,7 +68,7 @@ public class AuthController {
     }
 
     @PostMapping(path = "/login")
-    public ResponseEntity<Object> login(@RequestBody LoginBody model, BindingResult bindingResult, HttpServletRequest request) {
+    ResponseEntity<Object> login(@RequestBody LoginBody model, BindingResult bindingResult, HttpServletRequest request) {
 
         loginValidator.validate(model, bindingResult);
 
@@ -98,7 +98,7 @@ public class AuthController {
     }
 
     @PostMapping(path = "/join")
-    public ResponseEntity<Object> join(@RequestBody JoinBody model, BindingResult bindingResult, HttpServletRequest request) {
+    ResponseEntity<Object> join(@RequestBody JoinBody model, BindingResult bindingResult, HttpServletRequest request) {
 
         joinValidator.validate(model, bindingResult);
 
