@@ -16,7 +16,6 @@
 
 package com.keygenqt.mylibrary.base;
 
-
 import org.jetbrains.annotations.NotNull;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
