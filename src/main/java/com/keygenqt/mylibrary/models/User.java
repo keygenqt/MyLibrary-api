@@ -121,7 +121,7 @@ public class User {
 
     @Transient
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private String token;
+    private String token = "";
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
