@@ -16,7 +16,6 @@
 
 package com.keygenqt.mylibrary.base;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -28,7 +27,7 @@ public class BaseMessageUtils implements MessageSourceAware {
     private static MessageSource source;
 
     @Override
-    public void setMessageSource(@NotNull MessageSource messageSource) {
+    public void setMessageSource(MessageSource messageSource) {
         source = messageSource;
     }
 

@@ -16,7 +16,6 @@
 
 package com.keygenqt.mylibrary.base;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +23,6 @@ import java.util.Locale;
 
 public class BaseLocaleResolver extends AcceptHeaderLocaleResolver {
 
-    @NotNull
     @Override
     public Locale resolveLocale(HttpServletRequest request) {
         String language = request.getHeader("Accept-Language");

@@ -24,7 +24,6 @@ import com.keygenqt.mylibrary.models.repositories.UserTokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -67,7 +66,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
     }
 
     @Override
-    public void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain chain) {
+    public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) {
 
         String authorization = request.getHeader(HEADER);
         String language = request.getHeader(ACCEPT_LANGUAGE);

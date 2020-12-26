@@ -17,7 +17,6 @@
 package com.keygenqt.mylibrary.models.repositories;
 
 import com.keygenqt.mylibrary.models.Book;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -27,10 +26,9 @@ import java.util.Optional;
 
 public interface BookRepository extends PagingAndSortingRepository<Book, Long> {
 
-    @NotNull
     @Override
     @Query("select m from Book m where m.enabled=true and m.id=:id")
-    Optional<Book> findById(@NotNull Long id);
+    Optional<Book> findById(Long id);
 
     @Query("select m from Book m where m.enabled=true and (:search IS NULL or m.title like %:search%) order by m.id desc")
     Page<Book> findAll(String search, Pageable pageable);

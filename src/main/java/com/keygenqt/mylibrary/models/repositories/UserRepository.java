@@ -17,7 +17,6 @@
 package com.keygenqt.mylibrary.models.repositories;
 
 import com.keygenqt.mylibrary.models.User;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -29,15 +28,13 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
     @Query(value = "select u from User u where u.enabled=true and u.email=:email")
     User findAllByEmail(@Param("email") String email);
 
-    @NotNull
     @Override
     @Query(value = "select u from User u where u.enabled=true")
-    Page<User> findAll(@NotNull Pageable pageable);
+    Page<User> findAll(Pageable pageable);
 
     @Query(value = "select u from User u where u.enabled=true and u.id=:id")
     User findByIdActive(Long id);
 
-    @NotNull
     @RestResource(exported = false)
-    User save(@NotNull User s);
+    User save(User s);
 }

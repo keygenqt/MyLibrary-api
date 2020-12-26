@@ -18,7 +18,6 @@ package com.keygenqt.mylibrary.api.validators;
 
 import com.keygenqt.mylibrary.api.bodies.PasswordBody;
 import com.keygenqt.mylibrary.base.CustomValidate;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -27,12 +26,12 @@ import org.springframework.validation.Validator;
 public class PasswordValidator implements Validator {
 
     @Override
-    public boolean supports(@NotNull Class<?> clazz) {
+    public boolean supports(Class<?> clazz) {
         return PasswordBody.class == clazz;
     }
 
     @Override
-    public void validate(@NotNull Object target, @NotNull Errors errors) {
+    public void validate(Object target, Errors errors) {
         CustomValidate.isPassword("password", target, errors);
         CustomValidate.isRequired("rpassword", target, errors);
         CustomValidate.isMatch("password", "rpassword", target, errors);

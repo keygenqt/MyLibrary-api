@@ -19,7 +19,6 @@ package com.keygenqt.mylibrary.api.validators;
 import com.keygenqt.mylibrary.api.bodies.LoginBody;
 import com.keygenqt.mylibrary.base.CustomValidate;
 import com.keygenqt.mylibrary.models.repositories.UserRepository;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -37,12 +36,12 @@ public class LoginValidator implements Validator {
     }
 
     @Override
-    public boolean supports(@NotNull Class<?> clazz) {
+    public boolean supports(Class<?> clazz) {
         return LoginBody.class == clazz;
     }
 
     @Override
-    public void validate(@NotNull Object target, @NotNull Errors errors) {
+    public void validate(Object target, Errors errors) {
 
         CustomValidate.isRequired("email", target, errors);
         CustomValidate.isEmail("email", target, errors);

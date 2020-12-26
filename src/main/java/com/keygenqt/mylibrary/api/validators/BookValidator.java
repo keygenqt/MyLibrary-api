@@ -19,7 +19,6 @@ package com.keygenqt.mylibrary.api.validators;
 import com.keygenqt.mylibrary.api.bodies.BookBody;
 import com.keygenqt.mylibrary.base.CustomValidate;
 import com.keygenqt.mylibrary.models.repositories.GenreRepository;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -36,12 +35,12 @@ public class BookValidator implements Validator {
     }
 
     @Override
-    public boolean supports(@NotNull Class<?> clazz) {
+    public boolean supports(Class<?> clazz) {
         return BookBody.class == clazz;
     }
 
     @Override
-    public void validate(@NotNull Object target, @NotNull Errors errors) {
+    public void validate(Object target, Errors errors) {
 
         CustomValidate.isCoverType("coverType", target, errors);
         CustomValidate.isRequired("genreId", target, errors);

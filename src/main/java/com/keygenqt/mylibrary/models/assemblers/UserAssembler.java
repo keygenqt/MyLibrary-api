@@ -17,7 +17,6 @@
 package com.keygenqt.mylibrary.models.assemblers;
 
 import com.keygenqt.mylibrary.models.User;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
@@ -42,9 +41,8 @@ public class UserAssembler implements RepresentationModelAssembler<User, EntityM
         this.entityLinks = entityLinks;
     }
 
-    @NotNull
     @Override
-    public EntityModel<User> toModel(@NotNull User model) {
+    public EntityModel<User> toModel(User model) {
         ArrayList<Link> links = new ArrayList<>() {{
             add(entityLinks.linkToItemResource(User.class, model.getId()).withSelfRel());
             add(entityLinks.linkToItemResource(User.class, model.getId()).withRel(relProvider.getItemResourceRelFor(User.class)));

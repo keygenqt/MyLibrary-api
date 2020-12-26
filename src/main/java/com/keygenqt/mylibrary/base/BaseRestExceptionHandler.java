@@ -16,15 +16,12 @@
 
 package com.keygenqt.mylibrary.base;
 
-import kotlin.jvm.Throws;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import java.io.IOException;
 
 @ControllerAdvice
 public class BaseRestExceptionHandler extends ResponseEntityExceptionHandler {
@@ -34,7 +31,6 @@ public class BaseRestExceptionHandler extends ResponseEntityExceptionHandler {
             IllegalArgumentException.class,
             ResponseStatusException.class
     })
-    @Throws(exceptionClasses = IOException.class)
     ResponseEntity<ErrorResponse> springHandle(Exception ex) {
 
         var status = HttpStatus.BAD_REQUEST.value();

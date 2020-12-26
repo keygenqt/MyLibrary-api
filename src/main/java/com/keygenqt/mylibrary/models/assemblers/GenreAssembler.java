@@ -17,7 +17,6 @@
 package com.keygenqt.mylibrary.models.assemblers;
 
 import com.keygenqt.mylibrary.models.Genre;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
@@ -42,9 +41,8 @@ public class GenreAssembler implements RepresentationModelAssembler<Genre, Entit
         this.entityLinks = entityLinks;
     }
 
-    @NotNull
     @Override
-    public EntityModel<Genre> toModel(@NotNull Genre model) {
+    public EntityModel<Genre> toModel(Genre model) {
         ArrayList<Link> links = new ArrayList<>() {{
             add(entityLinks.linkToItemResource(Genre.class, model.getId()).withSelfRel());
             add(entityLinks.linkToItemResource(Genre.class, model.getId()).withRel(relProvider.getItemResourceRelFor(Genre.class)));

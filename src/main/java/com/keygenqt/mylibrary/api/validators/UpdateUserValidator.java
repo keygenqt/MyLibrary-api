@@ -18,7 +18,6 @@ package com.keygenqt.mylibrary.api.validators;
 
 import com.keygenqt.mylibrary.api.bodies.UpdateUserBody;
 import com.keygenqt.mylibrary.base.CustomValidate;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -27,12 +26,12 @@ import org.springframework.validation.Validator;
 public class UpdateUserValidator implements Validator {
 
     @Override
-    public boolean supports(@NotNull Class<?> clazz) {
+    public boolean supports(Class<?> clazz) {
         return UpdateUserBody.class == clazz;
     }
 
     @Override
-    public void validate(@NotNull Object target, @NotNull Errors errors) {
+    public void validate(Object target, Errors errors) {
         CustomValidate.isNickname("nickname", target, errors);
         CustomValidate.isWebsite("website", target, errors);
     }
