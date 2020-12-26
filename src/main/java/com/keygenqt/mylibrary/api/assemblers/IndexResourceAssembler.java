@@ -36,7 +36,7 @@ public class IndexResourceAssembler {
         this.entityLinks = entityLinks;
     }
 
-    IndexResource buildIndex() {
+    public IndexResource buildIndex() {
         var role = WebSecurityConfig.ROLE_ANONYMOUS;
         for (GrantedAuthority item : SecurityContextHolder.getContext().getAuthentication().getAuthorities()) {
             if (item.getAuthority() != null) {
