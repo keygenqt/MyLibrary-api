@@ -76,11 +76,11 @@ public class Book {
     private String coverType;
 
     @Column(name = "sale", nullable = false)
-    private Boolean sale;
+    private Boolean sale = false;
 
     @JsonIgnore
     @Column(name = "enabled", nullable = false)
-    private Boolean enabled;
+    private Boolean enabled = true;
 
     @JsonIgnore
     @CreationTimestamp
@@ -103,6 +103,32 @@ public class Book {
     @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "user_id", referencedColumnName = "id", updatable = false, insertable = false)
     private User user;
+
+    public Book(Long genreId,
+                Long userId,
+                String image,
+                String title,
+                String author,
+                String publisher,
+                String isbn,
+                String year,
+                String numberOfPages,
+                String description,
+                String coverType,
+                Boolean sale) {
+        this.genreId = genreId;
+        this.userId = userId;
+        this.image = image;
+        this.title = title;
+        this.author = author;
+        this.publisher = publisher;
+        this.isbn = isbn;
+        this.year = year == null || year.isEmpty() ? null : Integer.parseInt(year);
+        this.numberOfPages = numberOfPages == null || numberOfPages.isEmpty() ? null : Integer.parseInt(numberOfPages);
+        this.description = description;
+        this.coverType = coverType == null ? Book.COVER_OTHER : coverType;
+        this.sale = sale;
+    }
 
     public Long getId() {
         return id;
@@ -172,16 +198,16 @@ public class Book {
         return year;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setYear(String year) {
+        this.year = year == null || year.isEmpty() ? null : Integer.parseInt(year);
     }
 
     public Integer getNumberOfPages() {
         return numberOfPages;
     }
 
-    public void setNumberOfPages(Integer numberOfPages) {
-        this.numberOfPages = numberOfPages;
+    public void setNumberOfPages(String numberOfPages) {
+        this.numberOfPages = numberOfPages == null || numberOfPages.isEmpty() ? null : Integer.parseInt(numberOfPages);
     }
 
     public String getDescription() {

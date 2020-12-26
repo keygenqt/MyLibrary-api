@@ -123,7 +123,7 @@ public class BaseValidate {
     public static boolean isTextLength(String name, Integer min, Integer max, Object model, Errors errors) {
         var value = findValue(name, model);
         if (value != null) {
-            if (value.length() > min) {
+            if (value.length() < min) {
                 setError(name, MESSAGE_FIELD_MIN_LENGTH, errors, min);
                 return false;
             } else if (value.length() > max) {

@@ -47,10 +47,12 @@ public class BookValidator implements Validator {
         CustomValidate.isRequired("genreId", target, errors);
         CustomValidate.isRequired("image", target, errors);
         CustomValidate.isRequired("title", target, errors);
+
         CustomValidate.isTextLength("title", 2, 250, target, errors);
         CustomValidate.isTextLength("description", 2, 5000, target, errors);
         CustomValidate.isTextLength("author", 2, 250, target, errors);
         CustomValidate.isTextLength("publisher", 2, 250, target, errors);
+
         CustomValidate.isYear("year", target, errors);
         CustomValidate.isInt("numberOfPages", target, errors);
 
