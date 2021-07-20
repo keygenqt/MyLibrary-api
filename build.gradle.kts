@@ -25,7 +25,7 @@ flyway {
     url = "jdbc:mysql://localhost:3306/my_library?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true"
     user = "root"
     schemas = arrayOf("my_library")
-    password = findProperty("password") as String
+    password = findProperty("my_library_password") as String
 }
 
 // commons-io
